@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -16,7 +16,7 @@ import com.hadronsoft.vendas.services.CadastroProdutoService;
 import com.hadronsoft.vendas.util.jsf.FacesUtil;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class CadastroProdutosBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -40,6 +40,7 @@ public class CadastroProdutosBean implements Serializable{
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()){
+			limpar();
 			categoriasRaizes = categoriaRepository.getCategoriasRaizes();
 			
 			if(this.categoriaPai != null){
@@ -48,23 +49,25 @@ public class CadastroProdutosBean implements Serializable{
 		}
 	}
 	private void limpar(){
-		produto = new Produto();
+		this.produto = new Produto();
 		categoriaPai = null;
 		subcategorias = new ArrayList<>();
 	}
 	
 	public void carregarSubcategorias(){
-		subcategorias = categoriaRepository.getSubCategorias(categoriaPai);
+		if(this.produto != null){
+			subcategorias = categoriaRepository.getSubCategorias(categoriaPai);
+		}
 	}
 	
 	public void salvar(){
-		this.produto = cadastroProdutoService.salvar(produto);
+		this.produto = cadastroProdutoService.salvar(this.produto);
 		limpar();
 		FacesUtil.addInfoMessage("Produto salvo com sucesso!");	
 	}
 
 	public Produto getProduto() {
-		return produto;
+		return this.produto;
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
