@@ -71,10 +71,6 @@ public class Lancamento implements Serializable {
 	@JoinColumn(name="LCT_IDCONTA", nullable = false,  foreignKey = @ForeignKey(name="FK2_LANCAMENTO_CONTA"))
 	private Conta conta;
 	
-	@OneToMany(mappedBy = "lancamento", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Parcela> parcelas;
-
-	
 	public Long getId() {
 		return id;
 	}
@@ -153,14 +149,6 @@ public class Lancamento implements Serializable {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
-	}
-
-	public List<Parcela> getParcelas() {
-		return parcelas;
-	}
-
-	public void setParcelas(List<Parcela> parcelas) {
-		this.parcelas = parcelas;
 	}
 
 	@Override

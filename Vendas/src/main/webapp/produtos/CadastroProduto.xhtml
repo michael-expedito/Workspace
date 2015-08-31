@@ -11,7 +11,7 @@
 	<ui:define name="corpo">
 		<f:metadata>
 			<o:viewParam name="produto" value="#{cadastroProdutosBean.produto}"/>
-			<f:event listener="#{cadastroProdutosBean.inicializar}"	type="preRenderView" />
+			<f:viewAction action="#{cadastroProdutosBean.inicializar}"	/>
 		</f:metadata>
 
 		<h:form>
@@ -50,8 +50,8 @@
 				<p:outputLabel value="Categoria" for="cat" />
 				<p:selectOneMenu id="cat" value="#{cadastroProdutosBean.categoriaPai}">
 					<f:selectItem itemLabel="Selecione a Categoria" />
-					<f:selectItems value="#{cadastroProdutosBean.categoriasRaizes}"
-                        var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.descricao}"  />
+					<f:selectItems value="#{cadastroProdutosBean.categoriasRaizes}" var="categoria"
+						 itemValue="#{categoria}" itemLabel="#{categoria.descricao}"  />
                     <p:ajax listener="#{cadastroProdutosBean.carregarSubcategorias}" update="subcategoria"/>
 				</p:selectOneMenu>
 

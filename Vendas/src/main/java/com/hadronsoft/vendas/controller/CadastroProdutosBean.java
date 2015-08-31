@@ -27,25 +27,22 @@ public class CadastroProdutosBean implements Serializable{
 	@Inject
 	private CadastroProdutoService cadastroProdutoService;
 	
-	private Categoria categoriaPai;
-	
 	private Produto produto;
 	
+	private Categoria categoriaPai;
 	private List<Categoria> categoriasRaizes;
 	private List<Categoria> subcategorias;
 	
-	public CadastroProdutosBean(){
-		limpar();
-	}
-	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()){
-			limpar();
 			categoriasRaizes = categoriaRepository.getCategoriasRaizes();
 			
 			if(this.categoriaPai != null){
 				carregarSubcategorias();
-			}
+			}		
+		}
+		if (this.produto == null) {
+			limpar();
 		}
 	}
 	private void limpar(){
