@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<title><ui:insert nome="titulo"> Hadronsoft | Dashboard </ui:insert></title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+	
+	<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+	<link rel="stylesheet" href="resources/css/dist/AdminLTE.min.css" />
+	<link rel="stylesheet" href="resources/css/dist/skins/_all-skins.min.css" />
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		
+</h:head>
+
+<h:body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>H</b>LT</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Hadron</b>Soft</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Menssagens: style can be found in dropdown.less-->
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">4</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Voce tem 4 mensagens</li>
+                  <li>
+                    
+                    <p:dataList value="#{mainBean.mensagens}" styleClass="menu" var="msg" type="ordered">
+				        <div class="pull-left">
+                            <img src="resources/img/dist/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                         </div>
+                         <h4>
+                         	#{msg.emissor}
+                         	<small><i class="fa fa-clock-o"></i> 5 minutos</small>
+                         </h4>
+				         <p>#{msg.assunto}</p>
+				    </p:dataList>
+                  </li>
+                  <li class="footer"><a href="#">Visualizar todas as mensagens</a></li>
+                </ul>
+              </li>
+              <!-- Notificações: style can be found in dropdown.less -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Você tem 10 Notificações</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-users text-aqua"></i> 5 novos membros se uniram hoje
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="#">Ver todas</a></li>
+                </ul>
+              </li>
+              
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="resources/img/dist/user2-160x160.jpg" class="user-image" alt="User Image" />
+                  <span class="hidden-xs">Michael Expedito</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="resources/img/dist/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <p>
+                      Michael Expedito - Analista de Sistemas
+                      <small>Membro desde Nov. 2015</small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Followers</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Vendas</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Amigos</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Conta</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sair</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MENU NAVEGAÇÃO</li>
+            <li class="active">
+              <a href="#">
+                <i class="fa fa-dashboard"></i><span>Dashboard</span> 
+              </a>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Cadastros</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-gears"></i> <span>Processos</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span>Relatórios</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+              </ul>
+            </li>
+			<li class="treeview">
+              <a href="#">
+                <i class="fa fa-toggle-on"></i>
+                <span>Utilitários</span>
+                <span class="label label-primary pull-right">4</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="pages/layout/fixed.html"><i class="fa fa-toggle-on"></i> Fixed</a></li>
+                <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+              </ul>
+            </li>
+			<li> 
+				<a href="documentation/index.html">
+					<i class="fa fa-book"></i> 
+					<span>Manual do Sistema</span>
+				</a>
+			</li>
+			</ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+		  
+        </section>
+
+        
+        <section class="content"><!-- Main content --> 
+			<ui:insert name="corpo"></ui:insert>
+        </section><!-- /.content -->
+		
+      </div><!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Hadronsoft</a>.</strong> Todos os direitos reservados.
+      </footer>
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<!-- Bootstrap 3.3.5 -->
+    <script src="resources/js/bootstrap/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="resources/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="resources/js/dist/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="resources/js/dist/demo.js"></script>
+</h:body>
+
+</html>
