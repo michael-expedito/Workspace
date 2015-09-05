@@ -12,9 +12,8 @@ public class Mensagem implements Serializable {
 	private String assunto;
 	private String mensagem;
 	private String anexos;
-	//private List<Usuario> destinatarios;
-	private String destinatario;
-	private String emissor;
+	private List<Usuario> destinatarios;
+	private Usuario emissor;
 	private Date dataEnvio;
 	
 	public long getId() {
@@ -41,16 +40,16 @@ public class Mensagem implements Serializable {
 	public void setAnexos(String anexos) {
 		this.anexos = anexos;
 	}
-	public String getDestinatario() {
-		return destinatario;
+	public List<Usuario> getDestinatario() {
+		return destinatarios;
 	}
-	public void setDestinatario(String destinatario) {
-		this.destinatario = destinatario;
+	public void setDestinatarios(List<Usuario> destinatarios) {
+		this.destinatarios = destinatarios;
 	}
-	public String getEmissor() {
+	public Usuario getEmissor() {
 		return emissor;
 	}
-	public void setEmissor(String emissor) {
+	public void setEmissor(Usuario emissor) {
 		this.emissor = emissor;
 	}
 	
