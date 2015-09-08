@@ -20,4 +20,9 @@ public class CadastroProdutoService implements Serializable{
 		
 		return produtoRepository.update(produto);
 	}
+	
+	@Transactional
+	public void excluir(Produto produto){
+		produtoRepository.delete(produto);
+	}
 }

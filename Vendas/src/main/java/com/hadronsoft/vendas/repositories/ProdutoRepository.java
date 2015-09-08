@@ -30,6 +30,10 @@ public class ProdutoRepository implements Serializable {
 		return this.manager.merge(produto);
 	}
 	
+	public void delete(Produto produto){
+		this.manager.remove(this.manager.getReference(Produto.class, produto.getId()));
+	}
+	
 	public Produto getById(Long id){
 		return this.manager.find(Produto.class, id);
 	}

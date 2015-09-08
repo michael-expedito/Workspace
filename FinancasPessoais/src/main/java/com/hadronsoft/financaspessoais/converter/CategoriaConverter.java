@@ -20,7 +20,7 @@ public class CategoriaConverter implements Converter {
 
 		Categoria retorno = null;
 
-		if (value != null) {
+		if (value != null && !"".equals(value)) {
 			retorno = catRepository.getById(new Long(value));
 		}
 		return retorno;

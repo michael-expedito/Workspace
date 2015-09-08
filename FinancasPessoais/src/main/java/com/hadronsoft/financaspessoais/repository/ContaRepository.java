@@ -30,4 +30,12 @@ public class ContaRepository implements Serializable  {
 	public void add(Conta conta){
 		this.manager.persist(conta);
 	}
+	
+	public Conta update(Conta conta) {
+		return this.manager.merge(conta);
+	}
+	
+	public void delete(Conta conta){
+		this.manager.remove(conta);
+	}
 }

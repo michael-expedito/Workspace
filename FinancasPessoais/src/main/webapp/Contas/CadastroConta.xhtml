@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/MainLayout.xhtml"
+<ui:composition template="/WEB-INF/templates/Layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -8,77 +8,43 @@
 	xmlns:o="http://omnifaces.org/ui">
 	
 	<f:metadata>
-		<o:viewParam name="id" value="#{cadastroLancamentoBean.lancamento}" />
-		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}" />
+		<o:viewParam name="id" value="#{cadastroContaBean.conta}" />
+		<f:viewAction action="#{cadastroContaBean.prepararCadastro}" />
 	</f:metadata>
 	
-	<ui:define name="titulo">Cadastro de lançamento</ui:define>
+	<ui:define name="titulo">Cadastro de Contas</ui:define>
+	
+	<ui:define name="titulo-corpo">Cadastro de Contas</ui:define>
+	
 	<ui:define name="corpo">
-		<h1>Cadastro de lançamento</h1>
+	
 		<h:form id="frm">
-
-			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-
+			
 			<p:panelGrid columns="2">
 
-				<p:outputLabel value="Tipo de Lançamento" for="tipo" />
-				<p:selectOneButton value="#{cadastroLancamentoBean.lancamento.tipo}"
-					id="tipo">
-					<f:selectItems value="#{cadastroLancamentoBean.tiposLancamentos}"
-						var="tipoLancamento" itemValue="#{tipoLancamento}"
-						itemLabel="#{tipoLancamento.descricao}" />
-				</p:selectOneButton>
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{cadastroContaBean.conta.nome}" />
 
-				<p:outputLabel value="Conta" for="conta" />
-				<p:selectOneMenu value="#{cadastroLancamentoBean.lancamento.conta}"
-					label="Conta" id="conta">
-					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-					<f:selectItems value="#{cadastroLancamentoBean.todasContas}"
-						var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Categoria" for="categoria" />
-				<p:selectOneMenu
-					value="#{cadastroLancamentoBean.lancamento.categoria}"
-					id="categoria" filter="true">
-					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-					<f:selectItems value="#{cadastroLancamentoBean.todasCategorias}"
-						var="categoria" itemValue="#{categoria}"
-						itemLabel="#{categoria.descricao}" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="60"
-					value="#{cadastroLancamentoBean.lancamento.descricao}">
-				</p:inputText>
-
-				<p:outputLabel value="Valor" for="valor" />
-				<p:inputText size="12" id="valor"
-					value="#{cadastroLancamentoBean.lancamento.valor}" label="Valor">
+				<p:outputLabel value="Saldo Inicial" for="saldo" />
+				<p:inputText id="saldo" value="#{cadastroContaBean.conta.saldoInicial}" >
 					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
 						minFractionDigits="2" />
 				</p:inputText>
 
-				<p:outputLabel value="Data de vencimento" for="dataVencimento" />
-				<p:calendar id="dataVencimento" size="12" pattern="dd/MM/yyyy"
-					value="#{cadastroLancamentoBean.lancamento.dataVencimento}">
-					<p:ajax event="dateSelect" update="@this dataPagamento"
-						process="@this dataPagamento"
-						listener="#{cadastroLancamentoBean.dataVencimentoAlterada}" />
-					<p:ajax event="change" update="@this dataPagamento"
-						process="@this dataPagamento"
-						listener="#{cadastroLancamentoBean.dataVencimentoAlterada}" />
-				</p:calendar>
-
-				<p:outputLabel value="Data de pagamento" for="dataPagamento" />
-				<p:calendar size="12" id="dataPagamento" pattern="dd/MM/yyyy"
-					value="#{cadastroLancamentoBean.lancamento.dataPagamento}" />
+				<p:outputLabel value="Status" for="status" />
+				<p:selectOneButton value="#{cadastroContaBean.conta.status}"
+					id="status">
+					<f:selectItems value="#{cadastroContaBean.status}"
+						var="status" itemValue="#{status}"
+						itemLabel="#{status.descricao}" />
+				</p:selectOneButton>
 
 				<h:outputLabel />
 				<p:commandButton value="Salvar"
-					action="#{cadastroLancamentoBean.salvar}" icon="ui-icon-disk"
+					action="#{cadastroContaBean.salvar}" icon="ui-icon-disk"
 					update="@form" />
 			</p:panelGrid>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

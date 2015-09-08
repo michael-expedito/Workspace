@@ -31,13 +31,15 @@
 			<p:submenu label="Cadastros">
 				<p:menuitem value="Lançamento"
 					action="/Lancamentos/CadastroLancamento?faces-redirect=true" />
-				<p:menuitem value="Conta" />
+				<p:menuitem value="Conta" 
+					action="/Contas/CadastroConta?faces-redirect=true" />
 				<p:menuitem value="Categoria" />
 			</p:submenu>
 			<p:submenu label="Consultas">
 				<p:menuitem value="Lançamentos"
 					action="/Lancamentos/ConsultaLancamentos?faces-redirect=true" />
-				<p:menuitem value="Conta" />
+				<p:menuitem value="Conta" 
+					action="/Contas/ConsultaContas?faces-redirect=true"/>
 				<p:menuitem value="Categoria" />
 			</p:submenu>
 			<p:submenu label="Sistema">
@@ -46,6 +48,9 @@
 		</p:menubar>
 	</h:form>
 	<div id="conteudo">
+		<h1><ui:insert name="titulo-corpo" /></h1>
+		<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+		<br/>
 		<ui:insert name="corpo" />
 	</div>
 	<footer> Finanças Pessoais - Hadronsoft </footer>

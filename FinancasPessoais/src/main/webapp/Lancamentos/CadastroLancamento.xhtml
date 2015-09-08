@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/MainLayout.xhtml"
+<ui:composition template="/WEB-INF/templates/Layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -13,12 +13,9 @@
 	</f:metadata>
 	
 	<ui:define name="titulo">Cadastro de lançamento</ui:define>
+	<ui:define name="titulo-corpo">Cadastro de lançamento</ui:define>
 	<ui:define name="corpo">
-		<h1>Cadastro de lançamento</h1>
 		<h:form id="frm">
-
-			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-
 			<p:panelGrid columns="2">
 
 				<p:outputLabel value="Tipo de Lançamento" for="tipo" />

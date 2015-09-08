@@ -18,7 +18,8 @@ public class ContaConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Conta retorno = null;
-		if (value != null) {
+		
+		if (value != null && !"".equals(value)) {
 			retorno = contaRepository.getById(new Long(value));
 		}
 		return retorno;
@@ -27,7 +28,8 @@ public class ContaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			return ((Conta) value).getId().toString();
+			Conta conta = ((Conta) value);
+			return conta.getId() == null ? null : conta.getId().toString();
 		}
 		return null;
 	}
