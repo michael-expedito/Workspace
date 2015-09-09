@@ -11,7 +11,16 @@
 		<java.version>1.7</java.version>
 		<maven.plugin.version>2.3.2</maven.plugin.version>
 	</properties>
-
+	
+	<repositories>
+	    <repository>
+	        <id>prime-repo</id>
+	        <name>PrimeFaces Maven Repository</name>
+	        <url>http://repository.primefaces.org</url>
+	        <layout>default</layout>
+	    </repository>
+	</repositories>
+	
 	<!-- DEPENDENCIES -->
 	<dependencies>
 		<!-- OmniFaces (utilitarios para JSF) -->
@@ -42,6 +51,7 @@
 			<version>5.2.1.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		
 		<!-- Mojarra (implementação do JSF 2) -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
@@ -87,6 +97,13 @@
 			<artifactId>primefaces</artifactId>
 			<version>5.2</version>
 			<scope>compile</scope>
+		</dependency>
+		
+	
+		<dependency>  
+		    <groupId>org.primefaces.themes</groupId>  
+		    <artifactId>all-themes</artifactId>  
+		    <version>1.0.9</version>  
 		</dependency>
 	</dependencies>
 
