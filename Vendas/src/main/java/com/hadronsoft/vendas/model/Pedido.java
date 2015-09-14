@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -49,20 +50,20 @@ public class Pedido implements Serializable {
 	
 	@NotNull
 	@Column(name = "PED_VLFRETE", nullable = false, precision = 23, scale = 9)
-	private BigDecimal valorFrete;
+	private BigDecimal valorFrete = BigDecimal.ZERO;;
 	
 	@NotNull
 	@Column(name = "PED_VLDESCONTO", nullable = false, precision = 23, scale = 9)
-	private BigDecimal valorDesconto;
+	private BigDecimal valorDesconto = BigDecimal.ZERO;;
 	
 	@NotNull
 	@Column(name = "PED_VLTOTAL", nullable = false, precision = 23, scale = 9)
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;;
 	
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name="PED_STATUS", nullable = false)
-	private StatusPedido status;
+	private StatusPedido status = StatusPedido.ORCAMENTO;
 	
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
@@ -174,6 +175,16 @@ public class Pedido implements Serializable {
 	}
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
+	}
+
+	@Transient
+	public boolean isNew(){
+		return getId() == null;
+	}
+	
+	@Transient
+	public boolean isExisten(){
+		return !isNew();
 	}
 
 	@Override

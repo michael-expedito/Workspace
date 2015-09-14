@@ -25,4 +25,8 @@ public class ClienteRepository implements Serializable {
 				.setParameter("nome", nome.toUpperCase() + "%")
 				.getResultList();
 	}
+	
+	public List<Cliente> getAll(){
+		return this.manager.createQuery("from Cliente", Cliente.class).getResultList();
+	}
 }

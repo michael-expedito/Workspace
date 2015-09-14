@@ -11,29 +11,31 @@
 
 	<p:panelGrid columns="4" style="width: 100%"
 		columnClasses="rotulo, campo, rotulo, campo">
-		<p:outputLabel value="Data de entrega" for="dataEntrega" />
-		<p:inputText id="dataEntrega" size="10" />
-
+		<p:outputLabel value="Data da entrega" for="dataEntrega" />
+		<p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy"
+			value="#{cadastroPedidosBean.pedido.dataEntrega}" />
+		
 		<p:spacer />
 		<p:spacer />
+	
+        <p:outputLabel value="Logradouro" for="entregaLogradouro" />
+        <p:inputText id="entregaLogradouro" size="50" 
+        	value="#{cadastroPedidosBean.pedido.enderecoEntrega.logradouro}" />
 
-		<p:outputLabel value="Logradouro" for="entregalogradouro" />
-		<p:inputText id="entregalogradouro" size="50" />
+        <p:outputLabel value="Número" for="entregaNumero" />
+        <p:inputText id="entregaNumero" size="5" value="#{cadastroPedidosBean.pedido.enderecoEntrega.numero}" />
 
-		<p:outputLabel value="Número" for="entregaNumero" />
-		<p:inputText id="entregaNumero" size="5" />
+        <p:outputLabel value="Complemento" for="entregaComplemento" />
+        <p:inputText id="entregaComplemento" size="50" value="#{cadastroPedidosBean.pedido.enderecoEntrega.complemento}" />
 
-		<p:outputLabel value="Complemento" for="entregaComplemento" />
-		<p:inputText id="entregaComplemento" size="50" />
+        <p:outputLabel value="Cidade" for="entregaCidade" />
+        <p:inputText id="entregaCidade" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cidade}" />
 
-		<p:outputLabel value="Cidade" for="entregaCidade" />
-		<p:inputText id="entregaCidade" size="20" />
+        <p:outputLabel value="Estado" for="entregaEstado" />
+        <p:inputText id="entregaEstado" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.uf}" />
 
-		<p:outputLabel value="Estado" for="entregaEstado" />
-		<p:inputText id="entregaEstado" size="20" />
-
-		<p:outputLabel value="CEP" for="entregaCep" />
-		<p:inputText id="entregaCep" size="10" />
+        <p:outputLabel value="CEP" for="entregaCep" />
+        <p:inputText id="entregaCep" size="10" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cep}" />
 	</p:panelGrid>
 
 
