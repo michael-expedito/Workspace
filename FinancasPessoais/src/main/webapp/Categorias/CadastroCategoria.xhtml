@@ -8,11 +8,12 @@
 	xmlns:o="http://omnifaces.org/ui">
 	
 	<f:metadata>
-		<o:viewParam name="id" value="#{cadastroLancamentoBean.lancamento}" />
-		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}" />
+		<!--  <o:viewParam name="id" value="#{cadastroLancamentoBean.lancamento}" />  -->
+		<f:viewAction action="#{cadastroCategoriaBean.prepararCadastro}" />
 	</f:metadata>
 	
-	<ui:define name="titulo">Cadastro de lançamento</ui:define>
+	<ui:define name="titulo">Cadastro de Categoria</ui:define>
+	
 	<ui:define name="corpo">
 		<h1>Cadastro de lançamento</h1>
 		<h:form id="frm">
@@ -21,23 +22,23 @@
 
 				<p:outputLabel value="Categoria Superior" for="categoria" />
 				<p:selectOneMenu
-					value="#{cadastroLancamentoBean.lancamento.categoria}"
+					value=""
 					id="categoria" filter="true">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-					<f:selectItems value="#{cadastroLancamentoBean.todasCategorias}"
+					<f:selectItems value=""
 						var="categoria" itemValue="#{categoria}" 
 						itemLabel="#{categoria.descricao}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Descrição" for="descricao" />
 				<p:inputText id="descricao" size="60"
-					value="#{cadastroLancamentoBean.lancamento.descricao}">
+					value="">
 				</p:inputText>
 
 
 				<h:outputLabel />
 				<p:commandButton value="Salvar"
-					action="#{cadastroLancamentoBean.salvar}" icon="ui-icon-disk"
+					action="#{cadastroCategoriaBean.salvar}" icon="ui-icon-disk"
 					update="@form" />
 			</p:panelGrid>
 		</h:form>

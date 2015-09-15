@@ -186,6 +186,25 @@ public class Pedido implements Serializable {
 	public boolean isExisten(){
 		return !isNew();
 	}
+	
+	@Transient
+	public BigDecimal getValorSubtotal() {
+		return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
+	}
+	
+	public void recalcularValorTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+		
+		total = total.add(this.getValorFrete()).subtract(this.getValorDesconto());
+		
+		for (ItemPedido item : this.getItens()) {
+			if (item.getProduto() != null && item.getProduto().getId() != null) {
+				total = total.add(item.getValorTotal());
+			}
+		}
+		
+		this.setValorTotal(total);
+	}
 
 	@Override
 	public int hashCode() {

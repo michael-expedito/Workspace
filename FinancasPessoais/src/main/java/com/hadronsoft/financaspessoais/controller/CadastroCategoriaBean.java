@@ -25,6 +25,14 @@ public class CadastroCategoriaBean implements Serializable{
 	private Categoria categoria;
 	
 	private List<Categoria> categoriasPai;
+	
+	public void prepararCadastro(){
+		
+	}
+	
+	public void salvar(){
+		
+	}
 
 	public Categoria getCategoria() {
 		return categoria;

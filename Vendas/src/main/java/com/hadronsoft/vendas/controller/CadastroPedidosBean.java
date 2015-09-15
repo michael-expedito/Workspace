@@ -48,6 +48,7 @@ public class CadastroPedidosBean implements Serializable{
 		if (this.pedido == null){
 			clear();
 		}
+		this.recalcularPedido();
 	}
 	
 	public void salvar(){
@@ -74,6 +75,10 @@ public class CadastroPedidosBean implements Serializable{
 		}
 	}
 	
+	public void recalcularPedido(){
+		this.pedido.recalcularValorTotal();
+	}
+	
 	// gets and sets
 	public Pedido getPedido(){
 		return pedido;
@@ -94,6 +99,8 @@ public class CadastroPedidosBean implements Serializable{
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
+	
+	
 	
 	
 }

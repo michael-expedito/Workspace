@@ -1,6 +1,5 @@
 *.class
 .mtj.tmp/
-*.jar
 *.war
 *.ear
 hs_err_pid*
@@ -8,7 +7,6 @@ hs_err_pid*
 Servers/*
 .metadata
 .settings
-.classpath
 .project
 target/
 .metadata

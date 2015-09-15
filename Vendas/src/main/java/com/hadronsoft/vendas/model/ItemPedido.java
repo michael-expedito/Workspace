@@ -1,5 +1,6 @@
 package com.hadronsoft.vendas.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -70,6 +71,11 @@ public class ItemPedido implements Serializable {
 	}
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	
+	@Transient
+	public BigDecimal getValorTotal() {
+		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
 	}
 
 	@Override
