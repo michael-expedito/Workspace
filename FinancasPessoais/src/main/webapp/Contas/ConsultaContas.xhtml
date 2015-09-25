@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/Layout.xhtml"
+<ui:composition template="/WEB-INF/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -29,7 +29,7 @@
 					<h:outputText value="#{conta.nome}" />
 				</p:column>
 				
-				<p:column>
+				<p:column headerText="Conta">
 					<f:facet name="header">
 						<h:outputText value="Saldo Inicial" />
 					</f:facet>
@@ -45,15 +45,15 @@
 					<h:outputText value="#{conta.status.descricao}" />
 				</p:column>
 				
-				<p:column>
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/Contas/CadastroConta">
+				<p:column width="180">
+					<p:button title="Editar" value="Editar"
+						outcome="/Contas/CadastroConta" styleClass="GreenButton">
 						<f:param name="id" value="#{conta.id}" />
 					</p:button>
-					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						process="@this" update="@form"
+					<p:commandButton title="Excluir" value="Excluir"
+						process="@this" update="@form" styleClass="RedButton"
 						action="#{consultaContasBean.excluir}">
-						<f:setPropertyActionListener value="#{conta}"
+						<f:setPropertyActionListener value="#{conta}" 
 							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
 					</p:commandButton>
 				</p:column>

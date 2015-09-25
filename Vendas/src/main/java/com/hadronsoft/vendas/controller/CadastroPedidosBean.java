@@ -10,9 +10,12 @@ import javax.inject.Named;
 import com.hadronsoft.vendas.model.Cliente;
 import com.hadronsoft.vendas.model.EnderecoEntrega;
 import com.hadronsoft.vendas.model.FormaPagamento;
+import com.hadronsoft.vendas.model.ItemPedido;
 import com.hadronsoft.vendas.model.Pedido;
+import com.hadronsoft.vendas.model.Produto;
 import com.hadronsoft.vendas.model.Usuario;
 import com.hadronsoft.vendas.repositories.ClienteRepository;
+import com.hadronsoft.vendas.repositories.ProdutoRepository;
 import com.hadronsoft.vendas.repositories.UsuarioRepository;
 import com.hadronsoft.vendas.services.CadastroPedidoService;
 import com.hadronsoft.vendas.util.jsf.FacesUtil;
@@ -31,24 +34,33 @@ public class CadastroPedidosBean implements Serializable{
 	
 	@Inject
 	private ClienteRepository cliRepository;
+	
+	@Inject
+	private ProdutoRepository prdRepository;
 
 	private Pedido pedido;
 	private List<Usuario> vendedores;
 	private List<Cliente> clientes;
+	
+	private Produto produtoLinhaEditavel;
 	
 	public CadastroPedidosBean() {
 		clear();
 	}
 	
 	public void start(){
-		if(FacesUtil.isNotPostback()){
-			this.vendedores = this.usuRepository.getVendedores();
-			this.clientes = this.cliRepository.getAll();
-		}
 		if (this.pedido == null){
 			clear();
 		}
+		
+		if(FacesUtil.isNotPostback()){
+			this.vendedores = this.usuRepository.getVendedores();
+			this.clientes = this.cliRepository.getAll();
+			this.pedido.addEmptyItem();
+		}
+		
 		this.recalcularPedido();
+		
 	}
 	
 	public void salvar(){
@@ -79,6 +91,23 @@ public class CadastroPedidosBean implements Serializable{
 		this.pedido.recalcularValorTotal();
 	}
 	
+	public List<Produto> completarProduto(String nome){
+		return this.prdRepository.getByName(nome);
+	}
+	
+	public void carregarProdutoLinhaEditavel(){
+		ItemPedido item = this.pedido.getItens().get(0);
+		
+		if (this.produtoLinhaEditavel != null) {
+			item.setProduto(this.produtoLinhaEditavel);
+			item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
+			
+			this.pedido.addEmptyItem();
+			this.produtoLinhaEditavel = null;
+			
+			this.pedido.recalcularValorTotal();
+		}
+	}
 	// gets and sets
 	public Pedido getPedido(){
 		return pedido;
@@ -98,6 +127,14 @@ public class CadastroPedidosBean implements Serializable{
 
 	public List<Cliente> getClientes() {
 		return clientes;
+	}
+
+	public Produto getProdutoLinhaEditavel() {
+		return produtoLinhaEditavel;
+	}
+
+	public void setProdutoLinhaEditavel(Produto produtoLinhaEditavel) {
+		this.produtoLinhaEditavel = produtoLinhaEditavel;
 	}
 	
 	

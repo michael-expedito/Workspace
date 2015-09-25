@@ -230,5 +230,24 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public void addEmptyItem() {
+		if (this.isOrcamento()){
+			Produto produto = new Produto();
+			produto.setQuantidadeEstoque(1);
+			
+			ItemPedido item = new ItemPedido();
+			item.setProduto(produto);
+			item.setPedido(this);
+			
+			this.getItens().add(0, item);
+		}
+		
+	}
+	
+	@Transient
+	public boolean isOrcamento() {
+		return StatusPedido.ORCAMENTO.equals(this.getStatus());
+	}
 
 }
