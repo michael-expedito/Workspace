@@ -44,6 +44,8 @@ public class CadastroPedidosBean implements Serializable{
 	
 	private Produto produtoLinhaEditavel;
 	
+	private String sku;
+	
 	public CadastroPedidosBean() {
 		clear();
 	}
@@ -64,9 +66,16 @@ public class CadastroPedidosBean implements Serializable{
 	}
 	
 	public void salvar(){
-		this.pedido = this.cadastroPedidoService.salvar(this.pedido);
-		clear();
-		FacesUtil.addInfoMessage("Pedido salvo com sucesso!");
+		this.pedido.removeEmptyItem();
+		
+		try{
+			this.pedido = this.cadastroPedidoService.salvar(this.pedido);
+			FacesUtil.addInfoMessage("Pedido salvo com sucesso!");
+		} finally {
+			this.pedido.addEmptyItem();
+		}
+		
+		
 	}
 		
 	
@@ -99,15 +108,51 @@ public class CadastroPedidosBean implements Serializable{
 		ItemPedido item = this.pedido.getItens().get(0);
 		
 		if (this.produtoLinhaEditavel != null) {
-			item.setProduto(this.produtoLinhaEditavel);
-			item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
-			
-			this.pedido.addEmptyItem();
-			this.produtoLinhaEditavel = null;
-			
-			this.pedido.recalcularValorTotal();
+			if (this.existeItemComProduto(this.produtoLinhaEditavel)) {
+				FacesUtil.addErrorMessage("Já existe um item no epdido com o produto informado.");
+			} else {
+				item.setProduto(this.produtoLinhaEditavel);
+				item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
+	
+				this.pedido.addEmptyItem();
+				this.produtoLinhaEditavel = null;
+				this.sku = null;
+				
+				this.pedido.recalcularValorTotal();
+			}
 		}
 	}
+	
+	private boolean existeItemComProduto(Produto produto) {
+		boolean existeItem = false;
+		for (ItemPedido item : this.getPedido().getItens()){
+			if (produto.equals(item.getProduto())){
+				existeItem = true;
+				break;
+			}
+		}
+		return existeItem;
+	}
+
+	public void carregarProdutoPorSku(){
+		if (this.sku != null && this.sku != ""){
+			this.produtoLinhaEditavel = this.prdRepository.getBySku(this.sku);
+			this.carregarProdutoLinhaEditavel();
+		}
+	}
+	
+	public void atualizarQuantidade(ItemPedido item, int linha){
+		if (item.getQuantidade() < 1){
+			if (linha == 0){
+				item.setQuantidade(1);
+			} else {
+				this.getPedido().getItens().remove(linha);
+			}
+		}
+		
+		this.pedido.recalcularValorTotal();
+	}
+	
 	// gets and sets
 	public Pedido getPedido(){
 		return pedido;
@@ -136,8 +181,13 @@ public class CadastroPedidosBean implements Serializable{
 	public void setProdutoLinhaEditavel(Produto produtoLinhaEditavel) {
 		this.produtoLinhaEditavel = produtoLinhaEditavel;
 	}
-	
-	
-	
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 	
 }

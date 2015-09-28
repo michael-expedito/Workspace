@@ -25,10 +25,10 @@ public class ItemPedido implements Serializable {
 	private Long id;
 	
 	@Column(name="ITP_QTITEMPEDIDO", nullable = false, length = 3)
-	private Integer quantidade;
+	private Integer quantidade = 1;
 	
 	@Column(name = "ITP_VLUNITARIO", nullable = false, precision = 10, scale = 2)
-	private BigDecimal valorUnitario;
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
 	
 	@ManyToOne
 	@JoinColumn(name = "ITP_IDPRODUTO", nullable = false, foreignKey = @ForeignKey(name="FK1_ITEMPEDIDO_PRODUTO"))
@@ -73,11 +73,6 @@ public class ItemPedido implements Serializable {
 		this.pedido = pedido;
 	}
 	
-	@Transient
-	public BigDecimal getValorTotal() {
-		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,6 +96,28 @@ public class ItemPedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	//Transient Methods
+	@Transient
+	public BigDecimal getValorTotal() {
+		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
+	
+	@Transient
+	public boolean isProdutoAssociado(){
+		return this.getProduto() != null && this.getProduto().getId() != null;
+	}
+	
+	@Transient
+	public boolean isEstoqueSuficiente() {
+		return this.getPedido().isEmitido() || this.getProduto().getId() == null 
+			|| this.getProduto().getQuantidadeEstoque() >= this.getQuantidade(); 
+	}
+	
+	@Transient
+	public boolean isEstoqueInsuficiente() {
+		return !this.isEstoqueSuficiente();
 	}
 
 }

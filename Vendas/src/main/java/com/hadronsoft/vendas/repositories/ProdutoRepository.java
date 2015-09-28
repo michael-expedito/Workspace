@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -62,6 +63,16 @@ public class ProdutoRepository implements Serializable {
 		return this.manager.createQuery("from Produto where upper(nome) like :nome", Produto.class)
 				.setParameter("nome", nome.toUpperCase() + "%")
 				.getResultList();
+	}
+
+	public Produto getBySku(String sku) {
+		try {
+			return this.manager.createQuery("from Produto where upper(sku) = :sku", Produto.class)
+					.setParameter("sku", sku.toUpperCase())
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
