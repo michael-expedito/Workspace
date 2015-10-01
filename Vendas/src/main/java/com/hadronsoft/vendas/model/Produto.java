@@ -1,5 +1,6 @@
 package com.hadronsoft.vendas.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.hadronsoft.vendas.services.NegocioException;
 import com.hadronsoft.vendas.validation.SKU;
 
 import javax.persistence.ForeignKey;
@@ -120,6 +122,19 @@ public class Produto implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Transient 
+	public void baixarEstoque(Integer quantidade) {
+		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
+		
+		if (novaQuantidade < 0 ){ 
+			throw new NegocioException("Não há quantidade no estoque de " 
+					+ quantidade + " itens do produto "
+					+ this.getSku() + ".");
+		}
+		this.setQuantidadeEstoque(novaQuantidade);
+		
 	}
 
 }
