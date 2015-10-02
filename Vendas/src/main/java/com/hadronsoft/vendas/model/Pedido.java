@@ -177,21 +177,6 @@ public class Pedido implements Serializable {
 		this.itens = itens;
 	}
 
-	@Transient
-	public boolean isNew(){
-		return getId() == null;
-	}
-	
-	@Transient
-	public boolean isExisten(){
-		return !isNew();
-	}
-	
-	@Transient
-	public BigDecimal getValorSubtotal() {
-		return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
-	}
-	
 	public void recalcularValorTotal() {
 		BigDecimal total = BigDecimal.ZERO;
 		
@@ -231,6 +216,22 @@ public class Pedido implements Serializable {
 		return true;
 	}
 	
+	@Transient
+	public boolean isNew(){
+		return getId() == null;
+	}
+	
+	@Transient
+	public boolean isExisten(){
+		return !isNew();
+	}
+	
+	@Transient
+	public BigDecimal getValorSubtotal() {
+		return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
+	}
+
+	@Transient
 	public void addEmptyItem() {
 		if (this.isOrcamento()){
 			Produto produto = new Produto();
@@ -249,6 +250,8 @@ public class Pedido implements Serializable {
 	public boolean isOrcamento() {
 		return StatusPedido.ORCAMENTO.equals(this.getStatus());
 	}
+	
+	@Transient
 	public void removeEmptyItem() {
 		ItemPedido primeiroItem = this.getItens().get(0);
 		
@@ -272,7 +275,7 @@ public class Pedido implements Serializable {
 	}
 	
 	@Transient
-	private boolean isEmissivel() {
+	public boolean isEmissivel() {
 		return this.isExisten() && this.isOrcamento();
 	}
 	
@@ -282,13 +285,23 @@ public class Pedido implements Serializable {
 	}
 	
 	@Transient
-	private boolean isCancelado() {
+	public boolean isCancelado() {
 		return StatusPedido.CANCELADO.equals(this.getStatus());
 	}
 	
 	@Transient
 	public boolean isCancelavel(){
 		return this.isExisten() && !this.isCancelado();
+	}
+	
+	@Transient
+	public boolean isNaoAlteravel() {
+		return !this.isAlteravel();
+	}
+	
+	@Transient
+	public boolean isAlteravel() {
+		return this.isOrcamento();
 	}
 
 }

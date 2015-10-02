@@ -13,29 +13,36 @@
 		columnClasses="rotulo, campo, rotulo, campo">
 		<p:outputLabel value="Data da entrega" for="dataEntrega" />
 		<p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy"
-			value="#{cadastroPedidosBean.pedido.dataEntrega}" />
+			value="#{cadastroPedidosBean.pedido.dataEntrega}" 
+			disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 		
 		<p:spacer />
 		<p:spacer />
 	
         <p:outputLabel value="Logradouro" for="entregaLogradouro" />
         <p:inputText id="entregaLogradouro" size="50" 
-        	value="#{cadastroPedidosBean.pedido.enderecoEntrega.logradouro}" />
+        	value="#{cadastroPedidosBean.pedido.enderecoEntrega.logradouro}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 
         <p:outputLabel value="Número" for="entregaNumero" />
-        <p:inputText id="entregaNumero" size="5" value="#{cadastroPedidosBean.pedido.enderecoEntrega.numero}" />
+        <p:inputText id="entregaNumero" size="5" value="#{cadastroPedidosBean.pedido.enderecoEntrega.numero}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 
         <p:outputLabel value="Complemento" for="entregaComplemento" />
-        <p:inputText id="entregaComplemento" size="50" value="#{cadastroPedidosBean.pedido.enderecoEntrega.complemento}" />
+        <p:inputText id="entregaComplemento" size="50" value="#{cadastroPedidosBean.pedido.enderecoEntrega.complemento}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 
         <p:outputLabel value="Cidade" for="entregaCidade" />
-        <p:inputText id="entregaCidade" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cidade}" />
+        <p:inputText id="entregaCidade" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cidade}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 
         <p:outputLabel value="Estado" for="entregaEstado" />
-        <p:inputText id="entregaEstado" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.uf}" />
+        <p:inputText id="entregaEstado" size="20" value="#{cadastroPedidosBean.pedido.enderecoEntrega.uf}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 
         <p:outputLabel value="CEP" for="entregaCep" />
-        <p:inputText id="entregaCep" size="10" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cep}" />
+        <p:inputText id="entregaCep" size="10" value="#{cadastroPedidosBean.pedido.enderecoEntrega.cep}" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 	</p:panelGrid>
 
 

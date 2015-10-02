@@ -10,13 +10,17 @@
 	<p:toolbar style="margin-top: 20px">
 		<p:toolbarGroup>
 			<p:button value="Novo" outcome="/pedidos/CadastroPedido"/>
-			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroPedidosBean.salvar}"  accesskey="s"/>
+			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroPedidosBean.salvar}"  
+			accesskey="s" disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">
 			<p:commandButton value="Emitir" action="#{emissaoPedidosBean.emitirPedido}"
-				update="@form" process="@form"/>
-			<p:commandButton value="Cancelar" action="#{cancelamentoPedidoBean.cancelarPedido}"/>
+				update="@form" process="@form" disabled="#{cadastroPedidosBean.pedido.naoEmissivel}"/>
+			
+			<p:commandButton value="Cancelar" action="#{cancelamentoPedidoBean.cancelarPedido}"
+				disabled="#{cadastroPedidosBean.pedido.naoCancelavel}"/>
+			
 			<p:button value="Enviar por e-mail" />
 			 
 			<p:separator/>

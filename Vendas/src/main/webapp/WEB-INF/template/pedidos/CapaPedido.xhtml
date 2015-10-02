@@ -9,11 +9,11 @@
 
 	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
 	
-		<p:outputLabel value="Número" rendered="#{cadastroPedidosBean.pedido.isExisten()}" />
-		<h:outputText value="#{cadastroPedidosBean.pedido.id}" rendered="#{cadastroPedidosBean.pedido.isExisten()}"/>
+		<p:outputLabel value="Número" rendered="#{cadastroPedidosBean.pedido.existen}" />
+		<h:outputText value="#{cadastroPedidosBean.pedido.id}" rendered="#{cadastroPedidosBean.pedido.existen}"/>
 		
-		<p:outputLabel value="Data de criação" rendered="#{cadastroPedidosBean.pedido.isExisten()}" />
-		<h:outputText value="#{cadastroPedidosBean.pedido.dataCriacao}" rendered="#{cadastroPedidosBean.pedido.isExisten()}">
+		<p:outputLabel value="Data de criação" rendered="#{cadastroPedidosBean.pedido.existen}" />
+		<h:outputText value="#{cadastroPedidosBean.pedido.dataCriacao}" rendered="#{cadastroPedidosBean.pedido.existen}">
 			<f:convertDateTime pattern="dd/MM/yyyy" />
 		</h:outputText>
 		
@@ -21,7 +21,8 @@
 		<h:outputText value="#{cadastroPedidosBean.pedido.status.descricao}" />
 		
 		<p:outputLabel value="Vendedor" for="vendedor" />
-		<p:selectOneMenu id="vendedor" value="#{cadastroPedidosBean.pedido.vendedor}">
+		<p:selectOneMenu id="vendedor" value="#{cadastroPedidosBean.pedido.vendedor}"
+			disabled="#{cadastroPedidosBean.pedido.naoAlteravel}">
 			<f:selectItem itemLabel="Selecione" />
 			<f:selectItems value="#{cadastroPedidosBean.vendedores}" var="vendedor"
 				itemValue="#{vendedor}" itemLabel="#{vendedor.nome}" />
@@ -30,10 +31,12 @@
 		<p:outputLabel value="Cliente" for="cliente" />
         <p:autoComplete id="cliente" size="40" dropdown="true" 
         	value="#{cadastroPedidosBean.pedido.cliente}" completeMethod="#{cadastroPedidosBean.completarCliente}"
-        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
+        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" 
+        	disabled="#{cadastroPedidosBean.pedido.naoAlteravel}"/>
 		
 		<p:outputLabel value="Forma de pagamento" for="formaPagamento" />
-		<p:selectOneMenu id="formaPagamento" value="#{cadastroPedidosBean.pedido.formaPagamento}">
+		<p:selectOneMenu id="formaPagamento" value="#{cadastroPedidosBean.pedido.formaPagamento}"
+			disabled="#{cadastroPedidosBean.pedido.naoAlteravel}">
 			<f:selectItem itemLabel="Selecione" />
 			<f:selectItems value="#{cadastroPedidosBean.formasPagamentos}" 
 				var="formaPagamento" itemValue="#{formaPagamento}" itemLabel="#{formaPagamento.descricao}"/>
@@ -41,7 +44,8 @@
 		
 		<p:outputLabel value="Valor do frete" for="valorFrete" />
 		<p:inputText id="valorFrete" size="10" maxlength="10"  styleClass="moeda"
-			value="#{cadastroPedidosBean.pedido.valorFrete}">
+			value="#{cadastroPedidosBean.pedido.valorFrete}"
+			disabled="#{cadastroPedidosBean.pedido.naoAlteravel}">
 			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />	
 			
 			<p:ajax event="change" process="@this" update="totalPedido"
@@ -56,7 +60,8 @@
 		
 		<p:outputLabel value="Valor de desconto" for="valorDesconto" />
 		<p:inputText id="valorDesconto" size="10" maxlength="10"  styleClass="moeda"
-			value="#{cadastroPedidosBean.pedido.valorDesconto}">
+			value="#{cadastroPedidosBean.pedido.valorDesconto}"
+			disabled="#{cadastroPedidosBean.pedido.naoAlteravel}">
 			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />	
 			<p:ajax event="change" process="@this" update="totalPedido" 
 				listener="#{cadastroPedidosBean.recalcularPedido}"/>
