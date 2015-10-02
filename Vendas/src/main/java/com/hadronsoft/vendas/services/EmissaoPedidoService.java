@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import com.hadronsoft.vendas.model.Pedido;
 import com.hadronsoft.vendas.model.StatusPedido;
 import com.hadronsoft.vendas.repositories.PedidoRepository;
+import com.hadronsoft.vendas.util.jpa.Transactional;
 
 public class EmissaoPedidoService implements Serializable{
 
@@ -21,6 +22,7 @@ public class EmissaoPedidoService implements Serializable{
 	@Inject
 	private EstoqueService estoqueService;
 	
+	@Transactional
 	public Pedido emitir(Pedido pedido) {
 		pedido = this.cadastroPedidoService.salvar(pedido);
 		

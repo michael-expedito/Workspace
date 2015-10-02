@@ -136,5 +136,11 @@ public class Produto implements Serializable {
 		this.setQuantidadeEstoque(novaQuantidade);
 		
 	}
+	
+	@Transient
+	public void adicionarEstoque(Integer quantidade) {
+		this.setQuantidadeEstoque(getQuantidadeEstoque() + quantidade);
+		
+	}
 
 }

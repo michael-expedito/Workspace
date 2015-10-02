@@ -16,7 +16,7 @@
 		<p:toolbarGroup align="right">
 			<p:commandButton value="Emitir" action="#{emissaoPedidosBean.emitirPedido}"
 				update="@form" process="@form"/>
-			<p:button value="Cancelar" />
+			<p:commandButton value="Cancelar" action="#{cancelamentoPedidoBean.cancelarPedido}"/>
 			<p:button value="Enviar por e-mail" />
 			 
 			<p:separator/>
