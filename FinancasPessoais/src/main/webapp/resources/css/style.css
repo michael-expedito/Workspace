@@ -112,3 +112,7 @@ h1 {
     background: inherit !important; 
     color: #b94a48;
 }
+
+.ui-dialog .ui-dialog-content {
+	padding: 5px !important; 
+}

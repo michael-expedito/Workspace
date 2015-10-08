@@ -24,8 +24,8 @@
                 <p:menuitem value="Pesquisar" icon="icon-search-outline" action="/Lancamentos/ConsultaLancamentos?faces-redirect=true"  />
             </p:submenu>
             
-            <p:menuitem value="Contas Financeiras" icon="icon-credit-card" action="/Contas/ConsultaContas?faces-redirect=true" />
-            <p:menuitem value="Categorias" icon="icon-th-list-2" action="/Categorias/ConsultaCategorias?faces-redirect=true"  />
+            <p:menuitem value="Contas Financeiras" icon="icon-credit-card" action="#{menuBean.viewDialog('/Contas/ConsultaContas.xhtml', true,false,false,325,500)}" />
+            <p:menuitem value="Categorias" icon="icon-th-list-2" actionListener="#{menuBean.viewDialog('/Categorias/ConsultaCategorias.xhtml', true,false,false,325,500)}" />
 
         </ps:menu>
         </h:form>

@@ -1,63 +1,73 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui">
 
+<h:head>
+</h:head>
+<h:body>
 	<f:metadata>
 		<f:viewAction action="#{consultaContasBean.consultar}" />
 	</f:metadata>
 
-	<ui:define name="titulo">Consulta de Contas</ui:define>
+	<h:form id="frm">
 
-	<ui:define name="titulo-corpo">Consulta de Contas</ui:define>
-	
-	<ui:define name="corpo">
+		<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 
-		<h:form id="frm">
-		
-			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-			<p:dataTable value="#{consultaContasBean.contas}"
-				var="conta" border="1" cellspacing="0" cellpadding="2"
-				paginator="true" rows="5" paginatorPosition="bottom">>
+		<p:toolbar style="margin-top: 10px">
+			<p:toolbarGroup>
+				<p:commandButton value="Pesquisar"
+					 update="@form" />
+			</p:toolbarGroup>
+
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/Contas/CadastroConta" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<p:dataTable value="#{consultaContasBean.contas}" var="conta"
+			border="1" cellspacing="0" cellpadding="2" paginator="true" rows="4"
+			paginatorPosition="bottom">>
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Nome" />
-					</f:facet>
-					<h:outputText value="#{conta.nome}" />
-				</p:column>
-				
-				<p:column headerText="Conta">
-					<f:facet name="header">
-						<h:outputText value="Saldo Inicial" />
-					</f:facet>
-					<h:outputText value="#{conta.saldoInicial}">
-						<f:convertNumber type="currency" locale="pt_BR" />
-					</h:outputText>
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Status" />
-					</f:facet>
-					<h:outputText value="#{conta.status.descricao}" />
-				</p:column>
-				
-				<p:column width="180">
-					<p:button title="Editar" value="Editar"
-						outcome="/Contas/CadastroConta" styleClass="GreenButton">
-						<f:param name="id" value="#{conta.id}" />
-					</p:button>
-					<p:commandButton title="Excluir" value="Excluir"
-						process="@this" update="@form" styleClass="RedButton"
-						action="#{consultaContasBean.excluir}">
-						<f:setPropertyActionListener value="#{conta}" 
-							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</ui:define>
-</ui:composition>
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{conta.nome}" />
+			</p:column>
+
+			<p:column headerText="Conta">
+				<f:facet name="header">
+					<h:outputText value="Saldo Inicial" />
+				</f:facet>
+				<h:outputText value="#{conta.saldoInicial}">
+					<f:convertNumber type="currency" locale="pt_BR" />
+				</h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Status" />
+				</f:facet>
+				<h:outputText value="#{conta.status.descricao}" />
+			</p:column>
+
+			<p:column width="180">
+				<p:button title="Editar" value="Editar"
+					outcome="/Contas/CadastroConta" styleClass="GreenButton">
+					<f:param name="id" value="#{conta.id}" />
+				</p:button>
+				<p:commandButton title="Excluir" value="Excluir" process="@this"
+					update="@form" styleClass="RedButton"
+					action="#{consultaContasBean.excluir}">
+					<f:setPropertyActionListener value="#{conta}"
+						target="#{consultaLancamentosBean.lancamentoSelecionado}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+</html>
+

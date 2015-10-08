@@ -1,50 +1,60 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:o="http://omnifaces.org/ui">
-	
+
+<h:head>
+</h:head>
+
+<h:body>
+
 	<f:metadata>
 		<o:viewParam name="id" value="#{cadastroContaBean.conta}" />
 		<f:viewAction action="#{cadastroContaBean.prepararCadastro}" />
 	</f:metadata>
-	
-	<ui:define name="titulo">Cadastro de Contas</ui:define>
-	
-	<ui:define name="titulo-corpo">Cadastro de Contas</ui:define>
-	
-	<ui:define name="corpo">
-	
-		<h:form id="frm">
-			
-			<p:panelGrid columns="2">
 
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" value="#{cadastroContaBean.conta.nome}" />
 
-				<p:outputLabel value="Saldo Inicial" for="saldo" />
-				<p:inputText id="saldo" value="#{cadastroContaBean.conta.saldoInicial}" >
-					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
-						minFractionDigits="2" />
-				</p:inputText>
+	<h:form id="frm">
+		<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+		
+		<p:toolbar style="margin-top: 10px">
+			<p:toolbarGroup>
+				<p:button value="Voltar" outcome="/Contas/ConsultaContas" />
+				
+			</p:toolbarGroup>
 
-				<p:outputLabel value="Status" for="status" />
-				<p:selectOneButton value="#{cadastroContaBean.conta.status}"
-					id="status">
-					<f:selectItems value="#{cadastroContaBean.status}"
-						var="status" itemValue="#{status}"
-						itemLabel="#{status.descricao}" />
-				</p:selectOneButton>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/Contas/CadastroConta" />
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		<p:panelGrid columns="2" style="width: 100%">
 
-				<h:outputLabel />
-				<p:commandButton value="Salvar"
-					action="#{cadastroContaBean.salvar}" icon="ui-icon-disk"
-					update="@form" />
-			</p:panelGrid>
-			
-		</h:form>
-	</ui:define>
-</ui:composition>
+			<p:outputLabel value="Nome" for="nome" />
+			<p:inputText id="nome" value="#{cadastroContaBean.conta.nome}" />
+
+			<p:outputLabel value="Saldo Inicial" for="saldo" />
+			<p:inputText id="saldo"
+				value="#{cadastroContaBean.conta.saldoInicial}">
+				<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+					minFractionDigits="2" />
+			</p:inputText>
+
+			<p:outputLabel value="Status" for="status" />
+			<p:selectOneButton value="#{cadastroContaBean.conta.status}"
+				id="status">
+				<f:selectItems value="#{cadastroContaBean.status}" var="status"
+					itemValue="#{status}" itemLabel="#{status.descricao}" />
+			</p:selectOneButton>
+
+			<h:outputLabel />
+			<p:commandButton value="Salvar" action="#{cadastroContaBean.salvar}"
+				icon="ui-icon-disk" update="@form" />
+		</p:panelGrid>
+
+	</h:form>
+</h:body>
+
+</html>
