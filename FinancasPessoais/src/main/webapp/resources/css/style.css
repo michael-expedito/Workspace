@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+html, body{
+ height:100%; /* aqui definimos que o html e o body terão altura de 100% */
+}
 body {
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -7,6 +10,7 @@ body {
 	font-weight: normal; 
 	background-image: url("#{resource['img:background_grey.jpg']}");
     background-repeat: repeat-yx;
+    height:100%;
 }
 
 header {
@@ -115,4 +119,9 @@ h1 {
 
 .ui-dialog .ui-dialog-content {
 	padding: 5px !important; 
+}
+
+.panel-content{
+ width:100%; height:auto; min-height:100%; /* aqui é onde acontece a mágica, a propriedade height:auto e min-height: 100% fará com que esta div ocupe sempre a altura total do navegador, mesmo quando redimensionado */
+ background:blue;
 }

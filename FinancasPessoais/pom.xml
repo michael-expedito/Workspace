@@ -98,8 +98,7 @@
 			<version>5.2</version>
 			<scope>compile</scope>
 		</dependency>
-		
-	
+			
 		<dependency>  
 		    <groupId>org.primefaces.themes</groupId>  
 		    <artifactId>all-themes</artifactId>  

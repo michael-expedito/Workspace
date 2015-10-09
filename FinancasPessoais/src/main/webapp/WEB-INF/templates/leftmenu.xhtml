@@ -2,32 +2,25 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ps="http://primefaces.org/sentinel"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/ronin">
     
-    <div id="layout-menubar" class="Unselectable fontRegular">
-        <div class="layout-menubarinner-box" id="buttonArea">
-            <a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a>
-            <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
-        </div>
-
-        <div class="layout-menubarinner-box" id="searchArea">
-            <i class="icon-search floatLeft gray"></i>
-            <input type="text" class="layout-menubar-search floatLeft Animated05" placeholder="Search Here"/>
-        </div>
+    <div class="Animated05" id="layout-menu-cover">
+    <ui:include src="topbar.xhtml" />
 		<h:form>
-        <ps:menu id="sm_leftmenu">
-            <p:menuitem value="Dashboard" icon="icon-home-outline" containerStyleClass="layout-menubar-active"/>
+		
+        <pr:menu>
+            <p:menuitem id="rm_dashboard" value="Dashboard" icon="fa fa-joomla" />
             <p:submenu label="Lançamentos" icon="icon-dollar" >
                 <p:menuitem value="Novo" icon="icon-doc-text-1" action="/Lancamentos/CadastroLancamento?faces-redirect=true" />
                 <p:menuitem value="Pesquisar" icon="icon-search-outline" action="/Lancamentos/ConsultaLancamentos?faces-redirect=true"  />
             </p:submenu>
             
-            <p:menuitem value="Contas Financeiras" icon="icon-credit-card" action="#{menuBean.viewDialog('/Contas/ConsultaContas.xhtml', true,false,false,325,500)}" />
+            <p:menuitem value="Contas Financeiras" icon="fa-cc-visa" action="#{menuBean.viewDialog('/Contas/ConsultaContas.xhtml', true,false,false,325,500)}" />
             <p:menuitem value="Categorias" icon="icon-th-list-2" actionListener="#{menuBean.viewDialog('/Categorias/ConsultaCategorias.xhtml', true,false,false,325,500)}" />
 
-        </ps:menu>
+        </pr:menu>
         </h:form>
     </div>
 
