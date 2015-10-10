@@ -5,9 +5,13 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "CONTA_CTA")
@@ -28,6 +32,11 @@ public class Conta implements Serializable {
 	
 	@Column(name="CTA_STATUS", nullable = false)
 	private Status status;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="CTA_IDCADASTRO", nullable = false,  foreignKey = @ForeignKey(name="FK1_CONTA_CADASTRO"))
+	private Cadastro cadastro;
 
 	public Long getId() {
 		return id;
@@ -59,6 +68,14 @@ public class Conta implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Cadastro getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Cadastro cadastro) {
+		this.cadastro = cadastro;
 	}
 
 	@Override

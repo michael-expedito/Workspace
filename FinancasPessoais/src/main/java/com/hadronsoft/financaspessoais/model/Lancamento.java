@@ -68,6 +68,11 @@ public class Lancamento implements Serializable {
 	@JoinColumn(name="LCT_IDCONTA", nullable = false,  foreignKey = @ForeignKey(name="FK2_LANCAMENTO_CONTA"))
 	private Conta conta;
 	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "LCT_IDCADASTRO", nullable = false, foreignKey = @ForeignKey(name="FK3_LANCAMENTO_CADASTRO"))
+	private Cadastro cadastro;
+	
 	public Long getId() {
 		return id;
 	}
@@ -146,6 +151,14 @@ public class Lancamento implements Serializable {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+	
+	public Cadastro getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Cadastro cadastro) {
+		this.cadastro = cadastro;
 	}
 
 	@Override

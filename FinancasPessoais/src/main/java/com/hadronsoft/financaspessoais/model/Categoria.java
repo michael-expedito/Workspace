@@ -1,6 +1,5 @@
 package com.hadronsoft.financaspessoais.model;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +14,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "CATEGORIA_CAT")
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="CAT_ID")
+	@Column(name = "CAT_ID")
 	private Long id;
-	
-	@Column(name="CAT_DSCATEGORIA", nullable = false, length = 60)
+
+	@Column(name = "CAT_DSCATEGORIA", nullable = false, length = 60)
 	private String descricao;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "CAT_IDCATEGORIAPAI", foreignKey = @ForeignKey(name="FK1_CATEGORIA"))
+	@JoinColumn(name = "CAT_IDCATEGORIAPAI", foreignKey = @ForeignKey(name = "FK1_CATEGORIA_CATEGORIA") )
 	private Categoria categoriaPai;
-	
+
 	@OneToMany(mappedBy = "categoriaPai", cascade = CascadeType.ALL)
 	private List<Categoria> subcategorias = new ArrayList<>();
+
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "CAT_IDCADASTRO", nullable = false, foreignKey = @ForeignKey(name = "FK2_CATEGORIA_CADASTRO") )
+	private Cadastro cadastro;
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -47,6 +53,7 @@ public class Categoria implements Serializable {
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
@@ -54,6 +61,7 @@ public class Categoria implements Serializable {
 	public Categoria getCategoriaPai() {
 		return categoriaPai;
 	}
+
 	public void setCategoriaPai(Categoria categoriaPai) {
 		this.categoriaPai = categoriaPai;
 	}
@@ -61,8 +69,17 @@ public class Categoria implements Serializable {
 	public List<Categoria> getSubcategorias() {
 		return subcategorias;
 	}
+
 	public void setSubcategorias(List<Categoria> subcategorias) {
 		this.subcategorias = subcategorias;
+	}
+
+	public Cadastro getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Cadastro cadastro) {
+		this.cadastro = cadastro;
 	}
 
 	@Override
