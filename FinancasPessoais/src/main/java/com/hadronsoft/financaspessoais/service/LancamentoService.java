@@ -49,7 +49,7 @@ public class LancamentoService implements Serializable {
 				newLancamento.setConta(lancamento.getConta());
 				newLancamento.setDataDesconto(lancamento.getDataDesconto());
 				newLancamento.setDataPagamento(lancamento.getDataPagamento());
-				newLancamento.setDataVencimento(lancamento.getDataVencimento());
+				newLancamento.setDataVencimento( lancamento.getDataVencimento());
 				newLancamento.setDescricao(lancamento.getDescricao());
 				newLancamento.setNumeroParcela(i);
 				newLancamento.setObservacoes(lancamento.getObservacoes());
