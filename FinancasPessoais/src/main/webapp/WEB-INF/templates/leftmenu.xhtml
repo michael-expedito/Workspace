@@ -13,12 +13,14 @@
         <pr:menu>
             <p:menuitem id="rm_dashboard" value="Dashboard" icon="fa fa-joomla" />
             <p:submenu label="Lançamentos" icon="icon-dollar" >
-                <p:menuitem value="Novo" icon="icon-doc-text-1" action="/Lancamentos/CadastroLancamento?faces-redirect=true" />
-                <p:menuitem value="Pesquisar" icon="icon-search-outline" action="/Lancamentos/ConsultaLancamentos?faces-redirect=true"  />
+                <p:menuitem value="Registrar Receita" icon="fa fa-plus-circle" action="/restrict/Lancamentos/CadastroReceitas?faces-redirect=true" />
+                <p:menuitem value="Regestrar Despesa" icon="fa fa-minus-circle " action="/restrict/Lancamentos/CadastroDespesas?faces-redirect=true" />
+                
+                <p:menuitem value="Pesquisar" icon="ui icon-search" action="/restrict/Lancamentos/ConsultaLancamentos?faces-redirect=true"  />
             </p:submenu>
             
-            <p:menuitem value="Contas Financeiras" icon="fa-cc-visa" action="#{menuBean.viewDialog('/Contas/ConsultaContas.xhtml', true,false,false,325,500)}" />
-            <p:menuitem value="Categorias" icon="icon-th-list-2" actionListener="#{menuBean.viewDialog('/Categorias/ConsultaCategorias.xhtml', true,false,false,325,500)}" />
+            <p:menuitem value="Contas Financeiras" icon="fa fa-credit-card" action="#{menuBean.viewDialog('/restrict/Contas/ConsultaContas', true,false,false,550,700)}" />
+            <p:menuitem value="Categorias" icon="fa fa-outdent" actionListener="#{menuBean.viewDialog('/restrict/Categorias/ConsultaCategorias', true,false,false,325,500)}" />
 
         </pr:menu>
         </h:form>

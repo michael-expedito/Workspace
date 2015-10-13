@@ -12,12 +12,30 @@
 		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}" />
 	</f:metadata>
 	
-	<ui:define name="titulo">Cadastro de lançamento</ui:define>
-	<ui:define name="titulo-corpo">Cadastro de lançamento</ui:define>
+	<ui:define name="titleComplement">Cadastro de lançamento</ui:define>
+	
 	<ui:define name="content">
 		<h:form id="frm">
-			<p:panelGrid columns="2" style="width: 100%; heigth: 100%">
+		
+		
+			<p:toolbar style="margin-top: 10px">
+			<p:toolbarGroup>
+				<p:button value="Voltar" outcome="/restrict/Lancamentos/ConsultaLancamentos" 
+					icon="fa-plus"/>
 
+			</p:toolbarGroup>
+
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/restrict/Lancamentos/CadastroLancamento" 
+					icon="fa fa-plus" />
+				<p:commandButton value="Salvar"
+					action="#{cadastroLancamentoBean.salvar}" icon="ui-icon-disk"
+					update="@form" />
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+			<p:panelGrid columns="2" style="width: 100%; heigth: 100%">
+			
 				<p:outputLabel value="Tipo de Lançamento" for="tipo" />
 				<p:selectOneButton value="#{cadastroLancamentoBean.lancamento.tipo}"
 					id="tipo">
@@ -72,9 +90,7 @@
 					value="#{cadastroLancamentoBean.lancamento.dataPagamento}" />
 
 				<h:outputLabel />
-				<p:commandButton value="Salvar"
-					action="#{cadastroLancamentoBean.salvar}" icon="ui-icon-disk"
-					update="@form" />
+				
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

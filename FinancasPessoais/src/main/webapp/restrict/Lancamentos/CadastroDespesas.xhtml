@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="id" value="#{cadastroLancamentoBean.lancamento}" />
+		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}" />
+	</f:metadata>
+
+	<ui:define name="titleComplement"> - Cadastro de Despesas (-$) </ui:define>
+
+	<ui:define name="content">
+		<h:form id="frmCadastroReceita">
+
+			<p:panel id="panelInformacoes" header="Informações" toggleable="true"
+				toggleSpeed="500" closeSpeed="500" widgetVar="panelInformacoes"
+				style="margin-top:5px" collapsed="true">
+			</p:panel>
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" update="@form" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" />
+					<p:commandButton value="Salvar" />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			<p:panel id="panelPrincial" header="Dados Principais"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelPrincial" style="margin-top:5px">
+
+				<p:panelGrid columns="2" id="gridPrincipal" style="width: 100%">
+
+					<p:outputLabel value="Em qual conta você recebera essa despesa?"
+						for="conta" />
+					<p:selectOneMenu value="#{cadastroLancamentoBean.lancamento.conta}"
+						label="Conta" id="conta">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{cadastroLancamentoBean.todasContas}"
+							var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Escolha uma categoria para essa receita"
+						for="categoria" />
+					<p:selectOneMenu
+						value="#{cadastroLancamentoBean.lancamento.categoria}"
+						id="categoria" filter="true">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{cadastroLancamentoBean.todasCategorias}"
+							var="categoria" itemValue="#{categoria}"
+							itemLabel="#{categoria.descricao}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Escreva uma descrição para essa despesa"
+						for="descricao" />
+					<p:inputText id="descricao" size="60"
+						value="#{cadastroLancamentoBean.lancamento.descricao}">
+					</p:inputText>
+
+					<p:outputLabel value="Qual é o valor dessa despesa?"
+						for="valorLancamento" />
+					<p:inputText id="valorLancamento"
+						value="#{cadastroLancamentoBean.lancamento.valor}">
+						<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+							minFractionDigits="2" />
+					</p:inputText>
+
+					<h:panelGroup>
+						<p:panelGrid columns="2" styleClass="panel-grid">
+							<p:outputLabel
+								value="Essa despesa já foi descontada da sua conta?  "
+								for="swithDataRecebimento" />
+							<p:inputSwitch id="swithDataRecebimento"
+								style="text-align: right;"
+								value="#{cadastroLancamentoBean.pago}">
+								<p:ajax event="change" process="@this" update="recebimento" />
+							</p:inputSwitch>
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup id="recebimento">
+						<p:outputLabel value="Em que data?  " id="labelDataRecebimento"
+							rendered="#{cadastroLancamentoBean.pago}" />
+						<p:calendar id="dataRecebimento" size="12" pattern="dd/MM/yyyy"
+							rendered="#{cadastroLancamentoBean.pago}"
+							value="#{cadastroLancamentoBean.lancamento.dataPagamento}">
+						</p:calendar>
+					</h:panelGroup>
+
+				</p:panelGrid>
+
+			</p:panel>
+
+			<p:panel id="panelAvancado" header="Avançado" toggleable="true"
+				toggleSpeed="500" closeSpeed="500" widgetVar="panelAvancado"
+				style="margin-top:5px">
+				<p:panelGrid columns="2" style="width: 100%">
+
+					<p:outputLabel value="Essa receita se repete? " for="frequencia" />
+					<p:selectOneMenu id="frequencia"
+						value="#{cadastroLancamentoBean.parcelamento.frequenciaLancamento}">
+						<f:selectItem itemLabel="Não" noSelectionOption="true" />
+						<f:selectItems
+							value="#{cadastroLancamentoBean.frequenciaLancamento}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Quantas parcelas terá essa despesa"
+						for="quantidadeParcelas" />
+					<p:spinner id="quantidadeParcelas"
+						value="#{cadastroLancamentoBean.parcelamento.quantidadeParcelas}" />
+
+				</p:panelGrid>
+
+				<p:outputLabel value="Essa despesa tem algum desconto? " />
+				<p:inputSwitch offLabel="Não" onLabel="Sim"
+					value="#{cadastroLancamentoBean.desconto}">
+					<p:ajax event="change" process="@this" update="descontos" />
+				</p:inputSwitch>
+
+				<p:panelGrid columns="2" style="width: 100%;margin-top:20px"
+					id="descontos">
+
+					<p:outputLabel id="labelDataDesconto"
+						rendered="#{cadastroLancamentoBean.desconto}"
+						value="Até quando você tem esse desconto? " for="dataDesconto" />
+					<p:calendar id="dataDesconto" size="12" pattern="dd/MM/yyyy"
+						rendered="#{cadastroLancamentoBean.desconto}"
+						value="#{cadastroLancamentoBean.lancamento.dataDesconto}">
+					</p:calendar>
+
+					<p:outputLabel id="labelValorDesconto"
+						rendered="#{cadastroLancamentoBean.desconto}"
+						value="De quanto(R$)? " for="valorDesconto" />
+					<p:inputText id="valorDesconto"
+						rendered="#{cadastroLancamentoBean.desconto}"
+						value="#{cadastroLancamentoBean.lancamento.valorDesconto}">
+						<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+							minFractionDigits="2" />
+					</p:inputText>
+
+				</p:panelGrid>
+
+				<p:panel id="panelDetalhamento" style="margin-top:20px">
+					<p:outputLabel
+						value="O valor total dessa despesa será de R$ 10000,00 " />
+				</p:panel>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

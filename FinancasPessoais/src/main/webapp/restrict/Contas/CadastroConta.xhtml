@@ -5,8 +5,17 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:o="http://omnifaces.org/ui">
 
-<h:head>
-</h:head>
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Contas Financeiras - Cadastro</title>
+        <h:outputStylesheet name="style.css" library="css" />
+        <h:outputScript name="js/layout.js" library="ronin-layout" />
+    </h:head>
 
 <h:body>
 
@@ -15,46 +24,84 @@
 		<f:viewAction action="#{cadastroContaBean.prepararCadastro}" />
 	</f:metadata>
 
-
 	<h:form id="frm">
 		<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-		
+
 		<p:toolbar style="margin-top: 10px">
 			<p:toolbarGroup>
-				<p:button value="Voltar" outcome="/Contas/ConsultaContas" />
-				
+				<p:button value="Voltar" outcome="/restrict/Contas/ConsultaContas"
+					icon="fa-plus" />
+
 			</p:toolbarGroup>
 
 			<p:toolbarGroup align="right">
-				<p:button value="Novo" outcome="/Contas/CadastroConta" />
+				<p:button value="Novo" outcome="/restrict/Contas/CadastroConta"
+					icon="fa fa-plus" />
+				<p:commandButton value="Salvar" action="#{cadastroContaBean.salvar}"
+					icon="ui-icon-disk" update="@form" />
 			</p:toolbarGroup>
 		</p:toolbar>
-		
-		<p:panelGrid columns="2" style="width: 100%">
 
-			<p:outputLabel value="Nome" for="nome" />
-			<p:inputText id="nome" value="#{cadastroContaBean.conta.nome}" />
+		<p:panel id="panelPrincial" header="Dados Principais"
+			toggleable="true" toggleSpeed="500" closeSpeed="500"
+			widgetVar="panelPrincial" style="margin-top:20px">
 
-			<p:outputLabel value="Saldo Inicial" for="saldo" />
-			<p:inputText id="saldo"
-				value="#{cadastroContaBean.conta.saldoInicial}">
-				<f:convertNumber locale="pt_BR" maxFractionDigits="2"
-					minFractionDigits="2" />
-			</p:inputText>
+			<p:panelGrid columns="2" style="width: 100%">
 
-			<p:outputLabel value="Status" for="status" />
-			<p:selectOneButton value="#{cadastroContaBean.conta.status}"
-				id="status">
-				<f:selectItems value="#{cadastroContaBean.status}" var="status"
-					itemValue="#{status}" itemLabel="#{status.descricao}" />
-			</p:selectOneButton>
+				<p:outputLabel value="Nome Descritivo" for="nomeDescritivo" />
+				<p:inputText id="nomeDescritivo"
+					value="#{cadastroContaBean.conta.nome}" />
 
-			<h:outputLabel />
-			<p:commandButton value="Salvar" action="#{cadastroContaBean.salvar}"
-				icon="ui-icon-disk" update="@form" />
-		</p:panelGrid>
+				<p:outputLabel value="Tipo de Conta" for="tipoConta" />
+				<p:selectOneMenu id="tipoConta"
+					value="#{cadastroContaBean.conta.tipoConta}">
+					<f:selectItems value="#{cadastroContaBean.tipoConta}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Quanto tem nessa conta?" for="saldo" />
+				<p:inputText id="saldo"
+					value="#{cadastroContaBean.conta.saldoInicial}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+						minFractionDigits="2" />
+				</p:inputText>
+
+				<p:outputLabel value="Quando você viu esse saldo?" for="dataSaldo" />
+				<p:calendar id="dataSaldo" size="12" pattern="dd/MM/yyyy"
+					value="#{cadastroContaBean.conta.dataSaldoInicial}">
+				</p:calendar>
+
+
+				<p:outputLabel value="Limite do cartão" />
+				<p:inputText id="vlLimite"
+					value="#{cadastroContaBean.conta.valorLimiteCredito}">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+						minFractionDigits="2" />
+				</p:inputText>
+
+			</p:panelGrid>
+
+		</p:panel>
+		<p:panel id="panelAdicional" header="Dados Adicionais"
+			toggleable="true" toggleSpeed="500" closeSpeed="500"
+			widgetVar="panelAdicional" style="margin-top:20px">
+			<p:panelGrid columns="2" style="width: 100%">
+
+				<p:outputLabel value="Inativar conta " for="inativarConta" />
+				<p:selectBooleanCheckbox id="inativarConta"
+					value="#{cadastroContaBean.conta.inativa}" />
+
+				<p:outputLabel value="Observações" for="observacoes" />
+				<p:inputTextarea id="observacoes" style="width: 95%"
+					value="#{cadastroContaBean.conta.observacoes}" />
+			</p:panelGrid>
+		</p:panel>
 
 	</h:form>
+	<h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/animate.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-font.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-layout.css" library="ronin-layout" />
 </h:body>
 
 </html>

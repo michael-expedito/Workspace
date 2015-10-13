@@ -23,56 +23,71 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="LCT_ID")
+	@Column(name = "LCT_ID")
 	private Long id;
-	
-	@NotNull
-	@Column(name="LCT_DTLANCAMENTO", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataLancamento;
-	
-	@Column(name="LCT_DTPAGAMENTO")
-	@Temporal(TemporalType.DATE)
-	private Date dataPagamento;
-	
+
 	@NotEmpty
-	@Column(name="LCT_DSLANCAMENTO", nullable = false)
+	@Column(name = "LCT_DSLANCAMENTO", nullable = false)
 	private String descricao;
-	
+
 	@NotNull
-	@Column(name="LCT_TPLANCAMENTO", nullable = false)
-	private TipoLancamento tipo;
-	
-	@NotNull
-	@Column(name="LCT_VLLANCAMENTO", nullable = false)
-	private BigDecimal valor;
-	
-	@NotNull
-	@Column(name="LCT_DTVENCIMENTO", nullable = false)
+	@Column(name = "LCT_DTVENCIMENTO", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
+
+	@NotNull
+	@Column(name = "LCT_TPLANCAMENTO", nullable = false)
+	private TipoLancamento tipo;
+
+	@NotNull
+	@Column(name = "LCT_VLLANCAMENTO", nullable = false)
+	private BigDecimal valor;
+
+	@Column(name = "LCT_DTPAGAMENTO")
+	@Temporal(TemporalType.DATE)
+	private Date dataPagamento;
+
+	@Column(name = "LCT_NRPARCELA")
+	private Long numeroParcela;
+
+	@Column(name = "LCT_VLDESCONTO", precision = 10, scale = 2)
+	private BigDecimal valorDesconto;
 	
-	@Column(name="LCT_DSOBSERVACAO", columnDefinition = "TEXT")
-	private String observacao;
+	@Column(name ="LCT_DTDESCONTO")
+	@Temporal(TemporalType.DATE)
+	private Date dataDesconto;
 	
+	@Column(name="LCT_PEMULTA", precision = 3, scale = 2)
+	private BigDecimal percentualMulta;
+	
+	@Column(name="LCT_MORADIARIA", precision = 3, scale = 2)
+	private BigDecimal moraDiaria;
+
+	@Column(name = "LCT_DSOBSERVACOES", columnDefinition = "TEXT")
+	private String observacoes;
+
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="LCT_IDCATEGORIA", nullable = false,  foreignKey = @ForeignKey(name="FK1_LANCAMENTO_CATEGORIA"))
+	@JoinColumn(name = "LCT_IDCATEGORIA", nullable = false, foreignKey = @ForeignKey(name = "FK1_LANCAMENTO_CATEGORIA") )
 	private Categoria categoria;
-	
+
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="LCT_IDCONTA", nullable = false,  foreignKey = @ForeignKey(name="FK2_LANCAMENTO_CONTA"))
+	@JoinColumn(name = "LCT_IDCONTA", nullable = false, foreignKey = @ForeignKey(name = "FK2_LANCAMENTO_CONTA") )
 	private Conta conta;
-	
+
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "LCT_IDCADASTRO", nullable = false, foreignKey = @ForeignKey(name="FK3_LANCAMENTO_CADASTRO"))
+	@JoinColumn(name = "LCT_IDCADASTRO", nullable = false, foreignKey = @ForeignKey(name = "FK3_LANCAMENTO_CADASTRO") )
 	private Cadastro cadastro;
 	
+	@ManyToOne
+	@JoinColumn(name="LCT_IDPARCELAMENTO", nullable = true, foreignKey = @ForeignKey(name="FK4_LANCAMENTO_PARCELAMENTO"))
+	private Parcelamento parcelamento; 
+
 	public Long getId() {
 		return id;
 	}
@@ -81,20 +96,20 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataLancamento() {
-		return dataLancamento;
-	}
-
-	public void setDataLancamento(Date dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Date getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
 	}
 
 	public TipoLancamento getTipo() {
@@ -113,14 +128,6 @@ public class Lancamento implements Serializable {
 		this.valor = valor;
 	}
 
-	public Date getDataVencimento() {
-		return dataVencimento;
-	}
-
-	public void setDataVencimento(Date dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-
 	public Date getDataPagamento() {
 		return dataPagamento;
 	}
@@ -129,12 +136,52 @@ public class Lancamento implements Serializable {
 		this.dataPagamento = dataPagamento;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public Long getNumeroParcela() {
+		return numeroParcela;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setNumeroParcela(Long numeroParcela) {
+		this.numeroParcela = numeroParcela;
+	}
+
+	public BigDecimal getValorDesconto() {
+		return valorDesconto;
+	}
+
+	public void setValorDesconto(BigDecimal valorDesconto) {
+		this.valorDesconto = valorDesconto;
+	}
+
+	public Date getDataDesconto() {
+		return dataDesconto;
+	}
+
+	public void setDataDesconto(Date dataDesconto) {
+		this.dataDesconto = dataDesconto;
+	}
+
+	public BigDecimal getPercentualMulta() {
+		return percentualMulta;
+	}
+
+	public void setPercentualMulta(BigDecimal percentualMulta) {
+		this.percentualMulta = percentualMulta;
+	}
+
+	public BigDecimal getMoraDiaria() {
+		return moraDiaria;
+	}
+
+	public void setMoraDiaria(BigDecimal moraDiaria) {
+		this.moraDiaria = moraDiaria;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
 	public Categoria getCategoria() {
@@ -152,13 +199,21 @@ public class Lancamento implements Serializable {
 	public void setConta(Conta conta) {
 		this.conta = conta;
 	}
-	
+
 	public Cadastro getCadastro() {
 		return cadastro;
 	}
 
 	public void setCadastro(Cadastro cadastro) {
 		this.cadastro = cadastro;
+	}
+
+	public Parcelamento getParcelamento() {
+		return parcelamento;
+	}
+
+	public void setParcelamento(Parcelamento parcelamento) {
+		this.parcelamento = parcelamento;
 	}
 
 	@Override
@@ -185,5 +240,5 @@ public class Lancamento implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

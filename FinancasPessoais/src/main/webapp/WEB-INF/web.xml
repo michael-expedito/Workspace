@@ -41,10 +41,10 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/restrict/*</url-pattern>
 	</filter-mapping>
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>20</session-timeout>
 	</session-config>
 
 </web-app>

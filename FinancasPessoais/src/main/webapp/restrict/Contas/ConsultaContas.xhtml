@@ -6,7 +6,18 @@
 	xmlns:o="http://omnifaces.org/ui">
 
 <h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>Contas Financeiras - Pesquisa</title>
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputScript name="js/layout.js" library="ronin-layout" />
 </h:head>
+
 <h:body>
 	<f:metadata>
 		<f:viewAction action="#{consultaContasBean.consultar}" />
@@ -18,12 +29,11 @@
 
 		<p:toolbar style="margin-top: 10px">
 			<p:toolbarGroup>
-				<p:commandButton value="Pesquisar"
-					 update="@form" />
+				<p:commandButton value="Pesquisar" update="@form" />
 			</p:toolbarGroup>
 
 			<p:toolbarGroup align="right">
-				<p:button value="Novo" outcome="/Contas/CadastroConta" />
+				<p:button value="Novo" outcome="/restrict/Contas/CadastroConta" />
 			</p:toolbarGroup>
 		</p:toolbar>
 
@@ -48,14 +58,14 @@
 
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Status" />
+					<h:outputText value="Tipo de Conta" />
 				</f:facet>
-				<h:outputText value="#{conta.status.descricao}" />
+				<h:outputText value="#{conta.tipoConta}" />
 			</p:column>
 
 			<p:column width="180">
 				<p:button title="Editar" value="Editar"
-					outcome="/Contas/CadastroConta" styleClass="GreenButton">
+					outcome="/restrict/Contas/CadastroConta" styleClass="GreenButton">
 					<f:param name="id" value="#{conta.id}" />
 				</p:button>
 				<p:commandButton title="Excluir" value="Excluir" process="@this"
@@ -67,6 +77,11 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
+	<h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/animate.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-font.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-layout.css" library="ronin-layout" />
 </h:body>
 
 </html>

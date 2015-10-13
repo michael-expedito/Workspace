@@ -2,6 +2,7 @@ package com.hadronsoft.financaspessoais.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,20 +27,41 @@ public class Conta implements Serializable {
 	@Column(name="CTA_ID")
 	private Long  id;
 	
-	@Column(name="CTA_NOME", nullable = false, precision = 10, scale = 2)
+	@NotNull
+	@Column(name="CTA_DESCRICAO", nullable = false)
 	private String nome;
 	
-	@Column(name="CTA_SALDOINICIAL", nullable = false)
-	private BigDecimal saldoInicial;
+	@NotNull
+	@Column(name="CTA_TPCONTA", nullable = false)
+	private TipoConta tipoConta;
 	
-	@Column(name="CTA_STATUS", nullable = false)
-	private Status status;
+	@NotNull
+	@Column(name="CTA_VLSANDOINICIAL", nullable = false, precision = 10, scale = 2)
+	private BigDecimal saldoInicial = BigDecimal.ZERO;
+	
+	@NotNull
+	@Column(name="CTA_DTSALDOINICIAL", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataSaldoInicial = new Date();
+	
+	@Column(name="CTA_OBSERVACOES",columnDefinition = "TEXT" )
+	private String observacoes;
+
+	@Column(name="CTA_VLLIMITECREDITO", precision = 10, scale = 2)
+	private BigDecimal valorLimiteCredito;
+	
+	@Column(name="CTA_DTCADASTRO", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataCadastro = new Date();
+	
+	@Column(name="CTA_INATIVA", nullable = false)
+	private Boolean inativa = false;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="CTA_IDCADASTRO", nullable = false,  foreignKey = @ForeignKey(name="FK1_CONTA_CADASTRO"))
 	private Cadastro cadastro;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +78,14 @@ public class Conta implements Serializable {
 		this.nome = nome;
 	}
 
+	public TipoConta getTipoConta() {
+		return tipoConta;
+	}
+
+	public void setTipoConta(TipoConta tipoConta) {
+		this.tipoConta = tipoConta;
+	}
+
 	public BigDecimal getSaldoInicial() {
 		return saldoInicial;
 	}
@@ -62,12 +94,44 @@ public class Conta implements Serializable {
 		this.saldoInicial = saldoInicial;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Date getDataSaldoInicial() {
+		return dataSaldoInicial;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setDataSaldoInicial(Date dataSaldoInicial) {
+		this.dataSaldoInicial = dataSaldoInicial;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public BigDecimal getValorLimiteCredito() {
+		return valorLimiteCredito;
+	}
+
+	public void setValorLimiteCredito(BigDecimal valorLimiteCredito) {
+		this.valorLimiteCredito = valorLimiteCredito;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Boolean getInativa() {
+		return inativa;
+	}
+
+	public void setInativa(Boolean inativa) {
+		this.inativa = inativa;
 	}
 
 	public Cadastro getCadastro() {

@@ -125,3 +125,9 @@ h1 {
  width:100%; height:auto; min-height:100%; /* aqui é onde acontece a mágica, a propriedade height:auto e min-height: 100% fará com que esta div ocupe sempre a altura total do navegador, mesmo quando redimensionado */
  background:blue;
 }
+
+.panel-grid{
+	border: 0px !important;
+	padding: 0px  !important;
+	width: 100%
+}

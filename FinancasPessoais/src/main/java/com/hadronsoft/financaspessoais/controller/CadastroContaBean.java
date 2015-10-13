@@ -8,8 +8,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
+
+import com.hadronsoft.financaspessoais.model.Cadastro;
 import com.hadronsoft.financaspessoais.model.Conta;
 import com.hadronsoft.financaspessoais.model.Status;
+import com.hadronsoft.financaspessoais.model.TipoConta;
+import com.hadronsoft.financaspessoais.security.SessionContext;
 import com.hadronsoft.financaspessoais.service.ContaService;
 import com.hadronsoft.financaspessoais.service.NegocioException;
 
@@ -33,6 +38,8 @@ public class CadastroContaBean implements Serializable {
 	public void salvar(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
+			conta.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
+			
 			ctaService.salvar(conta);
 			this.conta = new Conta();
 			context.addMessage(null, new FacesMessage("Lançamento salvo com sucesso!"));
@@ -56,6 +63,10 @@ public class CadastroContaBean implements Serializable {
 	
 	public Status[] getStatus() {
 		return Status.values();
+	}
+	
+	public TipoConta[] getTipoConta(){
+		return TipoConta.values();
 	}
 	
 }

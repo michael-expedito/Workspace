@@ -35,7 +35,7 @@ public class LoginBean implements Serializable{
 				return "";
 			}
 			SessionContext.getInstance().setAttribute("usuarioLogado", cadastro);
-			return "/Home.xhtml?faces-redirect=true";
+			return "/restrict/Home.xhtml?faces-redirect=true";
 			
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(e.getMessage());
