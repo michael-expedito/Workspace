@@ -15,7 +15,7 @@
 	</resource-env-ref>
 
 	<welcome-file-list>
-		<welcome-file>Home.xhtml</welcome-file>
+		<welcome-file>restrict/Home.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<servlet>

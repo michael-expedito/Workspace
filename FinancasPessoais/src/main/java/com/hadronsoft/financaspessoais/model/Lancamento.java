@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,6 +41,7 @@ public class Lancamento implements Serializable {
 	private Date dataVencimento;
 
 	@NotNull
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "LCT_TPLANCAMENTO", nullable = false)
 	private TipoLancamento tipo;
 
@@ -87,6 +90,7 @@ public class Lancamento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="LCT_IDPARCELAMENTO", nullable = true, foreignKey = @ForeignKey(name="FK4_LANCAMENTO_PARCELAMENTO"))
 	private Parcelamento parcelamento; 
+
 
 	public Long getId() {
 		return id;
@@ -214,6 +218,26 @@ public class Lancamento implements Serializable {
 
 	public void setParcelamento(Parcelamento parcelamento) {
 		this.parcelamento = parcelamento;
+	}
+
+	public void copyTo(Lancamento fullLancamento ){
+		this.cadastro = (fullLancamento.getCadastro());
+		this.categoria = (fullLancamento.getCategoria());
+		this.conta = (fullLancamento.getConta());
+		this.dataDesconto = (fullLancamento.getDataDesconto());
+		this.dataPagamento = (fullLancamento.getDataPagamento());
+		this.dataVencimento = (fullLancamento.getDataVencimento());
+		this.descricao = (fullLancamento.getDescricao());
+		this.id = (fullLancamento.getId());
+		this.moraDiaria = (fullLancamento.getMoraDiaria());
+		this.numeroParcela = (fullLancamento.getNumeroParcela());
+		this.observacoes = (fullLancamento.getObservacoes());
+		this.parcelamento = (fullLancamento.getParcelamento());
+		this.percentualMulta = (fullLancamento.getPercentualMulta());
+		this.tipo = (fullLancamento.getTipo());
+		this.valor = (fullLancamento.getValor());
+		this.valorDesconto = (fullLancamento.getValorDesconto());
+		
 	}
 
 	@Override

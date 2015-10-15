@@ -26,10 +26,11 @@
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
-					<p:button value="Novo"/>
-					<p:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvarReceita}" update="@form"/>
+					<p:button value="Novo" />
+					<p:commandButton value="Salvar"
+						action="#{cadastroLancamentoBean.salvarReceita}" update="@form" />
 				</p:toolbarGroup>
-				
+
 			</p:toolbar>
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 			<p:panel id="panelPrincial" header="Dados Principais"
@@ -41,7 +42,7 @@
 					<p:outputLabel value="Em qual conta você recebera essa receita?"
 						for="conta" />
 					<p:selectOneMenu value="#{cadastroLancamentoBean.lancamento.conta}"
-						label="Conta" id="conta">
+						id="conta">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 						<f:selectItems value="#{cadastroLancamentoBean.todasContas}"
 							var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
@@ -71,12 +72,13 @@
 						<f:convertNumber locale="pt_BR" maxFractionDigits="2"
 							minFractionDigits="2" />
 					</p:inputText>
-					
-					<p:outputLabel value="Quando vence essa receita? " id="labelDataVencimento" />
+
+					<p:outputLabel value="Quando vence essa receita? "
+						id="labelDataVencimento" />
 					<p:calendar id="dataVencimento" size="12" pattern="dd/MM/yyyy"
-							value="#{cadastroLancamentoBean.lancamento.dataVencimento}">
+						value="#{cadastroLancamentoBean.lancamento.dataVencimento}">
 					</p:calendar>
-					
+
 					<h:panelGroup>
 						<p:outputLabel
 							value="Você ja recebeu essa receita na sua conta?  "
@@ -115,13 +117,17 @@
 					<p:outputLabel value="Quantas parcelas terá essa receita?"
 						for="quantidadeParcelas" />
 					<p:spinner id="quantidadeParcelas"
-						value="#{cadastroLancamentoBean.parcelamento.quantidadeParcelas}" />
-					
+						value="#{cadastroLancamentoBean.parcelamento.quantidadeParcelas}">
+						<p:ajax event="change"
+							listener="#{cadastroLancamentoBean.atualizaValorTotalParcelado}"
+							update="labelDescricaoTotal" process="@this valorLancamento" />
+					</p:spinner>
+
 				</p:panelGrid>
-				
+
 				<p:panel id="panelDetalhamento" style="margin-top:20px">
-					<p:outputLabel
-							value="O valor total dessa receita será de R$ 10000,00 " />
+					<p:outputLabel id="labelDescricaoTotal"
+						value="O valor total dessa receita será de R$ #{cadastroLancamentoBean.valorTotalParcelado} " />
 				</p:panel>
 			</p:panel>
 

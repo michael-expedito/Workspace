@@ -27,18 +27,22 @@
 
 				<p:toolbarGroup align="right">
 					<p:button value="Novo" />
-					<p:commandButton value="Salvar" />
+					<p:commandButton value="Salvar"
+						actionListener="#{cadastroLancamentoBean.salvarDespesa}"
+						update="@form" />
 				</p:toolbarGroup>
-				
+
 			</p:toolbar>
+
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
 			<p:panel id="panelPrincial" header="Dados Principais"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"
 				widgetVar="panelPrincial" style="margin-top:5px">
-
 				<p:panelGrid columns="2" id="gridPrincipal" style="width: 100%">
 
-					<p:outputLabel value="Em qual conta você recebera essa despesa?"
-						for="conta" />
+					<p:outputLabel
+						value="Qual conta será usada para pagar essa despesa?" for="conta" />
 					<p:selectOneMenu value="#{cadastroLancamentoBean.lancamento.conta}"
 						label="Conta" id="conta">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
@@ -46,7 +50,7 @@
 							var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel value="Escolha uma categoria para essa receita"
+					<p:outputLabel value="Escolha uma categoria para essa despesa"
 						for="categoria" />
 					<p:selectOneMenu
 						value="#{cadastroLancamentoBean.lancamento.categoria}"
@@ -71,6 +75,12 @@
 							minFractionDigits="2" />
 					</p:inputText>
 
+					<p:outputLabel value="Qual é o vencimento dessa despesa "
+						id="labelDataVencimento" />
+					<p:calendar id="dataVencimento" size="12" pattern="dd/MM/yyyy"
+						value="#{cadastroLancamentoBean.lancamento.dataVencimento}">
+					</p:calendar>
+
 					<h:panelGroup>
 						<p:panelGrid columns="2" styleClass="panel-grid">
 							<p:outputLabel
@@ -79,12 +89,12 @@
 							<p:inputSwitch id="swithDataRecebimento"
 								style="text-align: right;"
 								value="#{cadastroLancamentoBean.pago}">
-								<p:ajax event="change" process="@this" update="recebimento" />
+								<p:ajax event="change" process="@this" update="pagamento" />
 							</p:inputSwitch>
 						</p:panelGrid>
 					</h:panelGroup>
 
-					<h:panelGroup id="recebimento">
+					<h:panelGroup id="pagamento">
 						<p:outputLabel value="Em que data?  " id="labelDataRecebimento"
 							rendered="#{cadastroLancamentoBean.pago}" />
 						<p:calendar id="dataRecebimento" size="12" pattern="dd/MM/yyyy"
@@ -100,56 +110,82 @@
 			<p:panel id="panelAvancado" header="Avançado" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelAvancado"
 				style="margin-top:5px">
-				<p:panelGrid columns="2" style="width: 100%">
+				<br />
+				<p:fieldset legend="Recorrencia" collapsed="false" toggleable="true"
+					toggleSpeed="500">
+					<p:panelGrid columns="2" style="width: 100%">
 
-					<p:outputLabel value="Essa receita se repete? " for="frequencia" />
-					<p:selectOneMenu id="frequencia"
-						value="#{cadastroLancamentoBean.parcelamento.frequenciaLancamento}">
-						<f:selectItem itemLabel="Não" noSelectionOption="true" />
-						<f:selectItems
-							value="#{cadastroLancamentoBean.frequenciaLancamento}" />
-					</p:selectOneMenu>
+						<p:outputLabel value="Essa receita se repete? " for="frequencia" />
+						<p:selectOneMenu id="frequencia"
+							value="#{cadastroLancamentoBean.parcelamento.frequenciaLancamento}">
+							<f:selectItem itemLabel="Não" noSelectionOption="true" />
+							<f:selectItems
+								value="#{cadastroLancamentoBean.frequenciaLancamento}" />
+						</p:selectOneMenu>
 
-					<p:outputLabel value="Quantas parcelas terá essa despesa"
-						for="quantidadeParcelas" />
-					<p:spinner id="quantidadeParcelas"
-						value="#{cadastroLancamentoBean.parcelamento.quantidadeParcelas}" />
+						<p:outputLabel value="Quantas parcelas terá essa despesa"
+							for="quantidadeParcelas" />
+						<p:spinner id="quantidadeParcelas"
+							value="#{cadastroLancamentoBean.parcelamento.quantidadeParcelas}" >
+							<p:ajax event="change"
+								listener="#{cadastroLancamentoBean.atualizaValorTotalParcelado}"
+								update="labelDescricaoTotal labelValorTotal" process="@this valorLancamento" />
+						</p:spinner>
+						
+						<p:outputLabel id="labelDescricaoTotal" value="O valor total da despesa " />
+						<p:outputLabel id="labelValorTotal" value="R$ #{cadastroLancamentoBean.valorTotalParcelado}" />
 
-				</p:panelGrid>
+					</p:panelGrid>
+				</p:fieldset>
+				<br />
+				<p:fieldset legend="Essa despesa tem algum desconto?"
+					collapsed="true" toggleable="true" toggleSpeed="500">
+					<p:panelGrid columns="2" style="width: 100%;margin-top:20px"
+						id="descontos">
 
-				<p:outputLabel value="Essa despesa tem algum desconto? " />
-				<p:inputSwitch offLabel="Não" onLabel="Sim"
-					value="#{cadastroLancamentoBean.desconto}">
-					<p:ajax event="change" process="@this" update="descontos" />
-				</p:inputSwitch>
+						<p:outputLabel id="labelDataDesconto"
+							value="Até quando você tem esse desconto? " for="dataDesconto" />
+						<p:calendar id="dataDesconto" size="12" pattern="dd/MM/yyyy"
+							value="#{cadastroLancamentoBean.lancamento.dataDesconto}">
+						</p:calendar>
 
-				<p:panelGrid columns="2" style="width: 100%;margin-top:20px"
-					id="descontos">
+						<p:outputLabel id="labelValorDesconto" value="De quanto(R$)? "
+							for="valorDesconto" />
+						<p:inputText id="valorDesconto"
+							value="#{cadastroLancamentoBean.lancamento.valorDesconto}">
+							<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+								minFractionDigits="2" />
+						</p:inputText>
 
-					<p:outputLabel id="labelDataDesconto"
-						rendered="#{cadastroLancamentoBean.desconto}"
-						value="Até quando você tem esse desconto? " for="dataDesconto" />
-					<p:calendar id="dataDesconto" size="12" pattern="dd/MM/yyyy"
-						rendered="#{cadastroLancamentoBean.desconto}"
-						value="#{cadastroLancamentoBean.lancamento.dataDesconto}">
-					</p:calendar>
+					</p:panelGrid>
+				</p:fieldset>
+				<br />
+				<p:fieldset
+					legend="Essa despesa tem multa caso seja paga após o vencimento?"
+					collapsed="true" toggleable="true" toggleSpeed="500">
+					<p:panelGrid columns="2" style="width: 100%;margin-top:20px"
+						id="multas">
+						<p:outputLabel id="labelPercentualMulta"
+							value="Qual é o perncentual de multa sobre o valor da despesa? "
+							for="valorPercentualMulta" />
+						<p:inputText id="valorPercentualMulta"
+							value="#{cadastroLancamentoBean.lancamento.percentualMulta}">
+							<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+								minFractionDigits="2" maxIntegerDigits="3" />
+						</p:inputText>
 
-					<p:outputLabel id="labelValorDesconto"
-						rendered="#{cadastroLancamentoBean.desconto}"
-						value="De quanto(R$)? " for="valorDesconto" />
-					<p:inputText id="valorDesconto"
-						rendered="#{cadastroLancamentoBean.desconto}"
-						value="#{cadastroLancamentoBean.lancamento.valorDesconto}">
-						<f:convertNumber locale="pt_BR" maxFractionDigits="2"
-							minFractionDigits="2" />
-					</p:inputText>
-
-				</p:panelGrid>
-
-				<p:panel id="panelDetalhamento" style="margin-top:20px">
-					<p:outputLabel
-						value="O valor total dessa despesa será de R$ 10000,00 " />
-				</p:panel>
+						<p:outputLabel id="labelMoraDiaria"
+							value="Quanto é o percentual de mora diária desta despesa?"
+							for="valorMoraDiaria" />
+						<p:inputText id="valorMoraDiaria"
+							value="#{cadastroLancamentoBean.lancamento.moraDiaria}">
+							<f:convertNumber locale="pt_BR" maxIntegerDigits="3"
+								maxFractionDigits="2" minFractionDigits="2" />
+						</p:inputText>
+					</p:panelGrid>
+				</p:fieldset>
+				<br />
+	
 			</p:panel>
 
 		</h:form>

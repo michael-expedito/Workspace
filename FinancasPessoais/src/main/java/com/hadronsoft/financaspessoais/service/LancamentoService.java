@@ -2,7 +2,7 @@ package com.hadronsoft.financaspessoais.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +14,7 @@ import com.hadronsoft.financaspessoais.model.TipoLancamento;
 import com.hadronsoft.financaspessoais.repository.LancamentoRepository;
 import com.hadronsoft.financaspessoais.repository.ParcelamentoRepository;
 import com.hadronsoft.financaspessoais.security.SessionContext;
+import com.hadronsoft.financaspessoais.util.FacesUtil;
 import com.hadronsoft.financaspessoais.util.Transactional;
 
 public class LancamentoService implements Serializable {
@@ -22,55 +23,74 @@ public class LancamentoService implements Serializable {
 
 	@Inject
 	private LancamentoRepository lancamentoRepository;
-	
+
 	@Inject
 	private ParcelamentoRepository parcelamentoRepository;
 
 	@Transactional
-	public void salvar(Lancamento lancamento) throws NegocioException {
-		if (lancamento.getDataPagamento() != null && lancamento.getDataPagamento().after(new Date())) {
-			throw new NegocioException("Data de pagamento não pode ser uma data futura.");
-		}
-		this.lancamentoRepository.update(lancamento);
-	}
-	
-	@Transactional
-	public void salvarReceita(Lancamento lancamento, Parcelamento parcelamento){
-		if (parcelamento != null){
-			
+	public void salvar(Lancamento lancamento, Parcelamento parcelamento) throws NegocioException {
+		if (parcelamento.getQuantidadeParcelas() > 0) {
+			lancamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
+			parcelamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
+
+			Calendar vencimentoTemp = Calendar.getInstance();
+
 			List<Lancamento> lancamentos = new ArrayList<>();
-			
-			for (long i = 1; i < parcelamento.getQuantidadeParcelas(); i++) {
-				
+
+			for (long i = 0; i < parcelamento.getQuantidadeParcelas(); i++) {
+
 				Lancamento newLancamento = new Lancamento();
-				newLancamento.setTipo(TipoLancamento.CREDITO);
-				newLancamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
-				newLancamento.setCategoria(lancamento.getCategoria());
-				newLancamento.setConta(lancamento.getConta());
-				newLancamento.setDataDesconto(lancamento.getDataDesconto());
-				newLancamento.setDataPagamento(lancamento.getDataPagamento());
-				newLancamento.setDataVencimento( lancamento.getDataVencimento());
-				newLancamento.setDescricao(lancamento.getDescricao());
-				newLancamento.setNumeroParcela(i);
-				newLancamento.setObservacoes(lancamento.getObservacoes());
+				newLancamento.copyTo(lancamento);
 				newLancamento.setParcelamento(parcelamento);
-				newLancamento.setTipo(lancamento.getTipo());
-				newLancamento.setValor(lancamento.getValor());
-				newLancamento.setValorDesconto(lancamento.getValorDesconto());
+				
+				vencimentoTemp.setTime(lancamento.getDataVencimento());
+				switch (parcelamento.getFrequenciaLancamento()) {
+					case DIARIA:
+						vencimentoTemp.add(Calendar.DAY_OF_MONTH, (int) i);
+						break;
+					case SEMANAL:
+						vencimentoTemp.add(Calendar.WEEK_OF_MONTH, (int) i);
+						break;
+					case QUINZENAL:
+						vencimentoTemp.add(Calendar.WEEK_OF_MONTH, (int) i*2);
+						break;
+					case MENSAL:
+						vencimentoTemp.add(Calendar.MONTH, (int) i);
+						break;
+					case BIMESTRAL:
+						vencimentoTemp.add(Calendar.MONTH, (int) i*2);
+						break;
+					case TRIMESTRAL:
+						vencimentoTemp.add(Calendar.MONTH, (int) i*3);
+						break;
+					case SEMESTRAL:
+						vencimentoTemp.add(Calendar.MONTH, (int) i*6);
+						break;
+					case ANUAL:
+						vencimentoTemp.add(Calendar.YEAR, (int) i);
+						break;
+				default:
+					break;
+				}
+				newLancamento.setDataVencimento(vencimentoTemp.getTime());
+				newLancamento.setNumeroParcela(i+1);
+				
 				lancamentos.add(newLancamento);
 			}
-			
-			parcelamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
 			parcelamento.setLancamentos(lancamentos);
-			
 			parcelamentoRepository.add(parcelamento);
-			
+
 		} else {
-			lancamento.setTipo(TipoLancamento.CREDITO);
 			lancamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
 			lancamentoRepository.add(lancamento);
 		}
-	} 
+		
+		if (lancamento.getTipo() == TipoLancamento.CREDITO) {
+			FacesUtil.addInfoMessage("Receita cadastrada com sucesso!");
+		} else {
+			FacesUtil.addInfoMessage("Despesa cadastrada com sucesso!");
+		}
+	}
 
 	@Transactional
 	public void excluir(Lancamento lancamento) throws NegocioException {

@@ -27,7 +27,7 @@ public class Parcelamento implements Serializable{
 	private Long id;
 	
 	@Column(name="PAR_QTPARCELAS", nullable = false)
-	private Long quantidadeParcelas;
+	private Long quantidadeParcelas = (long) 0;
 	
 	@Column(name="PAR_FREQUENCIA", nullable = false)
 	private FrequenciaLancamento frequenciaLancamento;
