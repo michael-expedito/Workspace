@@ -16,8 +16,17 @@
 
 		<h1>Consulta de lançamentos</h1>
 
-		<h:form id="frm">
+		<h:form id="frmConsultaLancamentos">
+		
+			<p:panel id="panelInformacoes" header="Informações" toggleable="true"
+				toggleSpeed="500" closeSpeed="500" widgetVar="panelInformacoes"
+				style="margin-top:20px" collapsed="true">
+			</p:panel>
+			
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			
+			
+			
 			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
 				var="lancamento" border="1" cellspacing="0" cellpadding="2"
 				paginator="true" rows="9" paginatorPosition="bottom">>
@@ -67,7 +76,7 @@
 				</p:column>
 				<p:column width="175">
 					<p:button title="Editar"  value="Editar" styleClass="GreenButton"
-						outcome="/Lancamentos/CadastroLancamento" >
+						 >
 						<f:param name="id" value="#{lancamento.id}" />
 					</p:button>
 					<p:commandButton title="Excluir" styleClass="RedButton"
