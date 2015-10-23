@@ -8,8 +8,8 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
 	font-weight: normal; 
-	background-image: url("#{resource['img:background_grey.jpg']}");
-    background-repeat: repeat-yx;
+	/*background-image: url("#{resource['img:background_grey.jpg']}");
+    background-repeat: repeat-yx;*/
     height:100%;
 }
 
@@ -51,10 +51,12 @@ h1 {
 }
 .rotulo {
 	width: 150px;
+	  
 }
 .campo {
 	
 }
+
 .ui-panelgrid td {
 	height: 34px;
 }
@@ -130,4 +132,15 @@ h1 {
 	border: 0px !important;
 	padding: 0px  !important;
 	width: 100%
+}
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+}
+
+.ui-datatable-empty {
+    background: #ffffff !important;
 }

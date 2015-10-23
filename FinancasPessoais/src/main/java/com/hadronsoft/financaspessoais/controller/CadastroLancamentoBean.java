@@ -168,6 +168,4 @@ public class CadastroLancamentoBean implements Serializable {
 		this.multa = multa;
 	}
 	
-	
-
 }

@@ -17,76 +17,88 @@
 		<h1>Consulta de lançamentos</h1>
 
 		<h:form id="frmConsultaLancamentos">
-		
+
 			<p:panel id="panelInformacoes" header="Informações" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelInformacoes"
 				style="margin-top:20px" collapsed="true">
 			</p:panel>
-			
+
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
 			
+			<p:panel id="panelFiltros"	style="margin-top:5px">
 			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px"
+				styleClass="semBorda"
+				columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Período" />
+				<h:panelGroup>
+					<p:calendar size="10" pattern="dd/MM/yyyy"/>
+					a
+					<p:calendar size="10" pattern="dd/MM/yyyy"/>
+				</h:panelGroup>
+				
+				<p:outputLabel value="Conta Financeira" />
+				<p:selectOneMenu>
+					<f:selectItems value="#{consultaLancamentosBean.contas}" var="conta" 
+					itemValue="#{conta}" itemLabel="#{conta.nome}"/>
+				</p:selectOneMenu>
+				
+			</p:panelGrid>
+			</p:panel>
 			
 			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
-				var="lancamento" border="1" cellspacing="0" cellpadding="2"
-				paginator="true" rows="9" paginatorPosition="bottom">>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Conta" />
-					</f:facet>
-					<h:outputText value="#{lancamento.conta.nome}" />
+				var="lancamento" paginator="true" rows="25" emptyMessage="Período sem lançamentos"
+				rowStyleClass="ui-datatable-empty" sortBy="#{lancamento.dataVencimento}"
+				paginatorPosition="bottom" styleClass="borderless" style="margin-top:5px">
+
+				<p:column headerText="">
+					<p:commandLink title="Visualizar"
+						styleClass="ui-icon ui-icon-pencil"
+						style="float:left;margin-right:10px">
+
+					</p:commandLink>
+
+					<p:commandLink title="Excluir" styleClass="ui-icon ui-icon-trash"
+						style="float:left;margin-right:10px">
+					</p:commandLink>
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Descricao" />
-					</f:facet>
-					<h:outputText value="#{lancamento.descricao}" />
+
+				<p:column headerText="Vencimento" >
+					<p:outputLabel value="#{lancamento.dataVencimento}" />
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Tipo" />
-					</f:facet>
-					<h:outputText value="#{lancamento.tipo.descricao}" />
+
+				<p:column headerText="Descrição">
+					<p:outputLabel value="#{lancamento.descricao}" />
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Valor" />
-					</f:facet>
-					<h:outputText value="#{lancamento.valor}">
-						<f:convertNumber type="currency" locale="pt_BR" />
-					</h:outputText>
+
+				<p:column headerText="Categoria">
+					<p:outputLabel value="#{lancamento.categoria.descricao}" />
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Data de vencimento" />
-					</f:facet>
-					<h:outputText value="#{lancamento.dataVencimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
+
+				<p:column headerText="Detalhes">
+					<p:outputLabel value="(P)" />
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Data de pagamento" />
-					</f:facet>
-					<h:outputText value="#{lancamento.dataPagamento}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
+
+				<p:column headerText="Valor">
+					<p:outputLabel value="#{lancamento.valor >= 0 ? '(+) ' : '(-) '}" />
+					<p:outputLabel value="#{lancamento.valor}" />
 				</p:column>
-				<p:column width="175">
-					<p:button title="Editar"  value="Editar" styleClass="GreenButton"
-						 >
-						<f:param name="id" value="#{lancamento.id}" />
-					</p:button>
-					<p:commandButton title="Excluir" styleClass="RedButton"
-						process="@this" update="@form" value="Excluir"
-						action="#{consultaLancamentosBean.excluir}">
-						<f:setPropertyActionListener value="#{lancamento}"
-							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
-					</p:commandButton>
-				</p:column>
+<p:summaryRow>
+            <p:column colspan="3" style="text-align:right">
+                <h:outputText value="Total:" />
+            </p:column>
+            <p:column>
+                <h:outputText value="#{consultaLancamentosBean.randomPrice}">
+                    <f:convertNumber type="currency" currencySymbol="R$" />
+                </h:outputText>
+            </p:column>
+        </p:summaryRow>
+
 			</p:dataTable>
+
+
 		</h:form>
 	</ui:define>
 </ui:composition>
