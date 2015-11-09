@@ -1,5 +1,6 @@
 package com.hadronsoft.financaspessoais.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -238,6 +239,16 @@ public class Lancamento implements Serializable {
 		this.valor = (fullLancamento.getValor());
 		this.valorDesconto = (fullLancamento.getValorDesconto());
 		
+	}
+	
+	@Transient
+	public boolean isCredito(){
+		return this.tipo == TipoLancamento.CREDITO;
+	}
+	
+	@Transient
+	public boolean isDebito(){
+		return this.tipo == TipoLancamento.DEBITO;
 	}
 
 	@Override

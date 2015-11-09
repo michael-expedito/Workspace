@@ -24,34 +24,35 @@
 			</p:panel>
 
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-			
-			<p:panel id="panelFiltros"	style="margin-top:5px">
-			
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px"
-				styleClass="semBorda"
-				columnClasses="rotulo, campo">
-				
-				<p:outputLabel value="Período" />
-				<h:panelGroup>
-					<p:calendar size="10" pattern="dd/MM/yyyy"/>
+
+			<p:panel id="panelFiltros" style="margin-top:5px">
+
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 20px" styleClass="semBorda"
+					columnClasses="rotulo, campo">
+
+					<p:outputLabel value="Período" />
+					<h:panelGroup>
+						<p:calendar size="10" pattern="dd/MM/yyyy" />
 					a
-					<p:calendar size="10" pattern="dd/MM/yyyy"/>
-				</h:panelGroup>
-				
-				<p:outputLabel value="Conta Financeira" />
-				<p:selectOneMenu>
-					<f:selectItems value="#{consultaLancamentosBean.contas}" var="conta" 
-					itemValue="#{conta}" itemLabel="#{conta.nome}"/>
-				</p:selectOneMenu>
-				
-			</p:panelGrid>
+					<p:calendar size="10" pattern="dd/MM/yyyy" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Conta Financeira" />
+					<p:selectOneMenu>
+						<f:selectItems value="#{consultaLancamentosBean.contas}"
+							var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
+					</p:selectOneMenu>
+
+				</p:panelGrid>
 			</p:panel>
-			
+
 			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
-				var="lancamento" paginator="true" rows="25" emptyMessage="Período sem lançamentos"
-				rowStyleClass="ui-datatable-empty" sortBy="#{lancamento.dataVencimento}"
-				paginatorPosition="bottom" styleClass="borderless" style="margin-top:5px">
+				var="lancamento" paginator="true" rows="25"
+				emptyMessage="Período sem lançamentos"
+				rowStyleClass="ui-datatable-empty"
+				sortBy="#{lancamento.dataVencimento}" paginatorPosition="bottom"
+				styleClass="borderless" style="margin-top:5px">
 
 				<p:column headerText="">
 					<p:commandLink title="Visualizar"
@@ -65,8 +66,10 @@
 					</p:commandLink>
 				</p:column>
 
-				<p:column headerText="Vencimento" >
-					<p:outputLabel value="#{lancamento.dataVencimento}" />
+				<p:column headerText="Vencimento">
+					<p:outputLabel value="#{lancamento.dataVencimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
 				</p:column>
 
 				<p:column headerText="Descrição">
@@ -81,20 +84,22 @@
 					<p:outputLabel value="(P)" />
 				</p:column>
 
-				<p:column headerText="Valor">
-					<p:outputLabel value="#{lancamento.valor >= 0 ? '(+) ' : '(-) '}" />
-					<p:outputLabel value="#{lancamento.valor}" />
+				<p:column headerText="Valor" >
+					<p:outputLabel value="#{lancamento.credito ? '(+) ' : '(-) '}" />
+					<p:outputLabel value="#{lancamento.valor}" >
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</p:outputLabel>
 				</p:column>
-<p:summaryRow>
-            <p:column colspan="3" style="text-align:right">
-                <h:outputText value="Total:" />
-            </p:column>
-            <p:column>
-                <h:outputText value="#{consultaLancamentosBean.randomPrice}">
-                    <f:convertNumber type="currency" currencySymbol="R$" />
-                </h:outputText>
-            </p:column>
-        </p:summaryRow>
+				<p:summaryRow>
+					<p:column colspan="5" >
+						<p:outputLabel value="Total:" />
+					</p:column>
+					<p:column>
+						<p:outputLabel value="#{consultaLancamentosBean.getValorPorData(lancamento.dataVencimento)}" >
+							<f:convertNumber type="currency" currencySymbol="R$" />
+						</p:outputLabel>
+					</p:column>
+				</p:summaryRow>
 
 			</p:dataTable>
 

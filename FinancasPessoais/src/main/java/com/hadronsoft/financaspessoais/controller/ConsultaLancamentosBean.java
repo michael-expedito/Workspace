@@ -1,6 +1,10 @@
 package com.hadronsoft.financaspessoais.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -24,23 +28,23 @@ public class ConsultaLancamentosBean implements Serializable {
 
 	@Inject
 	private CadastroLancamentos cadastro;
-	
+
 	@Inject
 	LancamentoRepository lctRepository;
 
-	@Inject 
+	@Inject
 	ContaRepository ctaRepository;
-	
+
 	private Lancamento lancamentoSelecionado;
-	
+
 	private List<Lancamento> lancamentos;
-	
+
 	private List<Conta> contas;
 
-	public ConsultaLancamentosBean(){
-		
+	public ConsultaLancamentosBean() {
+
 	}
-	
+
 	public void consultar() {
 		this.lancamentos = lctRepository.getAll();
 		contas = ctaRepository.getAll();
@@ -78,9 +82,20 @@ public class ConsultaLancamentosBean implements Serializable {
 	public void setContas(List<Conta> contas) {
 		this.contas = contas;
 	}
-	
+
+	public BigDecimal getValorPorData(String dataVencimento) throws ParseException {		
+		BigDecimal valorPorData = BigDecimal.ZERO;
+		for (Lancamento lanc : lancamentos) {
+			if (lanc.getDataVencimento().toString() == dataVencimento) {
+				valorPorData.add(lanc.getValor());
+			}
+		}
+		return valorPorData;
+
+	}
+
 	public int getRandomPrice() {
-        return (int) (Math.random() * 100000);
-    }
-	
+		return (int) (Math.random() * 100000);
+	}
+
 }
