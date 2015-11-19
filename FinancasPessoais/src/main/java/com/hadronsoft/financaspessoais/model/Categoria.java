@@ -41,13 +41,17 @@ public class Categoria implements Serializable {
 	private Cadastro cadastro;
 
 	@NotNull
-	@Column(nullable = false)
+	@Column(name = "CAT_NIVEL", nullable = false)
 	private int nivel;
 	
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "CAT_TPCATEGORIA", nullable = false)
 	private TipoCategoria tipoCategoria;
+	
+	@NotNull
+	@Column(name = "CAT_ORDENACAO",  nullable = false)
+	private int ordenacao;
 
 	@OneToMany(mappedBy = "categoriaPai")
 	private List<Categoria> subcategorias;
@@ -84,6 +88,30 @@ public class Categoria implements Serializable {
 		this.cadastro = cadastro;
 	}
 
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public TipoCategoria getTipoCategoria() {
+		return tipoCategoria;
+	}
+
+	public void setTipoCategoria(TipoCategoria tipoCategoria) {
+		this.tipoCategoria = tipoCategoria;
+	}
+
+	public int getOrdenacao() {
+		return ordenacao;
+	}
+
+	public void setOrdenacao(int ordenacao) {
+		this.ordenacao = ordenacao;
+	}
+
 	public List<Categoria> getSubcategorias() {
 		return subcategorias;
 	}
@@ -94,7 +122,7 @@ public class Categoria implements Serializable {
 
 	@Transient
 	public String getDescricaoIdentada(){
-		return (this.tipoCategoria == TipoCategoria.SINTETICA ? " (+) ": "-") + repeat("&#160;",this.nivel*2) + this.descricao ;
+		return  repeat("-",this.nivel*2) + (this.tipoCategoria == TipoCategoria.SINTETICA ? " (+) ": "-") + this.descricao ;
 	}
 
 	@Transient

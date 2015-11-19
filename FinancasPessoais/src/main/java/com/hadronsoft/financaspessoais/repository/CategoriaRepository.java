@@ -26,8 +26,9 @@ public class CategoriaRepository implements Serializable {
 	}
 
 	public List<Categoria> getAll() {
-		return this.manager.createQuery("from Categoria where cadastro = :cadastro", Categoria.class)
-				.setParameter("cadastro", (Cadastro) SessionContext.getInstance().getUsuarioLogado()).getResultList();
+		return this.manager.createQuery("FROM Categoria WHERE cadastro = :cadastro ORDER BY ordenacao", Categoria.class)
+				.setParameter("cadastro", (Cadastro) SessionContext.getInstance().getUsuarioLogado())
+				.getResultList();
 	}
 
 	public void add(Categoria categoria) {
@@ -37,10 +38,27 @@ public class CategoriaRepository implements Serializable {
 	public void update(Categoria categoria) {
 		this.manager.merge(categoria);
 	}
+	
+	public void incrementaOrdenacaoCategorias(Categoria categoria) {
+		this.manager.createNativeQuery("UPDATE CATEGORIA_CAT SET CAT_ORDENACAO = CAT_ORDENACAO+1 WHERE CAT_IDCADASTRO = ? AND CAT_ORDENACAO > ?")
+			.setParameter(0, categoria.getCadastro().getId())
+			.setParameter(1,categoria.getOrdenacao())
+			.executeUpdate();
+	}
 
 	public List<Categoria> raizes() {
 		return manager.createQuery("from Categoria where categoriaPai is null", Categoria.class)
 				.getResultList();
+	}
+
+	public void delete(Categoria categoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void save(Categoria categoria) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,20 +1,16 @@
 package com.hadronsoft.financaspessoais.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.TreeNode;
 
 import com.hadronsoft.financaspessoais.model.Categoria;
 import com.hadronsoft.financaspessoais.repository.CategoriaRepository;
+import com.hadronsoft.financaspessoais.service.CategoriaService;
+import com.hadronsoft.financaspessoais.service.NegocioException;
 
 @Named
 @ViewScoped
@@ -24,6 +20,9 @@ public class CadastroCategoriaBean implements Serializable{
 
 	@Inject
 	private CategoriaRepository catRepository;
+	
+	@Inject
+	private CategoriaService catService;
 	
 	private Categoria categoria;
 	
@@ -39,11 +38,13 @@ public class CadastroCategoriaBean implements Serializable{
 
 	public void prepararCadastro(){
 	
+		categoria  = new Categoria();
+		categoria.setCategoriaPai(new Categoria());
 		categorias = catRepository.getAll();
 	}
 	
-	public void salvar(){
-		
+	public void salvar() throws NegocioException{
+		this.catService.salvar(categoria);
 	}
 	
 	public void setCategoria(Categoria categoria) {

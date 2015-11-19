@@ -28,7 +28,7 @@ public class CategoriaConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if (value != null) {
+		if (value != null && ((Categoria) value).getId() != null) {
 			return ((Categoria) value).getId().toString();
 		}
 		return null;
