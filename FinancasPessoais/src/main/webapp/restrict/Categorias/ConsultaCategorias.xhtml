@@ -1,83 +1,47 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui">
 
-	<f:metadata>
-		<f:viewAction action="#{consultaLancamentosBean.consultar}" />
-	</f:metadata>
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>Categorias</title>
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputScript name="js/layout.js" library="ronin-layout" />
+</h:head>
 
-	<ui:define name="titulo">Consulta de lançamentos</ui:define>
+<h:body>
+	<h:form id="frm">
+		<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+		
+		<p:toolbar style="margin-top: 10px">
+			<p:toolbarGroup>
+				<p:button value="Atualizar" outcome="/restrict/Categorias/ConsultaCategorias"
+					icon="fa fa-refresh Fs20 white" />
 
-	<ui:define name="corpo">
+			</p:toolbarGroup>
 
-		<h1>Consulta de lançamentos</h1>
+			<p:toolbarGroup align="right">
+				<p:button value="Novo" outcome="/restrict/Categorias/CadastroCategoria"
+					icon="fa fa-plus Fs20 white" />
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		
+	</h:form>
+	<h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/animate.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-font.css" library="ronin-layout" />
+	<h:outputStylesheet name="css/ronin-layout.css" library="ronin-layout" />
+</h:body>
 
-		<h:form id="frm">
-			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
-				var="lancamento" border="1" cellspacing="0" cellpadding="2"
-				paginator="true" rows="10" paginatorPosition="bottom">>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Conta" />
-					</f:facet>
-					<h:outputText value="#{lancamento.conta.nome}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Descricao" />
-					</f:facet>
-					<h:outputText value="#{lancamento.descricao}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Tipo" />
-					</f:facet>
-					<h:outputText value="#{lancamento.tipo.descricao}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Valor" />
-					</f:facet>
-					<h:outputText value="#{lancamento.valor}">
-						<f:convertNumber type="currency" locale="pt_BR" />
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Data de vencimento" />
-					</f:facet>
-					<h:outputText value="#{lancamento.dataVencimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Data de pagamento" />
-					</f:facet>
-					<h:outputText value="#{lancamento.dataPagamento}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
-				</p:column>
-				<p:column>
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/Lancamentos/CadastroLancamento" styleClass="GreenButton">
-						<f:param name="id" value="#{lancamento.id}" />
-					</p:button>
-					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						process="@this" update="@form" styleClass="RedButton"
-						action="#{consultaLancamentosBean.excluir}">
-						<f:setPropertyActionListener value="#{lancamento}"
-							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</ui:define>
-</ui:composition>
+</html>

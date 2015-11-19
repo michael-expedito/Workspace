@@ -15,6 +15,7 @@ import javax.inject.Named;
 
 import com.hadronsoft.financaspessoais.model.Conta;
 import com.hadronsoft.financaspessoais.model.Lancamento;
+import com.hadronsoft.financaspessoais.model.TipoLancamento;
 import com.hadronsoft.financaspessoais.repository.ContaRepository;
 import com.hadronsoft.financaspessoais.repository.LancamentoRepository;
 import com.hadronsoft.financaspessoais.service.CadastroLancamentos;
@@ -83,15 +84,22 @@ public class ConsultaLancamentosBean implements Serializable {
 		this.contas = contas;
 	}
 
-	public BigDecimal getValorPorData(String dataVencimento) throws ParseException {		
+	public BigDecimal getValorPorData(String dataVencimento) throws ParseException {	
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
+		java.sql.Date data = new java.sql.Date(format.parse(dataVencimento).getTime());
 		BigDecimal valorPorData = BigDecimal.ZERO;
 		for (Lancamento lanc : lancamentos) {
-			if (lanc.getDataVencimento().toString() == dataVencimento) {
-				valorPorData.add(lanc.getValor());
+			if (data.equals(lanc.getDataVencimento())) {
+				BigDecimal valorLancamento = new BigDecimal( lanc.getValor().toString() );
+				if(lanc.getTipo() == TipoLancamento.CREDITO)
+				{ 
+					valorPorData = valorPorData.add(valorLancamento);
+				} else {
+					valorPorData = valorPorData.subtract(valorLancamento);
+				}
 			}
 		}
 		return valorPorData;
-
 	}
 
 	public int getRandomPrice() {

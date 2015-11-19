@@ -1,12 +1,12 @@
 package com.hadronsoft.financaspessoais.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -34,13 +35,22 @@ public class Categoria implements Serializable {
 	@JoinColumn(name = "CAT_IDCATEGORIAPAI", foreignKey = @ForeignKey(name = "FK1_CATEGORIA_CATEGORIA") )
 	private Categoria categoriaPai;
 
-	@OneToMany(mappedBy = "categoriaPai", cascade = CascadeType.ALL)
-	private List<Categoria> subcategorias = new ArrayList<>();
-
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "CAT_IDCADASTRO", nullable = false, foreignKey = @ForeignKey(name = "FK2_CATEGORIA_CADASTRO") )
 	private Cadastro cadastro;
+
+	@NotNull
+	@Column(nullable = false)
+	private int nivel;
+	
+	@NotNull
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "CAT_TPCATEGORIA", nullable = false)
+	private TipoCategoria tipoCategoria;
+
+	@OneToMany(mappedBy = "categoriaPai")
+	private List<Categoria> subcategorias;
 
 	public Long getId() {
 		return id;
@@ -66,6 +76,14 @@ public class Categoria implements Serializable {
 		this.categoriaPai = categoriaPai;
 	}
 
+	public Cadastro getCadastro() {
+		return cadastro;
+	}
+
+	public void setCadastro(Cadastro cadastro) {
+		this.cadastro = cadastro;
+	}
+
 	public List<Categoria> getSubcategorias() {
 		return subcategorias;
 	}
@@ -74,12 +92,17 @@ public class Categoria implements Serializable {
 		this.subcategorias = subcategorias;
 	}
 
-	public Cadastro getCadastro() {
-		return cadastro;
+	@Transient
+	public String getDescricaoIdentada(){
+		return (this.tipoCategoria == TipoCategoria.SINTETICA ? " (+) ": "-") + repeat("&#160;",this.nivel*2) + this.descricao ;
 	}
 
-	public void setCadastro(Cadastro cadastro) {
-		this.cadastro = cadastro;
+	@Transient
+	public String repeat(String str, int times) {
+		StringBuilder ret = new StringBuilder();
+		for (int i = 0; i < times; i++)
+			ret.append(str);
+		return ret.toString();
 	}
 
 	@Override

@@ -56,46 +56,52 @@
 
 				<p:column headerText="">
 					<p:commandLink title="Visualizar"
-						styleClass="ui-icon ui-icon-pencil"
-						style="float:left;margin-right:10px">
-
+						style="float:left;margin-right:10px; text-align: left; text-decoration:none; ">
+						<i class="fa fa-pencil-square  Fs20 blue"></i>
 					</p:commandLink>
 
-					<p:commandLink title="Excluir" styleClass="ui-icon ui-icon-trash"
-						style="float:left;margin-right:10px">
+					<p:commandLink title="Excluir"
+						style="float:left; margin-right:10px; text-align: left; text-decoration:none; ">
+						<i class="fa fa-trash Fs20 red"></i>
 					</p:commandLink>
 				</p:column>
 
-				<p:column headerText="Vencimento">
+				<p:column headerText="Vencimento" style="text-align: left">
 					<p:outputLabel value="#{lancamento.dataVencimento}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:outputLabel>
 				</p:column>
 
-				<p:column headerText="Descrição">
+				<p:column headerText="Descrição" style="text-align: left">
 					<p:outputLabel value="#{lancamento.descricao}" />
 				</p:column>
 
-				<p:column headerText="Categoria">
+				<p:column headerText="Categoria" style="text-align: left">
 					<p:outputLabel value="#{lancamento.categoria.descricao}" />
 				</p:column>
 
-				<p:column headerText="Detalhes">
-					<p:outputLabel value="(P)" />
+				<p:column headerText="Detalhes" style="text-align: left">
+					<i class="fa fa-repeat Fs20 blue"></i>
+					<i class="fa fa-check-square-o Fs20 green"></i>
+					<i class="fa fa-credit-card  Fs20 black"></i>
+
 				</p:column>
 
-				<p:column headerText="Valor" >
-					<p:outputLabel value="#{lancamento.credito ? '(+) ' : '(-) '}" />
-					<p:outputLabel value="#{lancamento.valor}" >
+				<p:column headerText="Valor" style="text-align: right">
+					<i class="fa #{lancamento.credito ? 'fa-minus-square Fs15 red ' : 'fa-plus-square Fs15 green  '} />"></i>
+					<p:outputLabel value=" " />
+					<p:outputLabel value="#{lancamento.valor}">
 						<f:convertNumber type="currency" currencySymbol="R$" />
 					</p:outputLabel>
 				</p:column>
 				<p:summaryRow>
-					<p:column colspan="5" >
-						<p:outputLabel value="Total:" />
+					<p:column colspan="5">
+						<p:outputLabel value="Total:" style="text-align: right" />
 					</p:column>
-					<p:column>
-						<p:outputLabel value="#{consultaLancamentosBean.getValorPorData(lancamento.dataVencimento)}" >
+					<p:column style="text-align: right">
+						<p:outputLabel
+							value="#{consultaLancamentosBean.getValorPorData(lancamento.dataVencimento)}"
+							style="color:red">
 							<f:convertNumber type="currency" currencySymbol="R$" />
 						</p:outputLabel>
 					</p:column>
