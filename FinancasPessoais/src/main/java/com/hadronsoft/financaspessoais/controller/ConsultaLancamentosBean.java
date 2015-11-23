@@ -3,9 +3,9 @@ package com.hadronsoft.financaspessoais.controller;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -18,8 +18,10 @@ import com.hadronsoft.financaspessoais.model.Lancamento;
 import com.hadronsoft.financaspessoais.model.TipoLancamento;
 import com.hadronsoft.financaspessoais.repository.ContaRepository;
 import com.hadronsoft.financaspessoais.repository.LancamentoRepository;
+import com.hadronsoft.financaspessoais.repository.filter.LancamentoFilter;
 import com.hadronsoft.financaspessoais.service.CadastroLancamentos;
 import com.hadronsoft.financaspessoais.service.NegocioException;
+import com.hadronsoft.financaspessoais.service.ParcelamentoService;
 
 @Named
 @SessionScoped
@@ -27,34 +29,52 @@ public class ConsultaLancamentosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private CadastroLancamentos cadastro;
+	@Inject	private CadastroLancamentos cadastro;
 
-	@Inject
-	LancamentoRepository lctRepository;
+	@Inject	LancamentoRepository lctRepository;
 
-	@Inject
-	ContaRepository ctaRepository;
-
+	@Inject	ContaRepository ctaRepository;
+	
+	@Inject	private ParcelamentoService parService;
+	
 	private Lancamento lancamentoSelecionado;
-
 	private List<Lancamento> lancamentos;
-
 	private List<Conta> contas;
+	private LancamentoFilter filter;
 
 	public ConsultaLancamentosBean() {
-
+		
 	}
 
 	public void consultar() {
-		this.lancamentos = lctRepository.getAll();
+		
+		if (filter == null){
+			filter = new LancamentoFilter();
+		}
+		
+		if (filter.getPeriodoInicial() == null){
+			Calendar f = Calendar.getInstance();   // this takes current date
+	    	f.set(Calendar.DAY_OF_MONTH, 1);
+	    	filter.setPeriodoInicial(f.getTime());  
+		}
+		if (filter.getPeriodoFinal() == null){
+			Calendar l = Calendar.getInstance();   // this takes current date
+	    	l.set(Calendar.DAY_OF_MONTH, l.getActualMaximum(Calendar.DAY_OF_MONTH));
+	    	filter.setPeriodoFinal(l.getTime());
+		}
+		
+		this.lancamentos = lctRepository.getByFilter(filter);
 		contas = ctaRepository.getAll();
 	}
 
 	public void excluir() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			this.cadastro.excluir(this.lancamentoSelecionado);
+			if (this.lancamentoSelecionado.getParcelamento() == null) {
+				this.cadastro.excluir(this.lancamentoSelecionado);
+			} else {
+				this.parService.excluir(lancamentoSelecionado.getParcelamento());
+			}
 			this.consultar();
 			context.addMessage(null, new FacesMessage("Lançamento excluído com sucesso!"));
 		} catch (NegocioException e) {
@@ -62,6 +82,36 @@ public class ConsultaLancamentosBean implements Serializable {
 			mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, mensagem);
 		}
+	}
+	
+	public BigDecimal getValorPorData(Lancamento obj) throws ParseException {
+		Date data = obj.getDataVencimento();
+		BigDecimal valorPorData = BigDecimal.ZERO;
+		for (Lancamento lanc : lancamentos) {
+			if (data.equals(lanc.getDataVencimento())) {
+				BigDecimal valorLancamento = new BigDecimal(lanc.getValor().toString());
+				if (lanc.getTipo() == TipoLancamento.CREDITO) {
+					valorPorData = valorPorData.add(valorLancamento);
+				} else {
+					valorPorData = valorPorData.subtract(valorLancamento);
+				}
+			}
+		}
+		return valorPorData;
+	}
+	
+	public String consultarLancamento(Lancamento lanc) {
+		if (lanc.isDebito()) {
+			return "/restrict/Lancamentos/CadastroDespesas?faces-redirect=true&lancamento=" + lanc.getId();
+		} else {
+			return "/restrict/Lancamentos/CadastroReceitas?faces-redirect=true&lancamento=" + lanc.getId();
+		}
+	}
+
+	public void deletarLancamento(Lancamento lanc) {
+
+		lctRepository.delete(lanc);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lançamento excluído com sucesso!"));
 	}
 
 	public List<Lancamento> getLancamentos() {
@@ -84,26 +134,12 @@ public class ConsultaLancamentosBean implements Serializable {
 		this.contas = contas;
 	}
 
-	public BigDecimal getValorPorData(String dataVencimento) throws ParseException {	
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
-		java.sql.Date data = new java.sql.Date(format.parse(dataVencimento).getTime());
-		BigDecimal valorPorData = BigDecimal.ZERO;
-		for (Lancamento lanc : lancamentos) {
-			if (data.equals(lanc.getDataVencimento())) {
-				BigDecimal valorLancamento = new BigDecimal( lanc.getValor().toString() );
-				if(lanc.getTipo() == TipoLancamento.CREDITO)
-				{ 
-					valorPorData = valorPorData.add(valorLancamento);
-				} else {
-					valorPorData = valorPorData.subtract(valorLancamento);
-				}
-			}
-		}
-		return valorPorData;
+	public LancamentoFilter getFilter() {
+		return filter;
 	}
 
-	public int getRandomPrice() {
-		return (int) (Math.random() * 100000);
+	public void setFilter(LancamentoFilter filter) {
+		this.filter = filter;
 	}
 
 }

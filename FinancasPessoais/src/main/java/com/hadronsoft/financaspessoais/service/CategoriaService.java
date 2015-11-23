@@ -21,16 +21,27 @@ public class CategoriaService implements Serializable{
 	
 	@Transactional
 	public void salvar(Categoria categoria) throws NegocioException {
-		
-		categoria.setNivel(categoria.getCategoriaPai().getNivel()+1);
-		categoria.setTipoCategoria(TipoCategoria.ANALITICA);
-		categoria.setOrdenacao(categoria.getCategoriaPai().getOrdenacao()+1);
+		//Preenchendo categoria
 		categoria.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
-		this.catRepository.incrementaOrdenacaoCategorias(categoria.getCategoriaPai());
-		this.catRepository.update(categoria);
-		categoria.getCategoriaPai().setTipoCategoria(TipoCategoria.SINTETICA);
-		this.catRepository.update(categoria.getCategoriaPai());
+		categoria.setTipoCategoria(TipoCategoria.ANALITICA);
+		if (categoria.getCategoriaPai() != null){
+			categoria.setNivel(categoria.getCategoriaPai().getNivel()+1);
+			categoria.setOrdenacao(categoria.getCategoriaPai().getOrdenacao()+1);
+			categoria.getCategoriaPai().setTipoCategoria(TipoCategoria.SINTETICA);
+		} else {
+			categoria.setNivel(0);
+			categoria.setOrdenacao(catRepository.getUltimaOrdenacao(categoria.getCadastro())+1);
+		}
 		
+		if (categoria.getCategoriaPai() != null){
+			this.catRepository.incrementaOrdenacaoCategorias(categoria.getCategoriaPai());
+		}
+		
+		this.catRepository.update(categoria);
+		
+		if (categoria.getCategoriaPai() != null){
+			this.catRepository.update(categoria.getCategoriaPai());
+		}
 		
 		FacesUtil.addInfoMessage("Categoria cadastrada com sucesso!");
 		

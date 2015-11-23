@@ -20,10 +20,20 @@
 
 			<p:panel id="panelInformacoes" header="Informações" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelInformacoes"
-				style="margin-top:20px" collapsed="true">
+				collapsed="true">
 			</p:panel>
 
 			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
+			<p:toolbar style="margin-top: 10px">
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Atualizar"
+						actionListener="#{consultaLancamentosBean.consultar}"
+						icon="fa fa-refresh Fs20 white" 
+						process="@this periodoInicial periodoFinal" update="@form"/>
+
+				</p:toolbarGroup>
+			</p:toolbar>
 
 			<p:panel id="panelFiltros" style="margin-top:5px">
 
@@ -33,17 +43,18 @@
 
 					<p:outputLabel value="Período" />
 					<h:panelGroup>
-						<p:calendar size="10" pattern="dd/MM/yyyy" />
-					a
-					<p:calendar size="10" pattern="dd/MM/yyyy" />
+						<p:calendar id="periodoInicial" size="10" pattern="dd/MM/yyyy"
+							value="#{consultaLancamentosBean.filter.periodoInicial}" />
+						a
+						<p:calendar id="periodoFinal" size="10" pattern="dd/MM/yyyy"
+							value="#{consultaLancamentosBean.filter.periodoFinal}" />
 					</h:panelGroup>
 
 					<p:outputLabel value="Conta Financeira" />
-					<p:selectOneMenu>
+					<p:selectOneMenu value="#{consultaLancamentosBean.filter.conta}">
 						<f:selectItems value="#{consultaLancamentosBean.contas}"
 							var="conta" itemValue="#{conta}" itemLabel="#{conta.nome}" />
 					</p:selectOneMenu>
-
 				</p:panelGrid>
 			</p:panel>
 
@@ -54,19 +65,34 @@
 				sortBy="#{lancamento.dataVencimento}" paginatorPosition="bottom"
 				styleClass="borderless" style="margin-top:5px">
 
-				<p:column headerText="">
+				<p:column headerText="" width="100">
 					<p:commandLink title="Visualizar"
+						action="#{consultaLancamentosBean.consultarLancamento(lancamento)}"
 						style="float:left;margin-right:10px; text-align: left; text-decoration:none; ">
 						<i class="fa fa-pencil-square  Fs20 blue"></i>
 					</p:commandLink>
 
-					<p:commandLink title="Excluir"
+					<p:commandLink title="Excluir" process="@this" update="@form"
+						action="#{consultaLancamentosBean.excluir}"
 						style="float:left; margin-right:10px; text-align: left; text-decoration:none; ">
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja deletar este lançamento?"
+							icon="ui-icon-alert" />
 						<i class="fa fa-trash Fs20 red"></i>
+						<f:setPropertyActionListener value="#{lancamento}"
+							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
 					</p:commandLink>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 				</p:column>
 
-				<p:column headerText="Vencimento" style="text-align: left">
+				<p:column headerText="Vencimento" style="text-align: left"
+					width="80">
 					<p:outputLabel value="#{lancamento.dataVencimento}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:outputLabel>
@@ -76,19 +102,24 @@
 					<p:outputLabel value="#{lancamento.descricao}" />
 				</p:column>
 
-				<p:column headerText="Categoria" style="text-align: left">
+				<p:column headerText="Categoria" style="text-align: left"
+					width="150">
 					<p:outputLabel value="#{lancamento.categoria.descricao}" />
 				</p:column>
 
-				<p:column headerText="Detalhes" style="text-align: left">
-					<i class="fa fa-repeat Fs20 blue"></i>
-					<i class="fa fa-check-square-o Fs20 green"></i>
-					<i class="fa fa-credit-card  Fs20 black"></i>
+				<p:column headerText="Detalhes" style="text-align: left" width="80">
+					<i
+						class="#{lancamento.parcelamento.parcelado ? 'fa fa-repeat Fs20 blue' : '' }"></i>
+					<i
+						class="#{lancamento.pago ? 'fa fa-check-square-o Fs20 green' : 'fa fa-check-square-o Fs20 silver'} "></i>
+					<i
+						class="#{lancamento.cartaoCredito ? 'fa fa-credit-card  Fs20 black' : '' }"></i>
 
 				</p:column>
 
-				<p:column headerText="Valor" style="text-align: right">
-					<i class="fa #{lancamento.credito ? 'fa-minus-square Fs15 red ' : 'fa-plus-square Fs15 green  '} />"></i>
+				<p:column headerText="Valor" style="text-align: right" width="120">
+					<i
+						class="fa #{lancamento.credito ? 'fa-plus-square Fs15 green  '  :  'fa-minus-square Fs15 red '} />"></i>
 					<p:outputLabel value=" " />
 					<p:outputLabel value="#{lancamento.valor}">
 						<f:convertNumber type="currency" currencySymbol="R$" />
@@ -100,7 +131,7 @@
 					</p:column>
 					<p:column style="text-align: right">
 						<p:outputLabel
-							value="#{consultaLancamentosBean.getValorPorData(lancamento.dataVencimento)}"
+							value="#{consultaLancamentosBean.getValorPorData(lancamento)}"
 							style="color:red">
 							<f:convertNumber type="currency" currencySymbol="R$" />
 						</p:outputLabel>

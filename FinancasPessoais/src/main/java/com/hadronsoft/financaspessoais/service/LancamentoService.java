@@ -29,6 +29,10 @@ public class LancamentoService implements Serializable {
 
 	@Transactional
 	public void salvar(Lancamento lancamento, Parcelamento parcelamento) throws NegocioException {
+		if (lancamento.getId() != null){
+			lancamentoRepository.delete(lancamento);
+			lancamento.setId(null);
+		}
 		if (parcelamento.getQuantidadeParcelas() > 0) {
 			lancamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
 			parcelamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
@@ -78,11 +82,11 @@ public class LancamentoService implements Serializable {
 				lancamentos.add(newLancamento);
 			}
 			parcelamento.setLancamentos(lancamentos);
-			parcelamentoRepository.add(parcelamento);
+			parcelamentoRepository.update(parcelamento);
 
 		} else {
 			lancamento.setCadastro((Cadastro) SessionContext.getInstance().getUsuarioLogado());
-			lancamentoRepository.add(lancamento);
+			lancamentoRepository.update(lancamento);
 		}
 		
 		if (lancamento.getTipo() == TipoLancamento.CREDITO) {

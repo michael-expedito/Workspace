@@ -51,7 +51,7 @@ public class Categoria implements Serializable {
 	
 	@NotNull
 	@Column(name = "CAT_ORDENACAO",  nullable = false)
-	private int ordenacao;
+	private long ordenacao;
 
 	@OneToMany(mappedBy = "categoriaPai")
 	private List<Categoria> subcategorias;
@@ -104,11 +104,11 @@ public class Categoria implements Serializable {
 		this.tipoCategoria = tipoCategoria;
 	}
 
-	public int getOrdenacao() {
+	public long getOrdenacao() {
 		return ordenacao;
 	}
 
-	public void setOrdenacao(int ordenacao) {
+	public void setOrdenacao(long ordenacao) {
 		this.ordenacao = ordenacao;
 	}
 

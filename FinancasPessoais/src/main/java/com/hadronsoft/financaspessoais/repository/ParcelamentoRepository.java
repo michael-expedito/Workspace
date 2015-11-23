@@ -21,4 +21,17 @@ public class ParcelamentoRepository  implements Serializable  {
 	public void add(Parcelamento parcelamento) {
 		this.manager.persist(parcelamento);
 	}
+
+	public void update(Parcelamento parcelamento) {
+		this.manager.merge(parcelamento);
+		
+	}
+	
+	public void remove(Parcelamento parcelamento){
+		this.manager.remove(this.manager.getReference(Parcelamento.class, parcelamento.getId()));
+	}
+
+	public Parcelamento getById(Long id) {
+		return this.manager.find(Parcelamento.class, id);
+	}
 }

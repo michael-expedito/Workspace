@@ -250,7 +250,17 @@ public class Lancamento implements Serializable {
 	public boolean isDebito(){
 		return this.tipo == TipoLancamento.DEBITO;
 	}
-
+	
+	@Transient
+	public boolean isPago(){
+		return this.dataPagamento != null;
+	}
+	
+	@Transient
+	public boolean isCartaoCredito(){
+		return this.conta.getTipoConta() == TipoConta.CARTAOCREDITO;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

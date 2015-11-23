@@ -1,5 +1,6 @@
 package com.hadronsoft.financaspessoais.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.List;
 
@@ -78,6 +79,11 @@ public class Parcelamento implements Serializable{
 
 	public void setLancamentos(List<Lancamento> lancamentos) {
 		this.lancamentos = lancamentos;
+	}
+	
+	@Transient
+	public boolean isParcelado(){
+		return this.lancamentos.size() > 1;
 	}
 
 	@Override

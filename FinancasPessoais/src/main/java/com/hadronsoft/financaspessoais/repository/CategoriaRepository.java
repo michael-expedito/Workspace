@@ -40,15 +40,23 @@ public class CategoriaRepository implements Serializable {
 	}
 	
 	public void incrementaOrdenacaoCategorias(Categoria categoria) {
-		this.manager.createNativeQuery("UPDATE CATEGORIA_CAT SET CAT_ORDENACAO = CAT_ORDENACAO+1 WHERE CAT_IDCADASTRO = ? AND CAT_ORDENACAO > ?")
-			.setParameter(0, categoria.getCadastro().getId())
-			.setParameter(1,categoria.getOrdenacao())
+		this.manager.createNativeQuery("UPDATE CATEGORIA_CAT SET CAT_ORDENACAO = CAT_ORDENACAO+1 WHERE CAT_IDCADASTRO = :idcadastro AND CAT_ORDENACAO > :ordenacao")
+			.setParameter("idcadastro", categoria.getCadastro().getId())
+			.setParameter("ordenacao",categoria.getOrdenacao())
 			.executeUpdate();
 	}
 
 	public List<Categoria> raizes() {
 		return manager.createQuery("from Categoria where categoriaPai is null", Categoria.class)
 				.getResultList();
+	}
+	
+	public long getUltimaOrdenacao(Cadastro cadastro){
+		Integer resultado = (Integer)this.manager.createNativeQuery("SELECT MAX(CAT_ORDENACAO) FROM CATEGORIA_CAT WHERE CAT_IDCADASTRO = :idcadastro")
+				.setParameter("idcadastro", cadastro.getId())
+				.getSingleResult();
+		return resultado;
+				
 	}
 
 	public void delete(Categoria categoria) {
