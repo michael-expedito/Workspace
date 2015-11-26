@@ -89,7 +89,7 @@ public class Lancamento implements Serializable {
 	private Cadastro cadastro;
 	
 	@ManyToOne
-	@JoinColumn(name="LCT_IDPARCELAMENTO", nullable = true, foreignKey = @ForeignKey(name="FK4_LANCAMENTO_PARCELAMENTO"))
+	@JoinColumn(name="LCT_IDPARCELAMENTO", nullable = true, foreignKey = @ForeignKey(name="FK4_LANCAMENTO_PARCELAMENTO") )
 	private Parcelamento parcelamento; 
 
 

@@ -9,15 +9,19 @@ import com.hadronsoft.financaspessoais.model.Parcelamento;
 
 @Named
 @SessionScoped
-public class ConsultaParcelasBean implements Serializable {
+public class VisualizarParcelamentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Parcelamento parcelamento;
-	
-	
+
 	// Gets and Sets
-	 
+
+	public VisualizarParcelamentoBean() {
+		if (parcelamento == null) {
+			parcelamento = new Parcelamento();
+		}
+	}
 
 	public Parcelamento getParcelamento() {
 		return parcelamento;

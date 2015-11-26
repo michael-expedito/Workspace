@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Parcelamento implements Serializable{
 	@Column(name="PAR_FREQUENCIA", nullable = false)
 	private FrequenciaLancamento frequenciaLancamento;
 	
-	@OneToMany(mappedBy="parcelamento", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy="parcelamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Lancamento> lancamentos;
 	
 	@NotNull

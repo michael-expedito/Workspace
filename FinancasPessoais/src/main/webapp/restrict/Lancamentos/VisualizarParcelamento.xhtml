@@ -13,19 +13,27 @@
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 	</f:facet>
-	<title>Contas Financeiras - Pesquisa</title>
+	<title>Parcelamento</title>
 	<h:outputStylesheet name="style.css" library="css" />
 	<h:outputScript name="js/layout.js" library="ronin-layout" />
 </h:head>
 <h:body>
 	<f:metadata>
-		
+
 	</f:metadata>
 
 	<h:form id="frm">
-	
+
+		<p:dataList id="dlParcelamento"
+			value="#{visualizarParcelamentoBean.parcelamento.lancamentos}"
+			var="lancamento">
+			<f:facet name="Parcelamento">Parcelamento</f:facet>
+			
+			#{lancamento.numeroParcela} - #{lancamento.descricao} (#{lancamento.numeroParcela} / #{lancamento.parcelamento.quantidadeParcelas}) - #{lancamento.valor}
+		</p:dataList>
+
 	</h:form>
-	
+
 	<h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
 	<h:outputStylesheet name="css/font-awesome.css" library="ronin-layout" />
 	<h:outputStylesheet name="css/animate.css" library="ronin-layout" />
