@@ -84,7 +84,7 @@
 					</p:commandLink>
 					
 					<p:commandLink title="Visualizar Parcelamento" process="@this" update="@form"
-						action="#{menuBean.viewDialog('/restrict/Contas/VisualizarParcelamento', true,false,false,550,700)}"
+						actionListener="#{menuBean.viewDialog('/restrict/Lancamentos/VisualizarParcelamento', true,false,false,550,700)}"
 						style="float:left; margin-right:10px; text-align: left; text-decoration:none; ">
 						<i class="fa fa-search  Fs20 blue"></i>
 						<f:setPropertyActionListener value="#{lancamento.parcelamento}"

@@ -29,61 +29,69 @@ public class ConsultaLancamentosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject	private CadastroLancamentos cadastro;
+	@Inject
+	private CadastroLancamentos cadastro;
 
-	@Inject	LancamentoRepository lctRepository;
+	@Inject
+	LancamentoRepository lctRepository;
 
-	@Inject	ContaRepository ctaRepository;
-	
-	@Inject	private ParcelamentoService parService;
-	
+	@Inject
+	ContaRepository ctaRepository;
+
+	@Inject
+	private ParcelamentoService parService;
+
 	private Lancamento lancamentoSelecionado;
 	private List<Lancamento> lancamentos;
 	private List<Conta> contas;
 	private LancamentoFilter filter;
 
 	public ConsultaLancamentosBean() {
-		
+
 	}
 
 	public void consultar() {
-		
-		if (filter == null){
+
+		if (filter == null) {
 			filter = new LancamentoFilter();
 		}
-		
-		if (filter.getPeriodoInicial() == null){
-			Calendar f = Calendar.getInstance();   // this takes current date
-	    	f.set(Calendar.DAY_OF_MONTH, 1);
-	    	filter.setPeriodoInicial(f.getTime());  
+
+		if (filter.getPeriodoInicial() == null) {
+			Calendar f = Calendar.getInstance(); // this takes current date
+			f.set(Calendar.DAY_OF_MONTH, 1);
+			filter.setPeriodoInicial(f.getTime());
 		}
-		if (filter.getPeriodoFinal() == null){
-			Calendar l = Calendar.getInstance();   // this takes current date
-	    	l.set(Calendar.DAY_OF_MONTH, l.getActualMaximum(Calendar.DAY_OF_MONTH));
-	    	filter.setPeriodoFinal(l.getTime());
+		if (filter.getPeriodoFinal() == null) {
+			Calendar l = Calendar.getInstance(); // this takes current date
+			l.set(Calendar.DAY_OF_MONTH, l.getActualMaximum(Calendar.DAY_OF_MONTH));
+			filter.setPeriodoFinal(l.getTime());
 		}
-		
+
 		this.lancamentos = lctRepository.getByFilter(filter);
 		contas = ctaRepository.getAll();
 	}
 
 	public void excluir() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		try {
-			if (this.lancamentoSelecionado.getParcelamento() == null) {
-				this.cadastro.excluir(this.lancamentoSelecionado);
-			} else {
-				this.parService.excluir(lancamentoSelecionado.getParcelamento());
+		if (this.lancamentoSelecionado.getParcelamento() != null) {
+			
+		} else {
+			FacesContext context = FacesContext.getCurrentInstance();
+			try {
+				if (this.lancamentoSelecionado.getParcelamento() == null) {
+					this.cadastro.excluir(this.lancamentoSelecionado);
+				} else {
+					this.parService.excluir(lancamentoSelecionado.getParcelamento());
+				}
+				this.consultar();
+				context.addMessage(null, new FacesMessage("Lançamento excluído com sucesso!"));
+			} catch (NegocioException e) {
+				FacesMessage mensagem = new FacesMessage(e.getMessage());
+				mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+				context.addMessage(null, mensagem);
 			}
-			this.consultar();
-			context.addMessage(null, new FacesMessage("Lançamento excluído com sucesso!"));
-		} catch (NegocioException e) {
-			FacesMessage mensagem = new FacesMessage(e.getMessage());
-			mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, mensagem);
 		}
 	}
-	
+
 	public BigDecimal getValorPorData(Lancamento obj) throws ParseException {
 		Date data = obj.getDataVencimento();
 		BigDecimal valorPorData = BigDecimal.ZERO;
@@ -99,7 +107,7 @@ public class ConsultaLancamentosBean implements Serializable {
 		}
 		return valorPorData;
 	}
-	
+
 	public String consultarLancamento(Lancamento lanc) {
 		if (lanc.isDebito()) {
 			return "/restrict/Lancamentos/CadastroDespesas?faces-redirect=true&lancamento=" + lanc.getId();

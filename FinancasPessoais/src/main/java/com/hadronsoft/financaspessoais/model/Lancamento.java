@@ -261,6 +261,11 @@ public class Lancamento implements Serializable {
 		return this.conta.getTipoConta() == TipoConta.CARTAOCREDITO;
 	}
 	
+	@Transient
+	public boolean isParcelamento(){
+		return ( this.getParcelamento() != null && this.getParcelamento().getLancamentos().size() > 1);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

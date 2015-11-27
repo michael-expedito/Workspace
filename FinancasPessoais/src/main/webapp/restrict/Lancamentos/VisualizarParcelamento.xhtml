@@ -23,15 +23,34 @@
 	</f:metadata>
 
 	<h:form id="frm">
-
-		<p:dataList id="dlParcelamento"
+		<p:dataTable
 			value="#{visualizarParcelamentoBean.parcelamento.lancamentos}"
-			var="lancamento">
-			<f:facet name="Parcelamento">Parcelamento</f:facet>
+			var="lancamento" emptyMessage="Período sem lançamentos"
+			rowStyleClass="ui-datatable-empty"
+			sortBy="#{lancamento.dataVencimento}" 
+			styleClass="borderless" style="margin-top:5px">
 			
-			#{lancamento.numeroParcela} - #{lancamento.descricao} (#{lancamento.numeroParcela} / #{lancamento.parcelamento.quantidadeParcelas}) - #{lancamento.valor}
-		</p:dataList>
-
+			<p:column headerText="Número" style="text-align: left" width="80">
+				<p:outputLabel value="#{lancamento.numeroParcela}" />
+			</p:column>
+			
+			<p:column headerText="Descrição" style="text-align: left" >
+				<p:outputLabel value="#{lancamento.descricao}" /> - ( <p:outputLabel value="#{lancamento.numeroParcela}" /> / <p:outputLabel value="#{lancamento.parcelamento.quantidadeParcelas}" />) 
+			</p:column>
+			
+			<p:column headerText="Vencimento" width="130" style="text-align: left">
+				<p:outputLabel value="#{lancamento.dataVencimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:outputLabel>
+			</p:column>
+			
+			<p:column headerText="Valor" style="text-align: left" width="80">
+				<p:outputLabel value="#{lancamento.valor}" >
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</p:outputLabel>
+			</p:column>
+			
+		</p:dataTable>
 	</h:form>
 
 	<h:outputStylesheet name="css/core-layout.css" library="ronin-layout" />
