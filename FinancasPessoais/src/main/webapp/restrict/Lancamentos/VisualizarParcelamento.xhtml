@@ -27,29 +27,40 @@
 			value="#{visualizarParcelamentoBean.parcelamento.lancamentos}"
 			var="lancamento" emptyMessage="Período sem lançamentos"
 			rowStyleClass="ui-datatable-empty"
-			sortBy="#{lancamento.dataVencimento}" 
-			styleClass="borderless" style="margin-top:5px">
-			
-			<p:column headerText="Número" style="text-align: left" width="80">
+			sortBy="#{lancamento.dataVencimento}" styleClass="borderless"
+			style="margin-top:5px">
+
+			<p:column headerText="Número" style="text-align: left" width="35">
 				<p:outputLabel value="#{lancamento.numeroParcela}" />
 			</p:column>
-			
-			<p:column headerText="Descrição" style="text-align: left" >
-				<p:outputLabel value="#{lancamento.descricao}" /> - ( <p:outputLabel value="#{lancamento.numeroParcela}" /> / <p:outputLabel value="#{lancamento.parcelamento.quantidadeParcelas}" />) 
+
+			<p:column headerText="Descrição" style="text-align: left">
+				<p:outputLabel value="#{lancamento.descricao}" /> - ( <p:outputLabel
+					value="#{lancamento.numeroParcela}" /> / <p:outputLabel
+					value="#{lancamento.parcelamento.quantidadeParcelas}" />) 
 			</p:column>
-			
-			<p:column headerText="Vencimento" width="130" style="text-align: left">
+
+			<p:column headerText="Vencimento" width="80" style="text-align: left">
 				<p:outputLabel value="#{lancamento.dataVencimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</p:outputLabel>
 			</p:column>
-			
+
 			<p:column headerText="Valor" style="text-align: left" width="80">
-				<p:outputLabel value="#{lancamento.valor}" >
+				<p:outputLabel value="#{lancamento.valor}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</p:outputLabel>
 			</p:column>
-			
+
+			<p:column headerText="" width="100">
+
+				<p:commandLink title="Visualizar Parcelamento" process="@this"
+					update="@form"
+					style="float:left; margin-right:10px; text-align: left; text-decoration:none; ">
+					<i class="fa fa-check-square-o  Fs20 #{lancamento.pago ? 'green' : 'red'}"></i>
+
+				</p:commandLink>
+			</p:column>
 		</p:dataTable>
 	</h:form>
 

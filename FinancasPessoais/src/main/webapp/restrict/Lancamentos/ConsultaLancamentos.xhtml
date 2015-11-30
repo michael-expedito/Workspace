@@ -83,7 +83,7 @@
 							target="#{consultaLancamentosBean.lancamentoSelecionado}" />
 					</p:commandLink>
 					
-					<p:commandLink title="Visualizar Parcelamento" process="@this" update="@form"
+					<p:commandLink title="Visualizar Parcelamento" process="@this" update="@form" rendered="#{lancamento.parcelado}"
 						actionListener="#{menuBean.viewDialog('/restrict/Lancamentos/VisualizarParcelamento', true,false,false,550,700)}"
 						style="float:left; margin-right:10px; text-align: left; text-decoration:none; ">
 						<i class="fa fa-search  Fs20 blue"></i>
@@ -116,7 +116,7 @@
 				</p:column>
 
 				<p:column headerText="Detalhes" style="text-align: left" width="80">
-					<i class="#{lancamento.parcelamento.parcelado ? 'fa fa-repeat Fs20 blue' : '' }"></i>
+					<i class="#{lancamento.parcelado ? 'fa fa-repeat Fs20 blue' : '' }"></i>
 					<i class="#{lancamento.pago ? 'fa fa-check-square-o Fs20 green' : 'fa fa-check-square-o Fs20 silver'} "></i>
 					<i class="#{lancamento.cartaoCredito ? 'fa fa-credit-card  Fs20 black' : '' }"></i>
 

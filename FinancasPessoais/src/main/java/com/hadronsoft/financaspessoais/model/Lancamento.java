@@ -262,7 +262,7 @@ public class Lancamento implements Serializable {
 	}
 	
 	@Transient
-	public boolean isParcelamento(){
+	public boolean isParcelado(){
 		return ( this.getParcelamento() != null && this.getParcelamento().getLancamentos().size() > 1);
 	}
 	
