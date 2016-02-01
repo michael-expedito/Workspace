@@ -1,0 +1,4 @@
+Padrões:
+
+	Não usar preposições em nomes de classes, modulos e objetos.
+	Ids de componentes que contem nomes compostos não devem ser separados e dividos por letra maiuscula. Ex: id="inscricaoEstadual".

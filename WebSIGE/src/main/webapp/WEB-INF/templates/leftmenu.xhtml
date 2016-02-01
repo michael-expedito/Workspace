@@ -1,0 +1,29 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/ronin">
+    
+    <div class="Animated05" id="layout-menu-cover">
+    <ui:include src="topbar.xhtml" />
+		<h:form>
+		
+        <pr:menu>
+            <p:menuitem id="rm_dashboard" value="Dashboard" icon="fa fa-joomla" />
+            <p:submenu label="Lançamentos" icon="icon-dollar" >
+                <p:menuitem value="Registrar Receita" icon="fa fa-plus-circle" action="/restrict/Lancamentos/CadastroReceitas?faces-redirect=true" />
+                <p:menuitem value="Regestrar Despesa" icon="fa fa-minus-circle " action="/restrict/Lancamentos/CadastroDespesas?faces-redirect=true" />
+                
+                <p:menuitem value="Pesquisar" icon="ui icon-search" action="/restrict/Lancamentos/ConsultaLancamentos?faces-redirect=true"  />
+            </p:submenu>
+            
+            <p:menuitem value="Contas Financeiras" icon="fa fa-credit-card" action="#{menuBean.viewDialog('/restrict/Contas/ConsultaContas', true,false,false,550,700)}" />
+            <p:menuitem value="Categorias" icon="fa fa-outdent" actionListener="#{menuBean.viewDialog('/restrict/Categorias/ConsultaCategorias', true,false,false,325,500)}" />
+
+        </pr:menu>
+        </h:form>
+    </div>
+
+</ui:composition>
