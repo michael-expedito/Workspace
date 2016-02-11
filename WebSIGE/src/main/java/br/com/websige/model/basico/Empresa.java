@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "EMPRESA_EMP")
@@ -16,52 +17,59 @@ public class Empresa implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "EMP_ID")
+	@Column(name = "EMP_ID", columnDefinition = "Identificador")
 	private Long id;
 
-	@Column(name = "EMP_CDEMPRESA", nullable = false, length = 6)
+	@NotNull(message="Código")
+	@Column(name = "EMP_CDEMPRESA", nullable = false, length = 6, columnDefinition = "Código")
 	private String codigo;
 	
-	@Column(name = "EMP_NMEMPRESA", nullable = false, length = 40)
+	@NotNull
+	@Column(name = "EMP_NMEMPRESA", nullable = false, length = 40, columnDefinition = "Nome")
 	private String nome;
 	
-	@Column(name = "EMP_CEP", nullable = true, length = 9)
+	@Column(name = "EMP_CEP", nullable = true, length = 9, columnDefinition = "CEP")
 	private String cep;
 	
-	@Column(name = "EMP_ENDERECO", nullable = true, length = 40)
+	@Column(name = "EMP_ENDERECO", nullable = true, length = 40, columnDefinition = "Endereço")
 	private String endereco;
 	
-	@Column(name = "EMP_NUMERO", nullable = true, length = 7)
+	@Column(name = "EMP_NUMERO", nullable = true, length = 7, columnDefinition = "Número")
 	private String numero;
 	
-	@Column(name = "EMP_BAIRRO", nullable = true, length = 30)
+	@Column(name = "EMP_BAIRRO", nullable = true, length = 30, columnDefinition = "Bairro")
 	private String bairro;
 	
-	@Column(name = "EMP_CIDADE", nullable = true, length = 30)
+	@Column(name = "EMP_CIDADE", nullable = true, length = 30, columnDefinition = "Cidade")
 	private String cidade;
 	
-	@Column(name = "EMP_ESTADO", nullable = true, length = 2)
+	@Column(name = "EMP_ESTADO", nullable = true, length = 2, columnDefinition = "Estado")
 	private String estado;
 	
-	@Column(name = "EMP_TELEFONE", nullable = true, length = 20)
+	@Column(name = "EMP_TELEFONE", nullable = true, length = 20, columnDefinition = "Telefone")
 	private String telefone;
 	
-	@Column(name = "EMP_WEBSITE", nullable = true, length = 100)
+	@Column(name = "EMP_WEBSITE", nullable = true, length = 100, columnDefinition = "Website")
 	private String website;
 	
-	@Column(name = "EMP_RAZAOSOCIAL", nullable = false, length = 80)
+	@NotNull
+	@Column(name = "EMP_RAZAOSOCIAL", nullable = false, length = 80, columnDefinition = "Razão social")
 	private String razaoSocial;
 	
-	@Column(name = "EMP_CNPJ", nullable = false, length = 15)
+	@NotNull
+	@Column(name = "EMP_CNPJ", nullable = false, length = 15, columnDefinition = "CNPJ")
 	private String cnpj;
 	
-	@Column(name = "EMP_INSCRICAOESTADUAL", nullable = false, length = 18)
+	@NotNull
+	@Column(name = "EMP_INSCRICAOESTADUAL", nullable = false, length = 18, columnDefinition = "Inscrição estadual")
 	private String inscricaoEstadual;
 	
-	@Column(name = "EMP_INSCRICAOMUNICIPAL", nullable = false, length = 18)
+	@NotNull
+	@Column(name = "EMP_INSCRICAOMUNICIPAL", nullable = false, length = 18, columnDefinition = "Inscrição municipal")
 	private String inscricaoMunicipal;
 	
-	@Column(name = "EMP_CNAE", nullable = false, length = 15)
+	@NotNull
+	@Column(name = "EMP_CNAE", nullable = false, length = 15, columnDefinition = "CNAE")
 	private String cnae;
 
 	public Long getId() {

@@ -6,6 +6,10 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
+	<f:metadata>
+		<f:viewAction action="#{empresaBean.prepararCadastro}" />
+	</f:metadata>
+
 	<ui:define name="titleComplement"> - Empresas </ui:define>
 	<ui:define name="informacao"> 
 		Registra os dados da empresa ou grupo de empresas que irá utilizar o sistema.
@@ -14,63 +18,93 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
+			<p:toolbar style="margin-top: 20px">
+
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Salvar"
+						actionListener="#{empresaBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
 			<p:panel id="panelPrincial" header="Dados Principais"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"
 				widgetVar="panelPrincial" style="margin-top:5px">
-				
-				<p:panelGrid columns="2" id="gridPrincipal" style="width: 100%; margin-top: 10px;" >
-					
+
+				<p:panelGrid columns="2" id="gridPrincipal"
+					style="width: 100%; margin-top: 10px;">
+
 					<p:outputLabel value="Codigo" for="codigo" />
-					<p:inputText id="codigo" size="10" maxlength="6" />
-					
-					<p:outputLabel  value="Nome" for="nome"/>
-					<p:inputText id="nome" size="80" maxlength="80"/>
-					
-					<p:outputLabel value="CEP" for="cep"/>
-					<p:inputMask mask="99999-999" id="cep" size="10"/>
-					
-					<p:outputLabel value="Endereço" for="endereco"/>
-					<p:inputText id="endereco" size="80" maxlength="80"/>
-					
-					<p:outputLabel value="Número" for="numero"/>
-					<p:inputText id="numero" size="10" maxlength="7"/>
-					
-					<p:outputLabel value="Bairro" for="bairro"/>
-					<p:inputText id="bairro" size="40" maxlength="40"/>
-					
-					<p:outputLabel value="Cidade" for="cidade"/>
-					<p:inputText id="cidade" size="40" maxlength="40"/>
-					
-					<p:outputLabel value="Estado" for="estado"/>
-					<p:inputText id="estado" size="5" maxlength="2"/>
-					
-					<p:outputLabel value="Telefone" for="telefone"/>
-					<p:inputText id="telefone" size="10" maxlength="10"/>
-					
-					<p:outputLabel value="Website" for="website"/>
-					<p:inputText id="website" size="80" maxlength="80"/>
-					
+					<p:inputText id="codigo" value="#{empresaBean.empresa.codigo}"
+						size="10" maxlength="6" />
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" value="#{empresaBean.empresa.nome}"
+						size="80" maxlength="80" />
+
+					<p:outputLabel value="CEP" for="cep" />
+					<p:inputMask id="cep" value="#{empresaBean.empresa.cep}"
+						mask="99999-999" size="10" />
+
+					<p:outputLabel value="Endereço" for="endereco" />
+					<p:inputText id="endereco" value="#{empresaBean.empresa.endereco}"
+						size="80" maxlength="80" />
+
+					<p:outputLabel value="Número" for="numero" />
+					<p:inputText id="numero" value="#{empresaBean.empresa.numero}"
+						size="10" maxlength="7" />
+
+					<p:outputLabel value="Bairro" for="bairro" />
+					<p:inputText id="bairro" value="#{empresaBean.empresa.bairro}"
+						size="40" maxlength="40" />
+
+					<p:outputLabel value="Cidade" for="cidade" />
+					<p:inputText id="cidade" value="#{empresaBean.empresa.cidade}"
+						size="40" maxlength="40" />
+
+					<p:outputLabel value="Estado" for="estado" />
+					<p:inputText id="estado" value="#{empresaBean.empresa.estado}"
+						size="5" maxlength="2" />
+
+					<p:outputLabel value="Telefone" for="telefone" />
+					<p:inputText id="telefone" value="#{empresaBean.empresa.telefone}"
+						size="10" maxlength="10" />
+
+					<p:outputLabel value="Website" for="website" />
+					<p:inputText id="website" value="#{empresaBean.empresa.website}"
+						size="80" maxlength="80" />
+
 				</p:panelGrid>
-				
-				<p:panelGrid columns="2" id="gridFiscal" style="width: 100%; margin-top: 10px;" >
-					
-					<p:outputLabel value="Razão Social" for="razaoSocial"/>
-					<p:inputText id="razaoSocial" size="80" maxlength="80"/>
-					
-					<p:outputLabel value="CNPJ" for="cnpj"/>
-					<p:inputText id="cnpj"/>
-					
-					<p:outputLabel value="Inscrição Estadual" for="inscricaoEstadual"/>
-					<p:inputText id="inscricaoEstadual" size="40" maxlength="40"/>
-					
-					<p:outputLabel value="Inscrição Municipal" for="inscricaoMunicipal"/>
-					<p:inputText id="inscricaoMunicipal" size="40" maxlength="40"/>
-					
-					<p:outputLabel value="Código CNAE" for="cnae"/>
-					<p:inputText id="cnae" size="20" maxlength="15"/>
-					
+
+				<p:panelGrid columns="2" id="gridFiscal"
+					style="width: 100%; margin-top: 10px;">
+
+					<p:outputLabel value="Razão Social" for="razaoSocial" />
+					<p:inputText id="razaoSocial"
+						value="#{empresaBean.empresa.razaoSocial}" size="80"
+						maxlength="80" />
+
+					<p:outputLabel value="CNPJ" for="cnpj" />
+					<p:inputText id="cnpj" value="#{empresaBean.empresa.cnpj}" />
+
+					<p:outputLabel value="Inscrição Estadual" for="inscricaoEstadual" />
+					<p:inputText id="inscricaoEstadual"
+						value="#{empresaBean.empresa.inscricaoEstadual}" size="40"
+						maxlength="40" />
+
+					<p:outputLabel value="Inscrição Municipal" for="inscricaoMunicipal" />
+					<p:inputText id="inscricaoMunicipal"
+						value="#{empresaBean.empresa.inscricaoMunicipal}" size="40"
+						maxlength="40" />
+
+					<p:outputLabel value="Código CNAE" for="cnae" />
+					<p:inputText id="cnae" value="#{empresaBean.empresa.cnae}"
+						size="20" maxlength="15" />
+
 				</p:panelGrid>
-				
+
 			</p:panel>
 		</h:form>
 	</ui:define>
