@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="/WEB-INF/templates/template.xhtml"
+<ui:composition template="/WEB-INF/templates/cadastro.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -10,25 +10,17 @@
 		<f:viewAction action="#{empresaBean.prepararCadastro}" />
 	</f:metadata>
 
-	<ui:define name="titleComplement"> - Empresas </ui:define>
+	<ui:define name="title-complemento"> - Empresas </ui:define>
+	
+	<ui:param name="controller" value="#{empresaBean}"></ui:param>
+	
 	<ui:define name="informacao"> 
 		Registra os dados da empresa ou grupo de empresas que irá utilizar o sistema.
 		Nele são informados: plano de contas, plano de centro de custo, plano de fluxo de caixa, plano de contas orçamentário, segunda moeda (caso seja necessário), dentre muitas outras coisas.
-	
 	</ui:define>
-	<ui:define name="content">
-		<h:form>
-			<p:toolbar style="margin-top: 20px">
-
-				<p:toolbarGroup align="right">
-					<p:commandButton value="Salvar"
-						actionListener="#{empresaBean.salvar}" update="@form" />
-				</p:toolbarGroup>
-
-			</p:toolbar>
-
-			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-
+	
+	<ui:define name="content-cadastro">
+		
 			<p:panel id="panelPrincial" header="Dados Principais"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"
 				widgetVar="panelPrincial" style="margin-top:5px">
@@ -106,6 +98,6 @@
 				</p:panelGrid>
 
 			</p:panel>
-		</h:form>
+		
 	</ui:define>
 </ui:composition>

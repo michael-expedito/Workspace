@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="content">
+		<h:form>
+			<p:panel id="panelInformacoes" header="Informações" toggleable="true"
+				toggleSpeed="500" closeSpeed="500" widgetVar="panelInformacoes"
+				style="margin-top:5px" collapsed="true">
+				<ui:insert name="informacao">
+				</ui:insert>
+			</p:panel>
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Consultar" 
+						action="Consulta.xhtml"/>
+				</p:toolbarGroup>
+				
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Excluir"
+						actionListener="#{controller.excluir}" />
+
+					<p:commandButton value="Salvar"
+						actionListener="#{controller.salvar}" update="@form" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+
+			<ui:insert name="content-cadastro">
+			</ui:insert>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
