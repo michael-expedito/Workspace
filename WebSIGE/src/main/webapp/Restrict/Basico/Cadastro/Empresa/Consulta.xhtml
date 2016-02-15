@@ -6,9 +6,91 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
+	<f:metadata>
+		<f:viewAction action="#{empresaBean.startConsulta}" />
+	</f:metadata>
+
 	<ui:define name="content">
-	
-	
+		<h:form>
+			<p:panel id="panelFiltros" style="margin-top:4px">
+
+				<p:panelGrid columns="2" id="painel"
+					style="width: 100%; margin-top: 1px" columnClasses="rotulo, campo">
+
+					<p:outputLabel value="Código" />
+					<p:inputText id="codigo" size="10"
+						value="#{empresaBean.filter.codigo}" />
+
+					<p:outputLabel value="CNPJ" />
+					<p:inputText id="cnpj" size="20" value="#{empresaBean.filter.CNPJ}" />
+
+					<p:outputLabel value="Nome" />
+					<p:inputText id="nome" size="80" value="#{empresaBean.filter.nome}" />
+				</p:panelGrid>
+			</p:panel>
+
+			<p:toolbar style="margin-top: 5px">
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Novo" 
+						style="width:100px;"
+						action="#{empresaBean.novo}" />
+				</p:toolbarGroup>
+				
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Pesquisar" style="width:100px;"
+						action="#{empresaBean.consultar}" process="@this codigo cnpj nome"
+						update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable value="#{empresaBean.empresas}" var="empresa"
+				id="dtEmpresas" paginator="true" rows="25"
+				emptyMessage="Período sem lançamentos"
+				rowStyleClass="ui-datatable-empty" paginatorPosition="bottom"
+				styleClass="borderless" style="margin-top:5px">
+
+				<p:column headerText="" width="20">
+					<p:commandLink icon="ui-icon-pencil"
+						style="float:left;margin-right:10px; text-align: left; text-decoration:none; "
+						action="#{empresaBean.consultarEntidade(empresa)}">
+
+						<i class="fa fa-pencil-square  Fs20 blue"></i>
+					</p:commandLink>
+				</p:column>
+
+				<p:column headerText="Codigo" style="text-align: left" width="50">
+					<p:outputLabel value="#{empresa.codigo}">
+					</p:outputLabel>
+				</p:column>
+
+				<p:column headerText="CNPJ" style="text-align: left" width="80">
+					<p:outputLabel value="#{empresa.cnpj}" />
+				</p:column>
+
+				<p:column headerText="Nome" style="text-align: left">
+					<p:outputLabel value="#{empresa.nome}" />
+				</p:column>
+
+				<p:column headerText="Endereço" style="text-align: left" width="200">
+					<p:outputLabel value="#{empresa.endereco}" />
+				</p:column>
+
+				<p:column headerText="Bairro" style="text-align: left" width="80">
+					<p:outputLabel value="#{empresa.bairro}" />
+				</p:column>
+
+				<p:column headerText="Cidade" style="text-align: left" width="80">
+					<p:outputLabel value="#{empresa.cidade}" />
+				</p:column>
+
+				<p:column headerText="Estado" style="text-align: left" width="80">
+					<p:outputLabel value="#{empresa.estado}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+		</h:form>
 	</ui:define>
-	
+
 </ui:composition>

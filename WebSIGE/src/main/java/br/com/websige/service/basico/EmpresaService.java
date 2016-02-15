@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import br.com.websige.model.basico.Empresa;
 import br.com.websige.repository.basico.EmpresaRepository;
-import br.com.websige.service.pattern.GenericService;
+import br.com.websige.pattern.GenericService;
 
 public class EmpresaService extends GenericService<Empresa> implements Serializable {
 
