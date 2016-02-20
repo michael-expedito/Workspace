@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 
+import br.com.websige.model.basico.Empresa;
 import br.com.websige.util.framework.MessageService;
 import br.com.websige.util.framework.TypeMessageService;
 
@@ -15,7 +16,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public class GenericRepository<PK, T> implements Serializable {
+public class GenericRepository<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,13 +27,13 @@ public class GenericRepository<PK, T> implements Serializable {
 		this.entityManager = entityManager;
 	}
 
-	public T getById(PK pk) {
+	public T getById(Long pk) {
 		return (T) entityManager.find(getTypeClass(), pk);
 	}
 
 	private Class<?> getTypeClass() {
 		Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-				.getActualTypeArguments()[1];
+				.getActualTypeArguments()[0];
 		return clazz;
 	}
 
@@ -81,6 +82,5 @@ public class GenericRepository<PK, T> implements Serializable {
 				}
 			}
 		}
-	}
-	
+	}	
 }

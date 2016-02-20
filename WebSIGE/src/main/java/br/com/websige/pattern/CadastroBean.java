@@ -1,7 +1,10 @@
 package br.com.websige.pattern;
 
-public class CadastroBean {
+import java.util.List;
 
+public class CadastroBean<T> {
+
+	
 	public boolean getRenderedSalvar()
 	{
 		return true;
@@ -26,4 +29,7 @@ public class CadastroBean {
 	{
 		return false;
 	}
+	public void startCadastro() {
+		// TODO Auto-generated method stub	
+	}	
 }

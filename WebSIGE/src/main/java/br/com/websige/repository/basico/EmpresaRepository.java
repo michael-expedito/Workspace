@@ -16,7 +16,7 @@ import br.com.websige.filter.basico.EmpresaFilter;
 import br.com.websige.model.basico.Empresa;
 import br.com.websige.pattern.GenericRepository;
 
-public class EmpresaRepository extends GenericRepository<Long, Empresa> implements Serializable  {
+public class EmpresaRepository extends GenericRepository<Empresa> implements Serializable  {
 	
 	private static final long serialVersionUID = 1L;
 

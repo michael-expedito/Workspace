@@ -13,7 +13,7 @@ public class GenericService<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	protected GenericRepository<Long, T> repository;
+	protected GenericRepository<T> repository;
 
 	public List<MessageService> messages;
 
@@ -38,7 +38,7 @@ public class GenericService<T> implements Serializable {
 		// Se não foi encontrado nenhum erro FATAL ou ERRO nas validações acima
 		// o service segue persistindo
 		if (!hasFatalError()) {
-			((GenericRepository<Long, T>) this.repository).persist(entity);
+			((GenericRepository<T>) this.repository).persist(entity);
 			messages.add(new MessageService("INC0001", "Regisntro incluído com sucesso.", TypeMessageService.DEFAULT));
 		}
 	}
@@ -51,7 +51,7 @@ public class GenericService<T> implements Serializable {
 		validateRevertProcess(entity);
 		
 		if (!hasFatalError()) {
-			((GenericRepository<Long, T>) this.repository).delete(entity);
+			((GenericRepository<T>) this.repository).delete(entity);
 			messages.add(new MessageService("EXC0001", "Regisntro removido com sucesso.", TypeMessageService.DEFAULT));
 		}
 		

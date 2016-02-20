@@ -15,7 +15,7 @@ import br.com.websige.util.FacesUtil;
 
 @Named
 @javax.faces.view.ViewScoped
-public class EmpresaBean extends CadastroBean implements Serializable {
+public class EmpresaBean extends CadastroBean<Empresa> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +29,7 @@ public class EmpresaBean extends CadastroBean implements Serializable {
 	@Inject
 	private EmpresaRepository empresaRepository;
 
+	@Override
 	public void startCadastro() {
 		if (empresa == null) {
 			empresa = new Empresa();
