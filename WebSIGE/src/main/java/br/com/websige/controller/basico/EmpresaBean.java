@@ -37,11 +37,11 @@ public class EmpresaBean extends CadastroBean<Empresa> implements Serializable {
 	}
 
 	public String consultarEntidade(Empresa emp) {
-		return "/Restrict/Basico/Cadastro/Empresa/Default?faces-redirect=true&empresa=" + emp.getId();
+		return "/Restrict/Basico/Cadastro/Empresa/Cadastro?faces-redirect=true&empresa=" + emp.getId();
 	}
 
 	public String novo() {
-		return "/Restrict/Basico/Cadastro/Empresa/Default?faces-redirect=true";
+		return "/Restrict/Basico/Cadastro/Empresa/Cadastro?faces-redirect=true";
 	}
 
 	public void startConsulta() {

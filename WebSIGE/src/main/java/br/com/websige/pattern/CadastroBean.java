@@ -1,7 +1,5 @@
 package br.com.websige.pattern;
 
-import java.util.List;
-
 public class CadastroBean<T> {
 
 	

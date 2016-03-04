@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/cadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="filial" value="#{filialBean.filial}"/>
+		<f:viewAction action="#{filialBean.startCadastro}" type="preRenderView"/>
+	</f:metadata>
+
+	<ui:define name="title-complemento"> - Filial </ui:define>
+	
+	<ui:param name="controller" value="#{filialBean}"></ui:param>
+	
+	<ui:define name="informacao"> 
+		Registra os dados das filiais de uma empresa. O campo identificador da entidade é o código da filial juntamente como o código da empresa.
+	Neste cadastro é informado dados como CNPJ, IE, IM IS e outros dados que geralmente são diferentes dos dados da empresa principal.
+	</ui:define>
+	
+	<ui:define name="content-cadastro">
+		
+			<p:panel id="panelPrincial" header="Dados Principais"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelPrincial" style="margin-top:5px">
+
+				<p:panelGrid columns="2" id="gridPrincipal"
+					style="width: 100%; margin-top: 10px;">
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" id="gridFiscal"
+					style="width: 100%; margin-top: 10px;">
+
+				</p:panelGrid>
+
+			</p:panel>
+	</ui:define>
+</ui:composition>
