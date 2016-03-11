@@ -5,13 +5,21 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import br.com.websige.filter.basico.FilialFilter;
 import br.com.websige.model.basico.Filial;
 import br.com.websige.pattern.CadastroBean;
+import br.com.websige.pattern.GenericRepository;
+import br.com.websige.pattern.GenericService;
 
 @Named
 @javax.faces.view.ViewScoped
-public class FilialBean extends CadastroBean<Filial> implements Serializable {
+public class FilialBean extends CadastroBean<Filial, FilialFilter> implements Serializable {
 
+	public FilialBean(GenericRepository<Filial> repository, GenericService<Filial> service) {
+		super(repository, service);
+		
+	}
+	
 	private static final long serialVersionUID = 1L;
 	
 	private Filial filial;

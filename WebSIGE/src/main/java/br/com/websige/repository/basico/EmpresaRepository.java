@@ -14,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.websige.filter.basico.EmpresaFilter;
 import br.com.websige.model.basico.Empresa;
+import br.com.websige.pattern.GenericFilter;
 import br.com.websige.pattern.GenericRepository;
 
 public class EmpresaRepository extends GenericRepository<Empresa> implements Serializable  {
@@ -25,21 +26,23 @@ public class EmpresaRepository extends GenericRepository<Empresa> implements Ser
 		super(entityManager);
 	}	
 	
-	public List<Empresa> getByFilter(EmpresaFilter filter){
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Empresa> getByFilter(GenericFilter<Empresa> filter){
+		EmpresaFilter empresaFilter = (EmpresaFilter) filter;
 		Session session = this.entityManager.unwrap(Session.class);
-		
 		Criteria criteria = session.createCriteria(Empresa.class);
 		
-		if (filter.getCodigo() != null && !"".equals(filter.getCodigo())) {
-			criteria.add(Restrictions.eq("codigo", filter.getCodigo()));
+		if (empresaFilter.getCodigo() != null && !"".equals(empresaFilter.getCodigo())) {
+			criteria.add(Restrictions.eq("codigo", ((EmpresaFilter) filter).getCodigo()));
 		}
 		
-		if (filter.getCNPJ() != null && !"".equals(filter.getCNPJ())) {
-			criteria.add(Restrictions.eq("cnpj", filter.getCNPJ()));
+		if (empresaFilter.getCNPJ() != null && !"".equals(empresaFilter.getCNPJ())) {
+			criteria.add(Restrictions.eq("cnpj", ((EmpresaFilter) filter).getCNPJ()));
 		}
 		
-		if (filter.getNome() != null && !"".equals(filter.getNome())){
-			criteria.add(Restrictions.ilike("nome", filter.getNome(),MatchMode.ANYWHERE));
+		if (empresaFilter.getNome() != null && !"".equals(empresaFilter.getNome())){
+			criteria.add(Restrictions.ilike("nome", empresaFilter.getNome(),MatchMode.ANYWHERE));
 		}
 		
 		return criteria.addOrder(Order.asc("codigo")).list();

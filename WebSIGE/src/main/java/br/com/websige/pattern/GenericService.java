@@ -39,7 +39,7 @@ public class GenericService<T> implements Serializable {
 		// o service segue persistindo
 		if (!hasFatalError()) {
 			((GenericRepository<T>) this.repository).persist(entity);
-			messages.add(new MessageService("INC0001", "Regisntro incluído com sucesso.", TypeMessageService.DEFAULT));
+			messages.add(new MessageService("INC0001", "Regisntro gravado com sucesso.", TypeMessageService.DEFAULT));
 		}
 	}
 	
@@ -54,7 +54,6 @@ public class GenericService<T> implements Serializable {
 			((GenericRepository<T>) this.repository).delete(entity);
 			messages.add(new MessageService("EXC0001", "Regisntro removido com sucesso.", TypeMessageService.DEFAULT));
 		}
-		
 	}
 
 	protected void validateProcess(T entity) {

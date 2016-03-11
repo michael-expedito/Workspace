@@ -13,7 +13,7 @@ import br.com.websige.pattern.GenericEntity;
 
 @Entity
 @Table(name = "EMPRESA_EMP")
-public class Empresa extends GenericEntity implements Serializable {
+public class Empresa extends GenericEntity<Empresa> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,8 +1,9 @@
 package br.com.websige.filter.basico;
 
+import br.com.websige.model.basico.Empresa;
 import br.com.websige.pattern.GenericFilter;
 
-public class EmpresaFilter extends GenericFilter {
+public class EmpresaFilter extends GenericFilter<Empresa> {
 	private String codigo;
 	private String CNPJ;
 	private String nome;

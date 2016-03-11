@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 
-import br.com.websige.model.basico.Empresa;
 import br.com.websige.util.framework.MessageService;
 import br.com.websige.util.framework.TypeMessageService;
 
@@ -42,7 +41,7 @@ public class GenericRepository<T> implements Serializable {
 	}
 
 	public void delete(T entity) {
-		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity)entity).getId()));
+		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity<T>)entity).getId()));
 	}
 
 	public List<T> findAll() {
@@ -82,5 +81,9 @@ public class GenericRepository<T> implements Serializable {
 				}
 			}
 		}
+	}
+
+	public List<T> getByFilter(GenericFilter<T> filter) {
+		return null;
 	}	
 }

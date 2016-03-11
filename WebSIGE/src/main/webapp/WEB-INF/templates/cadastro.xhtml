@@ -17,13 +17,13 @@
 			</p:panel>
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup align="left">
-					<p:button value="Consultar" 
-						outcome="/Restrict/Basico/Cadastro/Empresa/Consulta"/>
+					<p:commandButton value="Consultar" 
+						action="#{controller.directoryConsult}"/>
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
 					<p:commandButton value="Excluir"
-						actionListener="#{controller.excluir}" rendered="#{controller.renderedSalvar}"/>
+						actionListener="#{controller.excluir}" rendered="#{controller.renderedSalvar}" update="@form"/>
 
 					<p:commandButton value="Salvar"
 						actionListener="#{controller.salvar}" rendered="#{controller.renderedExcluir}" update="@form" />
