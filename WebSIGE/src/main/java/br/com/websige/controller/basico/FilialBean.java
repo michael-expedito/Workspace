@@ -3,6 +3,7 @@ package br.com.websige.controller.basico;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.websige.filter.basico.FilialFilter;
@@ -15,26 +16,47 @@ import br.com.websige.pattern.GenericService;
 @javax.faces.view.ViewScoped
 public class FilialBean extends CadastroBean<Filial, FilialFilter> implements Serializable {
 
-	public FilialBean(GenericRepository<Filial> repository, GenericService<Filial> service) {
-		super(repository, service);
-		
-	}
-	
 	private static final long serialVersionUID = 1L;
 	
-	private Filial filial;
-	private List<Filial> filiais;
+	@Inject
+	public FilialBean(GenericRepository<Filial> repository, GenericService<Filial> service) {
+		super(repository, service);
+		setDirectory("/Restrict/Basico/Cadastro/Filial/");
+	}
 	
 	public Filial getFilial() {
-		return filial;
+		return (Filial)getEntity();
 	}
 	public void setFilial(Filial filial) {
-		this.filial = filial;
+		setEntity(filial);
 	}
 	public List<Filial> getFiliais() {
-		return filiais;
+		return getListEntity();
 	}
 	public void setFiliais(List<Filial> filiais) {
-		this.filiais = filiais;
+		setListEntity(filiais);
 	}
+	
+	public FilialFilter getFilialFilter() {
+		return getFilter();
+	}
+
+	public void setFilialFilter(FilialFilter filter) {
+		setFilter(filter);
+	}
+	
+	@Override
+	public Filial createEntity(){
+		return new Filial();
+	}
+	
+	@Override
+	public FilialFilter createFilter(){
+		return new FilialFilter();
+	}
+	
+	@Override
+	protected String getParameterURL(Filial entityConsulted) {
+		return "filial=" + entityConsulted.getId();
+	};
 }
