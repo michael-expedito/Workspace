@@ -14,18 +14,18 @@ import br.com.websige.service.basico.EmpresaService;
 
 @Named
 @javax.faces.view.ViewScoped
-public class EmpresaBean extends CadastroBean<Empresa, EmpresaFilter> implements Serializable {
+public class EmpresaBean extends CadastroBean<Empresa, EmpresaFilter>implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	public EmpresaBean(EmpresaRepository repository, EmpresaService service) {
 		super(repository, service);
 		setDirectory("/Restrict/Basico/Cadastro/Empresa/");
 	}
-	
+
 	public Empresa getEmpresa() {
-		return (Empresa)getEntity();
+		return (Empresa) getEntity();
 	}
 
 	public void setEmpresa(Empresa empresa) {
@@ -39,7 +39,7 @@ public class EmpresaBean extends CadastroBean<Empresa, EmpresaFilter> implements
 	public void setEmpresaFilter(EmpresaFilter filter) {
 		setFilter(filter);
 	}
-	
+
 	public List<Empresa> getEmpresas() {
 		return getListEntity();
 	}
@@ -47,17 +47,17 @@ public class EmpresaBean extends CadastroBean<Empresa, EmpresaFilter> implements
 	public void setEmpresas(List<Empresa> empresas) {
 		setListEntity(empresas);
 	}
-	
+
 	@Override
-	public Empresa createEntity(){
+	public Empresa createEntity() {
 		return new Empresa();
 	}
-	
+
 	@Override
-	public EmpresaFilter createFilter(){
+	public EmpresaFilter createFilter() {
 		return new EmpresaFilter();
 	}
-	
+
 	@Override
 	protected String getParameterURL(Empresa entityConsulted) {
 		return "empresa=" + entityConsulted.getId();

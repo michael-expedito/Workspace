@@ -7,33 +7,51 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<f:metadata>
-		<o:viewParam name="filial" value="#{filialBean.filial}"/>
-		<f:viewAction action="#{filialBean.startCadastro}" type="preRenderView"/>
+	    <o:viewParam name="filial" value="#{filialBean.filial}" />
+		<f:viewAction action="#{filialBean.startCadastro}"
+			type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="title-complemento"> - Filial </ui:define>
-	
+
 	<ui:param name="controller" value="#{filialBean}"></ui:param>
-	
+
 	<ui:define name="informacao"> 
 		Registra os dados das filiais de uma empresa. O campo identificador da entidade é o código da filial juntamente como o código da empresa.
 	Neste cadastro é informado dados como CNPJ, IE, IM IS e outros dados que geralmente são diferentes dos dados da empresa principal.
 	</ui:define>
-	
+
 	<ui:define name="content-cadastro">
-		
-			<p:panel id="panelPrincial" header="Dados Principais"
-				toggleable="true" toggleSpeed="500" closeSpeed="500"
-				widgetVar="panelPrincial" style="margin-top:5px">
 
-				<p:panelGrid columns="2" id="gridPrincipal"
-					style="width: 100%; margin-top: 10px;">
-					
-					<p:outputLabel for="empresa" value="Empresa"/>
-					<p:selectOneListbox></p:selectOneListbox>
+		<p:panel id="panelPrincial" header="Dados Principais"
+			toggleable="true" toggleSpeed="500" closeSpeed="500"
+			widgetVar="panelPrincial" style="margin-top:5px">
 
-				</p:panelGrid>
+			<p:panelGrid columns="2" id="gridPrincipal"
+				style="width: 100%; margin-top: 10px;">
 
-			</p:panel>
+				<p:outputLabel value="Empresa" for="empresa" />
+				<h:panelGroup>
+					<p:inputText id="empresa" value="#{filialBean.filial.empresa.nome}"
+						readonly="true" size="80"/>
+					<p:commandButton icon="ui-icon-search" title="Pesquisa"
+						action="#{empresaSearchWindow.abrirDialogo}" process="@this"
+						update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{filialBean.empresaSelecionada}" process="@this"
+							update="empresa" />
+
+					</p:commandButton>
+				</h:panelGroup>
+				
+				<p:outputLabel value="Codigo" for="codigo"/>
+				<p:inputText value="#{filialBean.filial.codigo}" id="codigo"/>
+				
+				<p:outputLabel value="Descrição" for="descricao"/>
+				<p:inputText value="#{filialBean.filial.descricao}" id="descricao"/>
+
+			</p:panelGrid>
+
+		</p:panel>
 	</ui:define>
 </ui:composition>

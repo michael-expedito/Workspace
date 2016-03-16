@@ -6,33 +6,38 @@
 <h:head>
 	<meta charset="UTF-8"/>
 	<title>Seleção de cliente</title>
-	
-	<h:outputStylesheet library="algaworks" name="estilo.css" />
 </h:head>
 <h:body>
 
 	<h:form>
     	<div style="margin-top: 5px; margin-bottom: 20px">
-    		<p:inputText id="nome" size="40" value="#{empresaSearchWindow.nome}" placeholder="Nome da empresa" />
+    	    <p:selectOneMenu id="filtro" size="30" value="#{empresaSearchWindow.filtro}">
+    	    	<f:selectItems value="#{empresaSearchWindow.filtros}"
+							var="filtro" itemValue="#{filtro}" itemLabel="#{filtro}" />
+    	    </p:selectOneMenu>
+    	    
+    	    <p:spacer width="10px"/>
+    	    
+    		<p:inputText id="nome" size="40" value="#{empresaSearchWindow.valor}" placeholder="Nome da empresa" />
     		
     		<p:spacer width="10px"/>
     		
-    		<p:commandButton value="Pesquisar" action="#{selecaoClienteBean.pesquisar}" update="@form" />
+    		<p:commandButton value="Pesquisar" action="#{empresaSearchWindow.pesquisar}" update="@form" />
     	</div>
     	
-    	<p:dataTable value="#{selecaoClienteBean.clientesFiltrados}" var="cliente"
-    		emptyMessage="Nenhum cliente encontrado." rows="10"
+    	<p:dataTable value="#{empresaSearchWindow.empresasFiltradas}" var="empresa"
+    		emptyMessage="Nenhuma empresa encontrada." rows="10"
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
     		
     		<p:column headerText="Código" style="text-align: center; width: 40px">
-    			<h:outputText value="#{cliente.id}" />
+    			<h:outputText value="#{empresa.id}" />
     		</p:column>
     		<p:column headerText="Nome">
-    			<h:outputText value="#{cliente.nome}" />
+    			<h:outputText value="#{empresa.nome}" />
     		</p:column>
     		<p:column style="width: 30px; text-align: center">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
-    				action="#{selecaoClienteBean.selecionar(cliente)}"
+    				action="#{empresaSearchWindow.selecionar(empresa)}"
     				process="@this" />
     		</p:column>
     		

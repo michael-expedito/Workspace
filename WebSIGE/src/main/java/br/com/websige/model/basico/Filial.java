@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.websige.pattern.interfaces.IBaseEntity;
+
 @Entity
 @Table(name="FILIAL_FIL")
-public class Filial implements Serializable{
+public class Filial implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -71,14 +73,15 @@ public class Filial implements Serializable{
 	@JoinColumn(name = "FIL_IDEMPRESA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FILIAL"))
 	private Empresa empresa;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+		
 	}
-
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -199,6 +202,16 @@ public class Filial implements Serializable{
 		this.cnae = cnae;
 	}
 
+	
+	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -220,6 +233,8 @@ public class Filial implements Serializable{
 			return false;
 		return true;
 	}
+
+
 	
 	
 }
