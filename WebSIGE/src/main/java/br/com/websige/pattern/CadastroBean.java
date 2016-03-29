@@ -35,13 +35,17 @@ public class CadastroBean<Entity,Filter> {
 
 	public void salvar() {
 		service.process(getEntity());
-		setEntity(createEntity());
+		if(!service.hasFatalError()){
+			setEntity(createEntity());
+		}
 		FacesUtil.addListMessageService(service.messages);
 	}
 	
 	public void excluir() {
 		service.revertProcess(getEntity());
-		setEntity(createEntity());
+		if(!service.hasFatalError()){
+			setEntity(createEntity());
+		}
 		FacesUtil.addListMessageService(service.messages);
 	}
 	

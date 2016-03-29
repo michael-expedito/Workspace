@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 
 import br.com.websige.util.framework.MessageService;
@@ -41,7 +42,7 @@ public class GenericRepository<T> implements Serializable {
 	}
 
 	public void delete(T entity) {
-		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity<T>)entity).getId()));
+		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity<T>) entity).getId()));
 	}
 
 	public List<T> findAll() {
@@ -56,21 +57,31 @@ public class GenericRepository<T> implements Serializable {
 		Class<?> classe = entity.getClass();
 
 		for (Field field : classe.getDeclaredFields()) {
-			if (field.isAnnotationPresent(Column.class)) {
+			if (field.isAnnotationPresent(Column.class) || field.isAnnotationPresent(JoinColumn.class)) {
 				try {
 					field.setAccessible(true);
 					Object valueObj = field.get(entity);
-					Column coluna = field.getAnnotation(Column.class);
-					if (valueObj != null){
-						String value = valueObj.toString(); 
-						if ((coluna.nullable() == false) && value.trim() == "") {
-							NotNull notnull = field.getAnnotation(NotNull.class);
-							messages.add(new MessageService("INT0002",  notnull.message() +" é um campo obrigatório", TypeMessageService.FATAL));
+
+					if (field.isAnnotationPresent(Column.class)) {
+						Column coluna = field.getAnnotation(Column.class);
+						if (valueObj != null) {
+							String value = valueObj.toString();
+							if ((coluna.nullable() == false) && value.trim() == "") {
+								NotNull notnull = field.getAnnotation(NotNull.class);
+								messages.add(new MessageService("INT0002",	notnull.message() + " é um campo obrigatório", TypeMessageService.FATAL));
+							}
+							if ((coluna.length() > 0) && (value.length() > coluna.length())) {
+								messages.add(new MessageService("INT0003", "O campo " + coluna.columnDefinition()+ " pode ter no máximo " + coluna.length() + " caracteres.",TypeMessageService.FATAL));
+							}
 						}
-						if ((coluna.length() > 0) && (value.length() > coluna.length())) {
-							messages.add(new MessageService("INT0003", "O campo " + coluna.columnDefinition() + " pode ter no máximo " + coluna.length() + " caracteres.", TypeMessageService.FATAL));
+					} else if (field.isAnnotationPresent(JoinColumn.class)){
+						JoinColumn colunaJoin = field.getAnnotation(JoinColumn.class);
+						if (colunaJoin.nullable() == false && valueObj == null){
+							NotNull notnull = field.getAnnotation(NotNull.class);
+							messages.add(new MessageService("INT0002",	notnull.message() + " é um campo obrigatório", TypeMessageService.FATAL));
 						}
 					}
+
 				} catch (IllegalArgumentException e) {
 
 					e.printStackTrace();
@@ -81,9 +92,10 @@ public class GenericRepository<T> implements Serializable {
 				}
 			}
 		}
+
 	}
 
 	public List<T> getByFilter(GenericFilter<T> filter) {
 		return null;
-	}	
+	}
 }

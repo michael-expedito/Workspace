@@ -67,7 +67,6 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	};
 
 	public void empresaSelecionada(SelectEvent event) {
-
 		Empresa empresa = (Empresa) event.getObject();
 		getEntity().setEmpresa(empresa);
 	}

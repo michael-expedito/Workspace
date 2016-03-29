@@ -1,105 +1,46 @@
 package br.com.websige.searchwindow.basico;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
-
 import br.com.websige.filter.basico.EmpresaFilter;
 import br.com.websige.model.basico.Empresa;
+import br.com.websige.pattern.GenericSearchWindow;
 import br.com.websige.repository.basico.EmpresaRepository;
 
 @Named
 @ViewScoped
-public class EmpresaSearchWindow /* extends GenericSearchWindow<Empresa>*/implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	
-	
-	public EmpresaSearchWindow() {
-		filtros = new ArrayList<>();
-		filtros.add("Codigo");
-		filtros.add("CNPJ");
-		filtros.add("Nome");
-	}
+public class EmpresaSearchWindow extends GenericSearchWindow<Empresa, EmpresaFilter> implements Serializable {
 
 	@Inject
-	private EmpresaRepository empresas;
-	
-	private List<String> filtros;
-	
-	private String filtro;
-	private String valor;
-	
-	
-	private List<Empresa> empresasFiltradas;
-	
-	private EmpresaFilter filter;
+	public EmpresaSearchWindow(EmpresaRepository repository) {
+		super(repository);
+		super.setDirectory("/SearchWindow/Basico/EmpresaSearchWindow");
+		getFiltros().add("Codigo");
+		getFiltros().add("CNPJ");
+		getFiltros().add("Nome");
+	}
 
-	public void pesquisar() {
-		filter = new EmpresaFilter();
-		
-		if (filtro.equals("Codigo")){
-			filter.setCodigo(valor);
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	public void setParameterInFilter(){
+		if (getFiltro().equals("Codigo")){
+			getFilter().setCodigo(getValor());
 		}
-		if (filtro.equals("CNPJ")){
-			filter.setCNPJ(valor);
+		if (getFiltro().equals("CNPJ")){
+			getFilter().setCNPJ(getValor());
 		}
-		if (filtro.equals("Nome")){
-			filter.setNome(valor);
+		if (getFiltro().equals("Nome")){
+			getFilter().setNome(getValor());
 		}
-		empresasFiltradas = empresas.getByFilter(filter);
-	}
-	
-	public void abrirDialogo() {
-		Map<String, Object> opcoes = new HashMap<>();
-		opcoes.put("modal", true);
-		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 470);
-		
-		RequestContext.getCurrentInstance().openDialog("/SearchWindow/Basico/EmpresaSearchWindow", opcoes, null);
-	}
-	
-	public void selecionar(Empresa empresa) {
-		RequestContext.getCurrentInstance().closeDialog(empresa);
-	}
-	
-
-	public List<Empresa> getEmpresasFiltradas() {
-		return empresasFiltradas;
 	}
 
-	public String getValor() {
-		return valor;
+	@Override
+	public EmpresaFilter createFilter() {
+		return new EmpresaFilter();
 	}
-
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
-	
-	public List<String> getFiltros() {
-		return filtros;
-	}
-
-	public void setFiltros(List<String> filtros) {
-		this.filtros = filtros;
-	}
-	
-	
 }

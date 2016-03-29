@@ -1,32 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta charset="UTF-8"/>
-	<title>Seleção de cliente</title>
-</h:head>
-<h:body>
-
-	<h:form>
-    	<div style="margin-top: 5px; margin-bottom: 20px">
-    	    <p:selectOneMenu id="filtro" size="30" value="#{empresaSearchWindow.filtro}">
-    	    	<f:selectItems value="#{empresaSearchWindow.filtros}"
-							var="filtro" itemValue="#{filtro}" itemLabel="#{filtro}" />
-    	    </p:selectOneMenu>
-    	    
-    	    <p:spacer width="10px"/>
-    	    
-    		<p:inputText id="nome" size="40" value="#{empresaSearchWindow.valor}" placeholder="Nome da empresa" />
-    		
-    		<p:spacer width="10px"/>
-    		
-    		<p:commandButton value="Pesquisar" action="#{empresaSearchWindow.pesquisar}" update="@form" />
-    	</div>
-    	
-    	<p:dataTable value="#{empresaSearchWindow.empresasFiltradas}" var="empresa"
-    		emptyMessage="Nenhuma empresa encontrada." rows="10"
+<ui:composition template="/WEB-INF/templates/searchWindow.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:param name="controller" value="#{empresaSearchWindow}"></ui:param>
+	
+	<ui:define name="gridEntity">
+	
+		<p:dataTable value="#{empresaSearchWindow.entityListed}" var="empresa"
+    		emptyMessage="Nenhuma empresa encontrada." rows="10" 
     		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
     		
     		<p:column headerText="Código" style="text-align: center; width: 40px">
@@ -35,14 +20,17 @@
     		<p:column headerText="Nome">
     			<h:outputText value="#{empresa.nome}" />
     		</p:column>
+    		<p:column headerText="CNPJ">
+    			<h:outputText value="#{empresa.cnpj}" />
+    		</p:column>
+
     		<p:column style="width: 30px; text-align: center">
     			<p:commandButton icon="ui-icon-check" title="Selecionar"
-    				action="#{empresaSearchWindow.selecionar(empresa)}"
+    				action="#{empresaSearchWindow.select(empresa)}"
     				process="@this" />
     		</p:column>
     		
     	</p:dataTable>
-	</h:form>
-
-</h:body>
-</html>
+	</ui:define>
+	
+</ui:composition>

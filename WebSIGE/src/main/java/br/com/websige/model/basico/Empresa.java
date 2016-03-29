@@ -38,7 +38,10 @@ public class Empresa extends GenericEntity<Empresa> implements Serializable {
 
 	@Column(name = "EMP_NUMERO", nullable = true, length = 7)
 	private String numero;
-
+	
+	@Column(name = "EMP_COMPLEMENTO", nullable = true, length = 20)
+	private String complemento;
+	
 	@Column(name = "EMP_BAIRRO", nullable = true, length = 30)
 	private String bairro;
 

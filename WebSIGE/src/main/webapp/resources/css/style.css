@@ -57,6 +57,16 @@ h1 {
 	
 }
 
+.searchEdit{
+	width: 400px;
+}
+.searchcombo{
+	width: 80px;
+}
+.searchButton{
+	width: 50px;
+}
+
 .ui-panelgrid td {
 	height: 34px;
 }
@@ -139,6 +149,11 @@ h1 {
 .ui-datatable.borderless tbody tr,
 .ui-datatable.borderless tbody td {
     border-style: none;
+}
+
+.semBorda{
+	border: none !important;
+	margin-bottom: 10px;
 }
 
 .ui-datatable-empty {

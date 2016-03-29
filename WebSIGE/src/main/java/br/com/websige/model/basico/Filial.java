@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
@@ -24,9 +25,11 @@ public class Filial implements IBaseEntity ,Serializable{
 	@Column(name="FIL_ID")
 	private long id;
 	
+	@NotNull(message = "Código")
 	@Column(name = "FIL_CDFILIAL", nullable = false, length = 6)
 	private String codigo;
 	
+	@NotNull(message = "Descrição")
 	@Column(name = "FIL_DSFILIAL", nullable = false, length = 40)
 	private String descricao;
 	
@@ -54,9 +57,11 @@ public class Filial implements IBaseEntity ,Serializable{
 	@Column(name = "FIL_TELEFONE", nullable = true, length = 20)
 	private String telefone;
 	
+	@NotNull(message = "Razão social")
 	@Column(name = "FIL_RAZAOSOCIAL", nullable = false, length = 80)
 	private String razaoSocial;
 	
+	@NotNull(message = "CNPJ")
 	@Column(name = "FIL_CNPJ", nullable = false, length = 15)
 	private String cnpj;
 	
@@ -66,9 +71,10 @@ public class Filial implements IBaseEntity ,Serializable{
 	@Column(name = "FIL_INSCRICAOMUNICIPAL", nullable = true, length = 18)
 	private String inscricaoMunicipal;
 	
-	@Column(name = "FIL_CNAE", nullable = false, length = 15)
+	@Column(name = "FIL_CNAE", nullable = true, length = 15)
 	private String cnae;
 	
+	@NotNull(message = "Empresa")
 	@ManyToOne
 	@JoinColumn(name = "FIL_IDEMPRESA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FILIAL"))
 	private Empresa empresa;
