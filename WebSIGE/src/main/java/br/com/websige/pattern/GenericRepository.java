@@ -45,7 +45,7 @@ public class GenericRepository<T> implements Serializable {
 		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity<T>) entity).getId()));
 	}
 
-	public List<T> findAll() {
+	public List<T> getAll() {
 		return entityManager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
 	}
 

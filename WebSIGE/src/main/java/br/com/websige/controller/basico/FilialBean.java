@@ -12,6 +12,7 @@ import br.com.websige.filter.basico.FilialFilter;
 import br.com.websige.model.basico.Empresa;
 import br.com.websige.model.basico.Filial;
 import br.com.websige.pattern.CadastroBean;
+import br.com.websige.repository.basico.EmpresaRepository;
 import br.com.websige.repository.basico.FilialRepository;
 import br.com.websige.service.basico.FilialService;
 
@@ -26,6 +27,11 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 		super(repository, service);
 		setDirectory("/Restrict/Basico/Cadastro/Filial/");
 	}
+	
+	@Inject
+	private EmpresaRepository empresaRepository;
+	
+	private List<Empresa> empresaListFilter;
 
 	public Filial getFilial() {
 		return (Filial) getEntity();
@@ -65,9 +71,19 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	protected String getParameterURL(Filial entityConsulted) {
 		return "filial=" + entityConsulted.getId();
 	};
+	
+	@Override
+	public void loadEntitiesFilters() {
+		
+	}
 
 	public void empresaSelecionada(SelectEvent event) {
 		Empresa empresa = (Empresa) event.getObject();
 		getEntity().setEmpresa(empresa);
 	}
+
+	public List<Empresa> getEmpresaListFilter() {
+		return empresaListFilter;
+	}
+	
 }

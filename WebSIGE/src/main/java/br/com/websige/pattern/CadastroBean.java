@@ -29,8 +29,14 @@ public class CadastroBean<Entity,Filter> {
 	public void startConsulta() {
 		if (getFilter() == null) {
 			setFilter(createFilter());
+			
 		}
-		listEntity = getRepository().findAll();
+		listEntity = getRepository().getAll();
+		loadEntitiesFilters();
+	}
+	
+	public void loadEntitiesFilters(){
+		
 	}
 
 	public void salvar() {
