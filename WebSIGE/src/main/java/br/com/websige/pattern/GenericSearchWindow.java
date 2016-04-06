@@ -2,10 +2,12 @@ package br.com.websige.pattern;
 
 import org.primefaces.context.RequestContext;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class GenericSearchWindow<Entity,Filter> {
 	
@@ -28,6 +30,19 @@ public class GenericSearchWindow<Entity,Filter> {
 		super();
 		this.repository = repository;
 		filtros = new ArrayList<>();
+		addLabelsInFiltros();
+	}
+
+	public void addLabelsInFiltros() {
+		Class<?> classe = createFilter().getClass();
+		
+		for (Field field : classe.getDeclaredFields()) {
+			if (field.isAnnotationPresent(FilterLabel.class)) {
+				field.setAccessible(true);
+				FilterLabel filterLabel = field.getAnnotation(FilterLabel.class);
+				filtros.add(filterLabel.label());
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,7 +55,25 @@ public class GenericSearchWindow<Entity,Filter> {
 	}
 	
 	public void setParameterInFilter() {
-		// TODO Auto-generated method stub
+		Class<?> classe = filter.getClass();
+		
+		for (Field field : classe.getDeclaredFields()) {
+			if (field.isAnnotationPresent(FilterLabel.class)) {
+				field.setAccessible(true);
+				FilterLabel filterLabel = field.getAnnotation(FilterLabel.class);
+				if (filtro.equals(filterLabel.label())){
+					try {
+						field.set(filter, valor);
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	public void openSearch() {

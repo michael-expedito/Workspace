@@ -24,7 +24,7 @@
 				<p:selectOneMenu value="#{filialBean.filter.empresa}"
 						label="Empresa" id="empresa">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-						<f:selectItems value="#{empresaBean.empresas}"
+						<f:selectItems value="#{filialBean.empresaListFilter}"
 							var="empresa" itemValue="#{empresa}" itemLabel="#{empresa.nome}" />
 				</p:selectOneMenu>
 				
@@ -52,6 +52,10 @@
 			<p:column headerText="Codigo" style="text-align: left" width="50">
 				<p:outputLabel value="#{filial.codigo}">
 				</p:outputLabel>
+			</p:column>
+			
+			<p:column headerText="Empresa" style="text-align: left" width="300">
+				<p:outputLabel value="#{filial.empresa.nome}" />
 			</p:column>
 
 			<p:column headerText="CNPJ" style="text-align: left" width="80">

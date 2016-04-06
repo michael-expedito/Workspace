@@ -15,30 +15,14 @@ import br.com.websige.repository.basico.EmpresaRepository;
 @ViewScoped
 public class EmpresaSearchWindow extends GenericSearchWindow<Empresa, EmpresaFilter> implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	public EmpresaSearchWindow(EmpresaRepository repository) {
 		super(repository);
 		super.setDirectory("/SearchWindow/Basico/EmpresaSearchWindow");
-		getFiltros().add("Codigo");
-		getFiltros().add("CNPJ");
-		getFiltros().add("Nome");
 	}
-
-	private static final long serialVersionUID = 1L;
 	
-	@Override
-	public void setParameterInFilter(){
-		if (getFiltro().equals("Codigo")){
-			getFilter().setCodigo(getValor());
-		}
-		if (getFiltro().equals("CNPJ")){
-			getFilter().setCNPJ(getValor());
-		}
-		if (getFiltro().equals("Nome")){
-			getFilter().setNome(getValor());
-		}
-	}
-
 	@Override
 	public EmpresaFilter createFilter() {
 		return new EmpresaFilter();

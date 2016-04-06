@@ -30,8 +30,7 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	
 	@Inject
 	private EmpresaRepository empresaRepository;
-	
-	private List<Empresa> empresaListFilter;
+
 
 	public Filial getFilial() {
 		return (Filial) getEntity();
@@ -71,11 +70,6 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	protected String getParameterURL(Filial entityConsulted) {
 		return "filial=" + entityConsulted.getId();
 	};
-	
-	@Override
-	public void loadEntitiesFilters() {
-		
-	}
 
 	public void empresaSelecionada(SelectEvent event) {
 		Empresa empresa = (Empresa) event.getObject();
@@ -83,7 +77,7 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	}
 
 	public List<Empresa> getEmpresaListFilter() {
-		return empresaListFilter;
+		return empresaRepository.getAll();
 	}
 	
 }
