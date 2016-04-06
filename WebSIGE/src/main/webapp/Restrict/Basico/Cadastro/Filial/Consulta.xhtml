@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition  template="/WEB-INF/templates/consulta.xhtml"
+<ui:composition  template="/WEB-INF/templates/pattern/consulta.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -48,7 +48,16 @@
 			emptyMessage="Sem lançamentos" rowStyleClass="ui-datatable-empty"
 			paginatorPosition="bottom" styleClass="borderless"
 			style="margin-top:5px">
+			
+			<p:column headerText="" width="20">
+				<p:commandLink icon="ui-icon-pencil"
+					style="float:left;margin-right:10px; text-align: left; text-decoration:none; "
+					action="#{filialBean.openEntity(filial)}">
 
+					<i class="fa fa-pencil-square  Fs20 blue"></i>
+				</p:commandLink>
+			</p:column>
+			
 			<p:column headerText="Codigo" style="text-align: left" width="50">
 				<p:outputLabel value="#{filial.codigo}">
 				</p:outputLabel>
@@ -64,15 +73,6 @@
 
 			<p:column headerText="Nome descritivo" style="text-align: left">
 				<p:outputLabel value="#{filial.descricao}" />
-			</p:column>
-
-			<p:column headerText="" width="20">
-				<p:commandLink icon="ui-icon-pencil"
-					style="float:left;margin-right:10px; text-align: left; text-decoration:none; "
-					action="#{filialBean.openEntity(filial)}">
-
-					<i class="fa fa-pencil-square  Fs20 blue"></i>
-				</p:commandLink>
 			</p:column>
 
 		</p:dataTable>

@@ -9,8 +9,25 @@
     <div class="layout-menu-cover-top Animated05" id="layout-menu-cover">
         <h:form id="menuform">
             <pm:menu>
-                <p:menuitem id="rm_dashboard" value=" Dashboard" icon="icon-feather" outcome="/dashboard"/>
-                <p:menuitem id="rm_promotion" value=" Promotion Page" icon="icon-globe" outcome="/promotion-page"/>
+                <p:menuitem id="rm_dashboard" value=" Dashboard" icon="icon-feather"/>
+                <p:submenu id="rm_orientation" label=" Menu Options" icon="icon-menu">
+                    <p:menuitem id="rm_top" value=" Top Menu" icon="icon-layout7" url="#" onclick="Adamantium.changeMenuLayout('top');return false;" />
+                    <p:menuitem id="rm_left" value=" Left Menu" icon="icon-layout14" url="#" onclick="Adamantium.changeMenuLayout('left');return false;" />
+                    <p:menuitem id="rm_dark" value=" Dark Menu" icon="icon-pen-alt-fill" url="#" onclick="$('body').addClass('dark');return false;" />
+                    <p:menuitem id="rm_light" value=" Light Menu" icon="icon-pen-alt-stroke" url="#" onclick="$('body').removeClass('dark');return false;" />
+                </p:submenu>
+
+                <p:submenu id="comuns" label="Cadastros Comuns" icon="icon-ruler">
+                    <p:submenu id="rm_sm1" label="Cadastros" icon="icon-plus-alt">
+                         <p:menuitem id="empresa" value="Empresa" icon="icon-plus-alt" outcome="/Restrict/Basico/Cadastro/Empresa/Consulta" />
+                         <p:menuitem id="filial" value="Filial" icon="icon-plus-alt" outcome="/Restrict/Basico/Cadastro/Filial/Consulta" />
+                         <p:menuitem id="fornecedor" value="Fornecedor" icon="icon-plus-alt"/>
+                         <p:menuitem id="cliente" value="Cliente" icon="icon-plus-alt" />
+                    </p:submenu>
+                    <p:submenu id="rm_sm2" label="Processos" icon="icon-folder-stroke">
+                    </p:submenu>
+                </p:submenu>
+                <!-- <p:menuitem id="rm_promotion" value=" Promotion Page" icon="icon-globe" outcome="/promotion-page"/>
                 <p:submenu id="rm_orientation" label=" Menu Options" icon="icon-menu">
                     <p:menuitem id="rm_top" value=" Top Menu" icon="icon-layout7" url="#" onclick="Adamantium.changeMenuLayout('top');return false;" />
                     <p:menuitem id="rm_left" value=" Left Menu" icon="icon-layout14" url="#" onclick="Adamantium.changeMenuLayout('left');return false;" />
@@ -94,7 +111,7 @@
                             <p:menuitem id="rm_docs_27" value=" Lato Font" icon="icon-menu" outcome="/docs/layout/lato-font" />
                         </p:submenu>
                     </p:submenu>
-                </p:submenu>
+                </p:submenu> -->
             </pm:menu>
         </h:form>
 
