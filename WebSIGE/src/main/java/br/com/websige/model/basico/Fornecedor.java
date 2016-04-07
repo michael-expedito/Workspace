@@ -1,6 +1,7 @@
 package br.com.websige.model.basico;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,11 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 import br.com.websige.model.basico.endereco.Endereco;
 import br.com.websige.model.basico.enuns.TipoPessoa;
@@ -28,31 +32,30 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 	@Column(name = "FOR_ID")
 	private Long id;
 	
-	@Column(name = "FOR_NMFORNECEDOR", nullable = false, length = 40)
-	private String nome;
+	@Column(name = "FOR_DSFORNECEDOR", nullable = false, length = 40)
+	private String descricao;
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "FOR_TPPESSOA", nullable = false)
 	private TipoPessoa tipoPessoa;
 	
 	@ManyToOne
-	@JoinColumn(name = "FOR_IDENDERECO", nullable = false, foreignKey = @ForeignKey(name = "FK1_FORNECEDOR_FOR"))
-	private Endereco endereco;
+	@JoinColumn(name = "FOR_IDPFISICA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FORNECEDOR_FOR"))
+	private PessoaFisica pessoaFisica;
+	
+	@ManyToOne
+	@JoinColumn(name = "FOR_IDPJURIDICA", nullable = false, foreignKey = @ForeignKey(name = "FK2_FORNECEDOR_FOR"))
+	private PessoaJuridica pessoaJuridica;
+	
+	@ManyToMany
+	@JoinTable(name = "FOREND_FOEN", joinColumns={@JoinColumn(name = "FOEN_IDFORNECEDOR")}, inverseJoinColumns={@JoinColumn(name = "FOEN_IDENDERECO")})
+	private List<Endereco> enderecos;
 	
 	@Column(name = "FOR_NRTELEFONE", nullable = false, length = 14)
 	private String telefone;
 	
 	@Column(name = "FOR_EMAIL", nullable = false, length = 80)
-	private String email;
-	
-	@Column(name = "FOR_NRCNPJCPF", nullable = false, length = 15)
-	private String cnpjcpf;
-	
-	@Column(name = "FOR_NRIE", nullable = false, length = 18)
-	private String inscricaoEstadual;
-	
-	@Column(name = "FOR_NRIM", nullable = false, length = 18)
-	private String inscricaoMunicipal;		
+	private String email;		
 	
 	public Long getId() {
 		return id;
@@ -62,12 +65,12 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public TipoPessoa getTipoPessoa() {
@@ -78,12 +81,12 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 		this.tipoPessoa = tipoPessoa;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public String getTelefone() {
@@ -102,30 +105,47 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 		this.email = email;
 	}
 
-	public String getCnpjcpf() {
-		return cnpjcpf;
+	public PessoaFisica getPessoaFisica() {
+		return pessoaFisica;
 	}
 
-	public void setCnpjcpf(String cnpjcpf) {
-		this.cnpjcpf = cnpjcpf;
+	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
 	}
 
-	public String getInscricaoEstadual() {
-		return inscricaoEstadual;
+	public PessoaJuridica getPessoaJuridica() {
+		return pessoaJuridica;
 	}
 
-	public void setInscricaoEstadual(String inscricaoEstadual) {
-		this.inscricaoEstadual = inscricaoEstadual;
+	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
+		this.pessoaJuridica = pessoaJuridica;
 	}
 
-	public String getInscricaoMunicipal() {
-		return inscricaoMunicipal;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
-	public void setInscricaoMunicipal(String inscricaoMunicipal) {
-		this.inscricaoMunicipal = inscricaoMunicipal;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
-	 
+
 	/*FOR_CODIGO, FOR_NOME, FOR_ENDERECO, FOR_TIPESSOA, FOR_BAIRRO, 
 	 * FOR_CIDADE, FOR_UF, FOR_CEP, FOR_TEL, FOR_FAX, FOR_CGC, FOR_INSCRICAO, 
 	 * FOR_CONTATO, FOR_ENDERECO1, FOR_NOCONTAB, FOR_CDGRUPO, FOR_DTMOV, 
