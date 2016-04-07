@@ -76,7 +76,7 @@ public class Filial implements IBaseEntity ,Serializable{
 	
 	@NotNull(message = "Empresa")
 	@ManyToOne
-	@JoinColumn(name = "FIL_IDEMPRESA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FILIAL"))
+	@JoinColumn(name = "FIL_IDEMPRESA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FILIAL_FIL"))
 	private Empresa empresa;
 
 	public Long getId() {
