@@ -37,14 +37,14 @@ public class Endereco implements IBaseEntity ,Serializable{
 	private String complemento;
 	
 	@ManyToOne
-	@JoinColumn(name = "END_IDCIDADE", nullable = false, foreignKey = @ForeignKey(name = "FK1_CIDADE_CID"))
+	@JoinColumn(name = "END_IDCIDADE", nullable = false, foreignKey = @ForeignKey(name = "FK1_ENDERECO_END"))
 	private Cidade cidade;
 	
 	@Column(name = "END_SGESTADO", nullable = false, length = 2)
 	private String estado;
 	
 	@ManyToOne
-	@JoinColumn(name = "END_IDPAIS", nullable = false, foreignKey = @ForeignKey(name = "FK2_CIDADE_CID"))
+	@JoinColumn(name = "END_IDPAIS", nullable = false, foreignKey = @ForeignKey(name = "FK2_ENDERECO_END"))
 	private Pais pais;
 	
 	@Column(name="END_DSOBSERVACAO", nullable = true, length = 80)

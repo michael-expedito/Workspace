@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.websige.pattern.interfaces.IBaseEntity;
@@ -21,11 +24,24 @@ public class Cidade implements IBaseEntity ,Serializable{
 	@Column(name = "CID_ID")
 	private Long id;
 	
-	@Column(name = "CID_CDCIDADE", nullable = false, length = 6)
+	@Column(name = "CID_CDCIDADE", nullable = false, length = 7)
 	private String codigo;
 	
-	@Column(name = "CID_NMCIDADE", nullable = false, length = 30)
+	@Column(name = "CID_NMCIDADE", nullable = false, length = 35)
 	private String nome;
+	
+	@Column(name = "CID_CDSIAFI", nullable = true, length = 6)
+	private String codigoSiafi;
+	
+	@Column(name = "CID_CDDIEF", nullable = true, length = 6)
+	private String codigoDief;
+	
+	@Column(name = "CID_CDGIASP", nullable = true, length = 6)
+	private String codigoGiasp;
+	
+	@ManyToOne
+	@JoinColumn(name = "CID_CDESTADOUF", nullable = false, foreignKey = @ForeignKey(name = "FK1_CIDADE_CID"))
+	private UF estado;
 
 	public Long getId() {
 		return id;
