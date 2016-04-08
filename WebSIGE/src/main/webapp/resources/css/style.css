@@ -144,6 +144,10 @@ h1 {
 	width: 100%
 }
 
+.ui-panelgrid {
+	width: 100% !important;
+}
+
 .ui-datatable.borderless thead th,
 .ui-datatable.borderless tbody,
 .ui-datatable.borderless tbody tr,
@@ -158,4 +162,8 @@ h1 {
 
 .ui-datatable-empty {
     background: #ffffff !important;
+}
+
+.ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+    /* height: 9px !important; */
 }

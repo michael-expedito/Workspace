@@ -16,13 +16,13 @@ public class UF implements IBaseEntity ,Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id	
-	@Column(name = "UFE_CDESTADO", nullable = false, length = 2)
+	@Column(name = "EUF_CDESTADO", nullable = false, length = 2)
 	private String codigo;
 	
-	@Column(name = "UFE_DSESTADO", nullable = false, length = 20)
+	@Column(name = "EUF_DSESTADO", nullable = false, length = 20)
 	private String descricao;
 	
-	@Column(name = "UFE_SGESTADO", nullable = false, length = 2)
+	@Column(name = "EUF_SGESTADO", nullable = false, length = 2)
 	private String sigla;
 
 	public String getCodigo() {

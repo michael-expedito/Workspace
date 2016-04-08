@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/pattern/cadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="fornecedor" value="#{fornecedorBean.fornecedor}" />
+		<f:viewAction action="#{fornecedorBean.startCadastro}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="title-complemento"> - Fornecedor </ui:define>
+
+	<ui:param name="controller" value="#{fornecedorBean}"></ui:param>
+
+	<ui:define name="informacao"> 
+		Registra os dados das filiais de uma empresa. O campo identificador da entidade é o código da fornecedor juntamente como o código da empresa.
+	    Neste cadastro é informado dados como CNPJ, IE, IM IS e outros dados que geralmente são diferentes dos dados da empresa principal.
+	</ui:define>
+
+	<ui:define name="content-cadastro">
+
+		<p:fieldset legend="Fornecedor" toggleable="true" toggleSpeed="500">
+
+			<h2 class="BigTopic">Dados Principais</h2>
+			<p:panelGrid columns="2" layout="grid" style="margin-bottom:20px">
+				<h:outputText value="Código" for="codigo" />
+				<p:inputText value="" id="codigo" />
+
+				<h:outputText value="Descrição" for="descricao" />
+				<p:inputText value="" id="descricao" />
+
+				<h:outputText value="Tipo de pessoa" for="tipoPessoa" />
+				<p:selectOneMenu id="tipoPessoa">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItem itemLabel="Fisica" />
+					<f:selectItem itemLabel="Jurídica" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+
+			<h2 class="BigTopic">Documentação legal</h2>
+			<p:panelGrid columns="2" style="margin-bottom:20px">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText value="" id="nome" />
+
+				<h:outputLabel value="CPF" for="cpf" />
+				<p:inputText value="" id="cpf" />
+
+				<p:outputLabel value="Identificação" for="identificacao" />
+				<p:inputText value="" id="identificacao" />
+
+				<p:outputLabel value="Orgão emissor" for="orgaoEmissor" />
+				<p:inputText value="" id="orgaoEmissor" />
+
+				<p:outputLabel value="Data emissão" for="dataEmissao" />
+				<p:calendar id="dataEmissao" size="12" pattern="dd/MM/yyyy">
+				</p:calendar>
+
+				<p:outputLabel value="PIS/PASEB" for="pisPaseb" />
+				<p:inputText value="" id="pisPaseb" />
+
+				<p:outputLabel value="Data nascimento" for="dataNascimento" />
+				<p:calendar id="dataNascimento" size="12" pattern="dd/MM/yyyy">
+				</p:calendar>
+
+				<p:outputLabel value="Estado civil" for="estadoCivil" />
+				<p:selectOneMenu id="estadoCivil">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="Solteiro" />
+					<f:selectItem itemLabel="Casado" />
+					<f:selectItem itemLabel="Divorciado" />
+					<f:selectItem itemLabel="Viúvo" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Matrícula INSS" for="matriculaInss" />
+				<p:inputText value="" id="matriculaInss" />
+
+				<p:outputLabel value="Salario da contribuição"
+					for="salarioContribuicao" />
+				<p:inputText id="salarioContribuicao">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+						minFractionDigits="2" />
+				</p:inputText>
+				
+				<p:outputLabel value="Número de dependentes" for="depententes" />
+				<p:inputText  value="" id="depententes" />
+
+				<h:outputText value="Teto máximo" for="tetoMaximo" />
+				<p:selectBooleanCheckbox id="tetoMaximo" />
+				
+				<p:outputLabel value="CBO" for="cbo" />
+				<h:panelGroup>
+					<p:inputText id="cbo"
+						readonly="true" size="80" />
+					
+					<p:commandButton icon="fa fa-search White" styleClass="BlueButton" title="Pesquisa"
+						>
+						
+					</p:commandButton>
+				</h:panelGroup>
+
+			</p:panelGrid>
+			
+			<p:panelGrid columns="2" style="margin-bottom:20px">
+				<p:outputLabel value="CNPJ" for="cnpj" />
+				<p:inputText  value="" id="cnpj" />
+				
+				<p:outputLabel value="Razão social" for="razaoSocial" />
+				<p:inputText  value="" id="razaoSocial" />
+				
+				<p:outputLabel value="Nome fantasia" for="nomeFantasia" />
+				<p:inputText  value="" id="nomeFantasia" />
+				
+				<p:outputLabel value="Inscrição estadual" for="inscricaoEstadual" />
+				<p:inputText  value="" id="inscricaoEstadual" />
+				
+				<p:outputLabel value="Inscrição municipal" for="inscricaoMunicipal" />
+				<p:inputText  value="" id="inscricaoMunicipal" />
+				
+				<p:outputLabel value="Inscrição SUFRAMA" for="inscricaoSuframa" />
+				<p:inputText  value="" id="inscricaoSuframa" />
+			</p:panelGrid>
+
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
