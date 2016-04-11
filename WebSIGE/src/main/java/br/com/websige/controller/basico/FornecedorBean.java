@@ -9,6 +9,7 @@ import javax.inject.Named;
 import br.com.websige.pattern.CadastroBean;
 import br.com.websige.filter.basico.FornecedorFilter;
 import br.com.websige.model.basico.Fornecedor;
+import br.com.websige.model.basico.enuns.TipoPessoa;
 import br.com.websige.repository.basico.FornecedorRepository;
 import br.com.websige.service.basico.FornecedorService;
 
@@ -62,7 +63,10 @@ public class FornecedorBean extends CadastroBean<Fornecedor, FornecedorFilter>im
 	protected String getParameterURL(Fornecedor entityConsulted) {
 		return "fornecedor=" + entityConsulted.getId();
 	};
-
+	
+	public TipoPessoa[] getTipoPessoas() {
+		return TipoPessoa.values();
+	}
 	/*
 	public void empresaSelecionada(SelectEvent event) {
 		Empresa empresa = (Empresa) event.getObject();

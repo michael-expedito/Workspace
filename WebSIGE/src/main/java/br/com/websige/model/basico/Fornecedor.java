@@ -32,6 +32,9 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 	@Column(name = "FOR_ID")
 	private Long id;
 	
+	@Column(name = "FOR_CDFORNECEDOR", nullable = false, length = 15)
+	private String codigo;
+	
 	@Column(name = "FOR_DSFORNECEDOR", nullable = false, length = 40)
 	private String descricao;
 	
@@ -63,6 +66,14 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getDescricao() {

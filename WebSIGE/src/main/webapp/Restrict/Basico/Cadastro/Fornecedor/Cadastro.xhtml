@@ -26,25 +26,26 @@
 		<p:fieldset legend="Fornecedor" toggleable="true" toggleSpeed="500">
 
 			<h2 class="BigTopic">Dados Principais</h2>
-			<p:panelGrid columns="2" layout="grid" style="margin-bottom:20px">
+			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<h:outputText value="Código" for="codigo" />
-				<p:inputText value="" id="codigo" />
+				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
 
 				<h:outputText value="Descrição" for="descricao" />
-				<p:inputText value="" id="descricao" />
+				<p:inputText value="#{fornecedorBean.fornecedor.descricao}" id="descricao" size="60" />
 
 				<h:outputText value="Tipo de pessoa" for="tipoPessoa" />
 				<p:selectOneMenu id="tipoPessoa">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-					<f:selectItem itemLabel="Fisica" />
-					<f:selectItem itemLabel="Jurídica" />
+					<f:selectItems value="#{fornecedorBean.tipoPessoas}"
+						var="tipoPessoa" itemValue="#{tipoPessoa}" 
+						itemLabel="#{tipoPessoa.descricao}" />
 				</p:selectOneMenu>
 			</p:panelGrid>
 
 			<h2 class="BigTopic">Documentação legal</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText value="" id="nome" />
+				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.nome}" id="nome" size="60" />
 
 				<h:outputLabel value="CPF" for="cpf" />
 				<p:inputText value="" id="cpf" />
@@ -84,46 +85,77 @@
 					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
 						minFractionDigits="2" />
 				</p:inputText>
-				
+
 				<p:outputLabel value="Número de dependentes" for="depententes" />
-				<p:inputText  value="" id="depententes" />
+				<p:inputText value="" id="depententes" />
 
 				<h:outputText value="Teto máximo" for="tetoMaximo" />
 				<p:selectBooleanCheckbox id="tetoMaximo" />
-				
+
 				<p:outputLabel value="CBO" for="cbo" />
 				<h:panelGroup>
-					<p:inputText id="cbo"
-						readonly="true" size="80" />
-					
-					<p:commandButton icon="fa fa-search White" styleClass="BlueButton" title="Pesquisa"
-						>
-						
+					<p:inputText id="cbo" readonly="true" size="80" />
+
+					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
+						title="Pesquisa">
+
 					</p:commandButton>
 				</h:panelGroup>
 
 			</p:panelGrid>
-			
+
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<p:outputLabel value="CNPJ" for="cnpj" />
-				<p:inputText  value="" id="cnpj" />
-				
+				<p:inputText value="" id="cnpj" />
+
 				<p:outputLabel value="Razão social" for="razaoSocial" />
-				<p:inputText  value="" id="razaoSocial" />
-				
+				<p:inputText value="" id="razaoSocial" />
+
 				<p:outputLabel value="Nome fantasia" for="nomeFantasia" />
-				<p:inputText  value="" id="nomeFantasia" />
-				
+				<p:inputText value="" id="nomeFantasia" />
+
 				<p:outputLabel value="Inscrição estadual" for="inscricaoEstadual" />
-				<p:inputText  value="" id="inscricaoEstadual" />
-				
+				<p:inputText value="" id="inscricaoEstadual" />
+
 				<p:outputLabel value="Inscrição municipal" for="inscricaoMunicipal" />
-				<p:inputText  value="" id="inscricaoMunicipal" />
-				
+				<p:inputText value="" id="inscricaoMunicipal" />
+
 				<p:outputLabel value="Inscrição SUFRAMA" for="inscricaoSuframa" />
-				<p:inputText  value="" id="inscricaoSuframa" />
+				<p:inputText value="" id="inscricaoSuframa" />
 			</p:panelGrid>
 
 		</p:fieldset>
+
+		<p:fieldset legend="Endereços" toggleable="true" toggleSpeed="500"
+			style="margin-top:20px">
+
+			<p:dataTable id="tbl" var="car" paginatorPosition="top"
+				paginatorTemplate="{Buttons}" paginator="true" rows="10">
+
+				<f:facet name="{Buttons}">
+
+					<h:commandLink style="text-align: right;">
+						<i class="fa fa-plus-circle Fs30 White"></i>
+					</h:commandLink>
+
+				</f:facet>
+
+
+			</p:dataTable>
+
+		</p:fieldset>
+
+		<p:fieldset legend="Outras informações" toggleable="true"
+			toggleSpeed="500" style="margin-top:20px">
+			<p:panelGrid columns="2" style="margin-bottom:20px">
+				<h:outputText value="Telefone" for="telefone" />
+				<p:inputText value="" id="telefone" size="60" />
+
+				<h:outputText value="E-mail" for="email" />
+				<p:inputText value="" id="email" size="60" />
+			</p:panelGrid>
+		</p:fieldset>
+
+
 	</ui:define>
 </ui:composition>
