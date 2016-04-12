@@ -31,13 +31,15 @@
 				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
 
 				<h:outputText value="Descrição" for="descricao" />
-				<p:inputText value="#{fornecedorBean.fornecedor.descricao}" id="descricao" size="60" />
+				<p:inputText value="#{fornecedorBean.fornecedor.descricao}"
+					id="descricao" size="60" />
 
 				<h:outputText value="Tipo de pessoa" for="tipoPessoa" />
-				<p:selectOneMenu id="tipoPessoa">
+				<p:selectOneMenu id="tipoPessoa"
+					value="#{fornecedorBean.fornecedor.tipoPessoa}">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{fornecedorBean.tipoPessoas}"
-						var="tipoPessoa" itemValue="#{tipoPessoa}" 
+						var="tipoPessoa" itemValue="#{tipoPessoa}"
 						itemLabel="#{tipoPessoa.descricao}" />
 				</p:selectOneMenu>
 			</p:panelGrid>
@@ -45,56 +47,75 @@
 			<h2 class="BigTopic">Documentação legal</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.nome}" id="nome" size="60" />
+				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.nome}"
+					id="nome" size="60" />
 
 				<h:outputLabel value="CPF" for="cpf" />
-				<p:inputText value="" id="cpf" />
+				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cp}"
+					id="cpf" />
 
 				<p:outputLabel value="Identificação" for="identificacao" />
-				<p:inputText value="" id="identificacao" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaFisica.identificacao}"
+					id="identificacao" />
 
 				<p:outputLabel value="Orgão emissor" for="orgaoEmissor" />
-				<p:inputText value="" id="orgaoEmissor" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaFisica.orgaoEmissor}"
+					id="orgaoEmissor" />
 
 				<p:outputLabel value="Data emissão" for="dataEmissao" />
-				<p:calendar id="dataEmissao" size="12" pattern="dd/MM/yyyy">
+				<p:calendar
+					value="#{fornecedorBean.fornecedor.pessoaFisica.dataEmissao}"
+					id="dataEmissao" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
 				<p:outputLabel value="PIS/PASEB" for="pisPaseb" />
-				<p:inputText value="" id="pisPaseb" />
+				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.pis}"
+					id="pisPaseb" />
 
 				<p:outputLabel value="Data nascimento" for="dataNascimento" />
-				<p:calendar id="dataNascimento" size="12" pattern="dd/MM/yyyy">
+				<p:calendar
+					value="#{fornecedorBean.fornecedor.pessoaFisica.dataNascimento}"
+					id="dataNascimento" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
 				<p:outputLabel value="Estado civil" for="estadoCivil" />
-				<p:selectOneMenu id="estadoCivil">
-					<f:selectItem itemLabel="Selecione" />
-					<f:selectItem itemLabel="Solteiro" />
-					<f:selectItem itemLabel="Casado" />
-					<f:selectItem itemLabel="Divorciado" />
-					<f:selectItem itemLabel="Viúvo" />
+				<p:selectOneMenu id="estadoCivil"
+					value="#{fornecedorBean.fornecedor.pessoaFisica.estadoCivil}">
+					<f:selectItems value="#{fornecedorBean.estadosCivis}"
+						var="estadoCivil" itemValue="#{estadoCivil}"
+						itemLabel="#{estadoCivil.descricao}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Matrícula INSS" for="matriculaInss" />
-				<p:inputText value="" id="matriculaInss" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaFisica.matriculaInss}"
+					id="matriculaInss" />
 
 				<p:outputLabel value="Salario da contribuição"
 					for="salarioContribuicao" />
-				<p:inputText id="salarioContribuicao">
+				<p:inputText id="salarioContribuicao"
+					value="#{fornecedorBean.fornecedor.pessoaFisica.salarioContribuicao}">
 					<f:convertNumber locale="pt_BR" maxFractionDigits="2"
 						minFractionDigits="2" />
 				</p:inputText>
 
 				<p:outputLabel value="Número de dependentes" for="depententes" />
-				<p:inputText value="" id="depententes" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaFisica.dependentes}"
+					id="depententes" />
 
 				<h:outputText value="Teto máximo" for="tetoMaximo" />
-				<p:selectBooleanCheckbox id="tetoMaximo" />
+				<p:selectBooleanCheckbox
+					value="#{fornecedorBean.fornecedor.pessoaFisica.tetoMaximo}"
+					id="tetoMaximo" />
 
 				<p:outputLabel value="CBO" for="cbo" />
 				<h:panelGroup>
-					<p:inputText id="cbo" readonly="true" size="80" />
+					<p:inputText id="cbo"
+						value="#{fornecedorBean.fornecedor.pessoaFisica.cbo.id}"
+						readonly="true" size="80" />
 
 					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
 						title="Pesquisa">
@@ -106,22 +127,33 @@
 
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<p:outputLabel value="CNPJ" for="cnpj" />
-				<p:inputText value="" id="cnpj" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.cnpj}" id="cnpj" />
 
 				<p:outputLabel value="Razão social" for="razaoSocial" />
-				<p:inputText value="" id="razaoSocial" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.razaoSocial}"
+					id="razaoSocial" />
 
 				<p:outputLabel value="Nome fantasia" for="nomeFantasia" />
-				<p:inputText value="" id="nomeFantasia" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.nomeFantasia}"
+					id="nomeFantasia" />
 
 				<p:outputLabel value="Inscrição estadual" for="inscricaoEstadual" />
-				<p:inputText value="" id="inscricaoEstadual" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.inscricaoEstadual}"
+					id="inscricaoEstadual" />
 
 				<p:outputLabel value="Inscrição municipal" for="inscricaoMunicipal" />
-				<p:inputText value="" id="inscricaoMunicipal" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.inscricaoMunicipal}"
+					id="inscricaoMunicipal" />
 
 				<p:outputLabel value="Inscrição SUFRAMA" for="inscricaoSuframa" />
-				<p:inputText value="" id="inscricaoSuframa" />
+				<p:inputText
+					value="#{fornecedorBean.fornecedor.pessoaJuridica.inscricaoSuframa}"
+					id="inscricaoSuframa" />
 			</p:panelGrid>
 
 		</p:fieldset>
@@ -129,16 +161,35 @@
 		<p:fieldset legend="Endereços" toggleable="true" toggleSpeed="500"
 			style="margin-top:20px">
 
-			<p:dataTable id="tbl" var="car" paginatorPosition="top"
-				paginatorTemplate="{Buttons}" paginator="true" rows="10">
+			<p:dataTable id="dtEnderecos" var="endereco" paginatorPosition="top"
+				paginatorTemplate="{Buttons}" paginator="true" rows="100"
+				value="#{fornecedorBean.fornecedor.enderecos}">
 
 				<f:facet name="{Buttons}">
-
 					<h:commandLink style="text-align: right;">
 						<i class="fa fa-plus-circle Fs30 White"></i>
 					</h:commandLink>
-
 				</f:facet>
+
+				<p:column headerText="Código" style="text-align: left">
+					<p:outputLabel value="#{endereco.codigo}" />
+				</p:column>
+
+				<p:column headerText="CEP" style="text-align: left">
+					<p:outputLabel value="#{endereco.cep}" />
+				</p:column>
+
+				<p:column headerText="Logradouro" style="text-align: left">
+					<p:outputLabel value="#{endereco.logradouro}" />
+				</p:column>
+				
+				<p:column headerText="Número" style="text-align: left">
+					<p:outputLabel value="#{endereco.numero}" />
+				</p:column>
+				
+				<p:column headerText="Logradouro" style="text-align: left">
+					<p:outputLabel value="#{endereco.logradouro}" />
+				</p:column>
 
 
 			</p:dataTable>

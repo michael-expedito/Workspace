@@ -24,6 +24,9 @@ public class Endereco implements IBaseEntity ,Serializable{
 	@Column(name = "END_ID")
 	private Long id;
 	
+	@Column(name = "END_CDENDERECO", nullable = false, length = 3)
+	private String codigo;
+	
 	@Column(name = "END_NRCEP", nullable = false, length = 9)
 	private String cep;
 	

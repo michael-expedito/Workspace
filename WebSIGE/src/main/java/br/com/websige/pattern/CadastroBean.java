@@ -15,7 +15,9 @@ public class CadastroBean<Entity,Filter> {
 	private String directory;
 	
 	public CadastroBean(GenericRepository<Entity> repository, GenericService<Entity> service) {
-		super();
+		if (getEntity() == null) {
+			setEntity(createEntity());
+		}
 		this.repository = repository;
 		this.service = service;
 	}
