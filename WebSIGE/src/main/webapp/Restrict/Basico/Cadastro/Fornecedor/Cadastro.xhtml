@@ -51,7 +51,7 @@
 					id="nome" size="60" />
 
 				<h:outputLabel value="CPF" for="cpf" />
-				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cp}"
+				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cpf}"
 					id="cpf" />
 
 				<p:outputLabel value="Identificação" for="identificacao" />
@@ -199,11 +199,13 @@
 		<p:fieldset legend="Outras informações" toggleable="true"
 			toggleSpeed="500" style="margin-top:20px">
 			<p:panelGrid columns="2" style="margin-bottom:20px">
+			
 				<h:outputText value="Telefone" for="telefone" />
-				<p:inputText value="" id="telefone" size="60" />
+				<p:inputText value="#{fornecedorBean.fornecedor.telefone}" id="telefone" size="10" />
 
 				<h:outputText value="E-mail" for="email" />
-				<p:inputText value="" id="email" size="60" />
+				<p:inputText value="#{fornecedorBean.fornecedor.email}" id="email" size="60" />
+				
 			</p:panelGrid>
 		</p:fieldset>
 

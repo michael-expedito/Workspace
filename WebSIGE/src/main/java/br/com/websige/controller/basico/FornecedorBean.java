@@ -1,6 +1,7 @@
 package br.com.websige.controller.basico;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +10,9 @@ import javax.inject.Named;
 import br.com.websige.pattern.CadastroBean;
 import br.com.websige.filter.basico.FornecedorFilter;
 import br.com.websige.model.basico.Fornecedor;
+import br.com.websige.model.basico.PessoaFisica;
+import br.com.websige.model.basico.PessoaJuridica;
+import br.com.websige.model.basico.endereco.Endereco;
 import br.com.websige.model.basico.enuns.EstadoCivil;
 import br.com.websige.model.basico.enuns.TipoPessoa;
 import br.com.websige.repository.basico.FornecedorRepository;
@@ -72,6 +76,16 @@ public class FornecedorBean extends CadastroBean<Fornecedor, FornecedorFilter>im
 	public EstadoCivil[] getEstadosCivis() {
 		return EstadoCivil.values();
 	}
+
+	@Override
+	public void createSubEntities() {
+		((Fornecedor) getEntity()).setPessoaFisica(new PessoaFisica());
+		((Fornecedor) getEntity()).setPessoaJuridica(new PessoaJuridica());
+		((Fornecedor) getEntity()).setEnderecos(new ArrayList<Endereco>());
+		//super.createSubEntities();
+	}
+	
+	
 	/*
 	public void empresaSelecionada(SelectEvent event) {
 		Empresa empresa = (Empresa) event.getObject();

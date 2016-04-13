@@ -17,6 +17,7 @@ public class CadastroBean<Entity,Filter> {
 	public CadastroBean(GenericRepository<Entity> repository, GenericService<Entity> service) {
 		if (getEntity() == null) {
 			setEntity(createEntity());
+			createSubEntities();
 		}
 		this.repository = repository;
 		this.service = service;
@@ -25,7 +26,12 @@ public class CadastroBean<Entity,Filter> {
 	public void startCadastro() {
 		if (getEntity() == null) {
 			setEntity(createEntity());
+			createSubEntities();
 		}
+	}
+	
+	public void createSubEntities(){
+		
 	}
 	
 	public void startConsulta() {
