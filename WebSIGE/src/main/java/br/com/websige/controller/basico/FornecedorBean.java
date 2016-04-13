@@ -7,8 +7,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import br.com.websige.pattern.CadastroBean;
 import br.com.websige.filter.basico.FornecedorFilter;
+import br.com.websige.model.basico.CBO;
 import br.com.websige.model.basico.Fornecedor;
 import br.com.websige.model.basico.PessoaFisica;
 import br.com.websige.model.basico.PessoaJuridica;
@@ -85,6 +88,10 @@ public class FornecedorBean extends CadastroBean<Fornecedor, FornecedorFilter>im
 		//super.createSubEntities();
 	}
 	
+	public void cboSelecionado(SelectEvent event) {
+		CBO cbo = (CBO) event.getObject();
+		getEntity().getPessoaFisica().setCbo(cbo);
+	}
 	
 	/*
 	public void empresaSelecionada(SelectEvent event) {

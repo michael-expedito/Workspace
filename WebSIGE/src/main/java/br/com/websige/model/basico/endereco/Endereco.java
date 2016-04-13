@@ -43,8 +43,9 @@ public class Endereco implements IBaseEntity ,Serializable{
 	@JoinColumn(name = "END_IDCIDADE", nullable = false, foreignKey = @ForeignKey(name = "FK1_ENDERECO_END"))
 	private Cidade cidade;
 	
-	@Column(name = "END_SGESTADO", nullable = false, length = 2)
-	private String estado;
+	@ManyToOne
+	@JoinColumn(name = "END_CDESTADO", nullable = false, foreignKey = @ForeignKey(name = "FK3_ENDERECO_END"))
+	private UF estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "END_IDPAIS", nullable = false, foreignKey = @ForeignKey(name = "FK2_ENDERECO_END"))
@@ -59,6 +60,14 @@ public class Endereco implements IBaseEntity ,Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getCep() {
@@ -101,11 +110,11 @@ public class Endereco implements IBaseEntity ,Serializable{
 		this.cidade = cidade;
 	}
 
-	public String getEstado() {
+	public UF getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(UF estado) {
 		this.estado = estado;
 	}
 

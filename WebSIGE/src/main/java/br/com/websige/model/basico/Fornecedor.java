@@ -15,7 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 
 import br.com.websige.model.basico.endereco.Endereco;
 import br.com.websige.model.basico.enuns.TipoPessoa;
@@ -32,22 +32,25 @@ public class Fornecedor implements IBaseEntity ,Serializable{
 	@Column(name = "FOR_ID")
 	private Long id;
 	
+	@NotNull(message = "Código")
 	@Column(name = "FOR_CDFORNECEDOR", nullable = false, length = 15)
 	private String codigo;
 	
+	@NotNull(message = "Descrição")
 	@Column(name = "FOR_DSFORNECEDOR", nullable = false, length = 40)
 	private String descricao;
 	
+	@NotNull(message = "Tipo de pessoa")
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "FOR_TPPESSOA", nullable = false)
 	private TipoPessoa tipoPessoa;
 	
 	@ManyToOne
-	@JoinColumn(name = "FOR_IDPFISICA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FORNECEDOR_FOR"))
+	@JoinColumn(name = "FOR_IDPFISICA", nullable = true, foreignKey = @ForeignKey(name = "FK1_FORNECEDOR_FOR"))
 	private PessoaFisica pessoaFisica;
 	
 	@ManyToOne
-	@JoinColumn(name = "FOR_IDPJURIDICA", nullable = false, foreignKey = @ForeignKey(name = "FK2_FORNECEDOR_FOR"))
+	@JoinColumn(name = "FOR_IDPJURIDICA", nullable = true, foreignKey = @ForeignKey(name = "FK2_FORNECEDOR_FOR"))
 	private PessoaJuridica pessoaJuridica;
 	
 	@ManyToMany

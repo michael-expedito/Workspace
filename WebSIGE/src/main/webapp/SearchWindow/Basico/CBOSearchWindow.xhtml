@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/pattern/searchWindow.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:param name="controller" value="#{cBOSearchWindow}"></ui:param>
+	
+	<ui:define name="gridEntity">
+	
+		<p:dataTable value="#{cBOSearchWindow.entityListed}" var="cbo"
+    		emptyMessage="Nenhuma registro encontrada." rows="10" 
+    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    		
+    		<p:column headerText="Código" style="text-align: center; width: 40px">
+    			<h:outputText value="#{cbo.codigoOcupacao}" />
+    		</p:column>
+    		<p:column headerText="Título ocupação">
+    			<h:outputText value="#{cbo.tituloOcupacao}" />
+    		</p:column>
+
+    		<p:column style="width: 30px; text-align: center">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{cBOSearchWindow.select(cbo)}"
+    				process="@this" />
+    		</p:column>
+    		
+    	</p:dataTable>
+	</ui:define>
+	
+</ui:composition>

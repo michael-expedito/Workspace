@@ -102,7 +102,7 @@
 				</p:inputText>
 
 				<p:outputLabel value="Número de dependentes" for="depententes" />
-				<p:inputText
+				<p:spinner
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dependentes}"
 					id="depententes" />
 
@@ -113,13 +113,18 @@
 
 				<p:outputLabel value="CBO" for="cbo" />
 				<h:panelGroup>
-					<p:inputText id="cbo"
-						value="#{fornecedorBean.fornecedor.pessoaFisica.cbo.id}"
-						readonly="true" size="80" />
-
+				
+						
+                    <p:autoComplete id="cbo" value="#{fornecedorBean.fornecedor.pessoaFisica.cbo}" completeMethod="#{cBOSearchWindow.complete}"
+                        var="cbo" itemLabel="#{cbo.tituloOcupacao}" minQueryLength="5" itemValue="#{cbo}" forceSelection="true" size="60"/>
+                        
 					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
-						title="Pesquisa">
-
+						title="Pesquisa" style="-webkit-border-radius: 0px 15px 15px 0px !important;" 
+						action="#{cBOSearchWindow.openSearch}" process="@this"
+						update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{fornecedorBean.cboSelecionado}" process="@this"
+							update="cbo" />
 					</p:commandButton>
 				</h:panelGroup>
 
@@ -187,8 +192,12 @@
 					<p:outputLabel value="#{endereco.numero}" />
 				</p:column>
 				
-				<p:column headerText="Logradouro" style="text-align: left">
-					<p:outputLabel value="#{endereco.logradouro}" />
+				<p:column headerText="Cidade" style="text-align: left">
+					<p:outputLabel value="#{endereco.cidade.nome}" />
+				</p:column>
+				
+				<p:column headerText="UF" style="text-align: left">
+					<p:outputLabel value="#{endereco.estado.sigla}" />
 				</p:column>
 
 
