@@ -2,6 +2,7 @@ package br.com.websige.pattern;
 
 import org.primefaces.context.RequestContext;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +26,16 @@ public class GenericSearchWindow<Entity,Filter> {
 	
 	private String directory;
 	
+	private List<ColumnModel> columns;
+	
+	private String columnTemplate = "codigoOcupacao;tituloOcupacao";
 	
 	public GenericSearchWindow(GenericRepository<Entity> repository) {
 		super();
 		this.repository = repository;
 		filtros = new ArrayList<>();
 		addLabelsInFiltros();
+		createDynamicColumns();
 	}
 
 	public void addLabelsInFiltros() {
@@ -44,6 +49,15 @@ public class GenericSearchWindow<Entity,Filter> {
 			}
 		}
 	}
+	
+	private void createDynamicColumns() {
+        String[] columnKeys = columnTemplate.split(";");
+        columns = new ArrayList<ColumnModel>();   
+         
+        for(String columnKey : columnKeys) {
+            columns.add(new ColumnModel(columnKey.toUpperCase(), columnKey));
+        }
+    }
 
 	@SuppressWarnings("unchecked")
 	public void pesquisar() {
@@ -135,6 +149,38 @@ public class GenericSearchWindow<Entity,Filter> {
 
 	public void setDirectory(String directory) {
 		this.directory = directory;
+	}	
+	
+	public List<ColumnModel> getColumns() {
+		return columns;
 	}
+
+	public void setColumns(List<ColumnModel> columns) {
+		this.columns = columns;
+	}
+
+
+
+
+	static public class ColumnModel implements Serializable {
+ 
+		private static final long serialVersionUID = 1L;
+
+		private String header;
+        private String property;
+ 
+        public ColumnModel(String header, String property) {
+            this.header = header;
+            this.property = property;
+        }
+ 
+        public String getHeader() {
+            return header;
+        }
+ 
+        public String getProperty() {
+            return property;
+        }
+    }
 	
 }

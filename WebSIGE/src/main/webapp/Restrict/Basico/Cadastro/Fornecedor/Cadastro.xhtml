@@ -11,6 +11,8 @@
 		<f:viewAction action="#{fornecedorBean.startCadastro}"
 			type="preRenderView" />
 	</f:metadata>
+	
+	<f:loadBundle basename="br.com.websige.messages.basico.cadastro.fornecedor" var="teste" />
 
 	<ui:define name="title-complemento"> - Fornecedor </ui:define>
 
@@ -27,7 +29,7 @@
 
 			<h2 class="BigTopic">Dados Principais</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
-				<h:outputText value="Código" for="codigo" />
+				<h:outputText value="#{teste.codigo}" for="codigo" />
 				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
 
 				<h:outputText value="Descrição" for="descricao" />

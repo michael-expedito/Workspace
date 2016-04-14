@@ -13,21 +13,44 @@
 
 <h:body>
 	<h:form>
-		<p:panelGrid columns="3" id="gridPrincipal"
-			styleClass="semBorda" columnClasses="searchcombo, searchEdit, searchButton">
+		<p:panelGrid columns="3" id="gridPrincipal" styleClass="semBorda"
+			columnClasses="searchcombo, searchEdit, searchButton">
 
 			<p:selectOneMenu id="filtro" value="#{controller.filtro}">
 				<f:selectItems value="#{controller.filtros}" var="filtro"
 					itemValue="#{filtro}" itemLabel="#{filtro}" />
 			</p:selectOneMenu>
 
-			<p:inputText id="nome" size="53" value="#{controller.valor}" />
+			<p:inputText id="nome" size="30" value="#{controller.valor}" />
 
 			<p:commandButton value="Pesquisar" action="#{controller.pesquisar}"
 				update="@form" />
 
 		</p:panelGrid>
-		<ui:insert name="gridEntity" />
+		<ui:insert name="gridEntity">
+
+
+
+		</ui:insert>
+
+		<p:dataTable id="entitiesList" var="entity"
+			value="#{controller.entityListed}" widgetVar="entityTable"
+			rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:columns value="#{controller.columns}" var="column"
+				columnIndexVar="colIndex" sortBy="#{entity[column.property]}">
+				<f:facet name="header">
+					<h:outputText value="#{column.header}" />
+				</f:facet>
+				<h:outputText value="#{entity[column.property]}" />
+
+			</p:columns>
+			
+			<p:column style="width: 30px; text-align: center">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{controller.select(entity)}"
+    				process="@this" />
+    		</p:column>
+		</p:dataTable>
 
 	</h:form>
 
