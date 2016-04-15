@@ -13,19 +13,23 @@
 		</a> <a href="/adamantium/dashboard.xhtml"></a> <a id="topmenu-button"
 			class="Animated1"> <i class="icon-list2"></i>
 		</a>
-		<h:panelGrid columns="2">
-				
-			Language : 
-			<h:form>
-			<h:selectOneMenu value="#{languageBean.localeCode}">
-				<f:selectItems value="#{languageBean.countriesInMap}" var="countri" itemValue="#{countri}" />
-				<f:ajax listener="#{languageBean.countryLocaleCodeChanged}"
-					event="change"></f:ajax>
-			</h:selectOneMenu>
-</h:form>
-		</h:panelGrid>
 
 		<ul id="top-menu">
+			<li><a class="menulink Animated05"><i class="fa fa-language"></i>
+			<span>Idioma</span></a>  
+			<ul style="margin-left: -153px;">
+			<li>
+			<h:form>
+				<p:selectOneMenu value="#{languageBean.language}" style="width: 193px;"
+					onchange="submit()">
+					<f:selectItem itemValue="pt" itemLabel="Português" />
+					<f:selectItem itemValue="en" itemLabel="English" />
+					<f:selectItem itemValue="es" itemLabel="Español" />
+				</p:selectOneMenu>
+			</h:form>
+			</li>
+				</ul>
+			</li>
 			<li><a class="menulink Animated05"><i class="icon-search"></i>
 					<span>Search</span></a>
 				<ul style="margin-left: -150px;">
