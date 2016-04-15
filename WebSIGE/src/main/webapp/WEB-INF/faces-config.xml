@@ -3,20 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
-	<application>
-
-		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
-		<navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
-		<view-handler>org.primefaces.application.DialogViewHandler</view-handler>
-
-		<locale-config>
-			<default-locale>pt_BR</default-locale>	
-		</locale-config>
-		
-		<resource-bundle><base-name>br.com.websige.messages.basico.cadastro.fornecedor</base-name><var>fornecedorResource</var></resource-bundle>
-		<resource-bundle><base-name>br.com.websige.messages.basico.cadastro.empresa</base-name><var>empresaResource</var></resource-bundle>
-	   
-	</application>
 	<component>
 		<component-type>org.primefaces.component.AdamantiumMenu</component-type>
 		<component-class>org.primefaces.adamantium.component.menu.AdamantiumMenu</component-class>
@@ -29,4 +15,18 @@
 			<renderer-class>org.primefaces.adamantium.component.menu.AdamantiumMenuRenderer</renderer-class>
 		</renderer>
 	</render-kit>
+	<application>
+		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
+		<navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+		<view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+
+		<locale-config>
+			<default-locale>pt_BR</default-locale>	
+			<supported-locale>en_US</supported-locale>
+			<supported-locale>es_ES</supported-locale>
+		</locale-config>
+		
+		<resource-bundle><base-name>basico.cadastro.fornecedor.fornecedor</base-name><var>fornecedorResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.empresa.empresa</base-name><var>empresaResource</var></resource-bundle>
+	</application>
 </faces-config>

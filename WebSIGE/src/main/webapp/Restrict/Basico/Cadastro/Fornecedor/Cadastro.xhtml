@@ -30,11 +30,11 @@
 				<h:outputText value="#{fornecedorResource.codigo}" for="codigo" />
 				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
 
-				<h:outputText value="Descrição" for="descricao" />
+				<h:outputText value="#{fornecedorResource.descricao}" for="descricao" />
 				<p:inputText value="#{fornecedorBean.fornecedor.descricao}"
 					id="descricao" size="60" />
 
-				<h:outputText value="#{empresaResource.descricao}" for="tipoPessoa" />
+				<h:outputText value="#{fornecedorResource.tipoPessoa}" for="tipoPessoa" />
 				<p:selectOneMenu id="tipoPessoa"
 					value="#{fornecedorBean.fornecedor.tipoPessoa}">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
