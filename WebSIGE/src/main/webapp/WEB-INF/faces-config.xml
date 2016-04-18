@@ -28,5 +28,6 @@
 		
 		<resource-bundle><base-name>basico.cadastro.fornecedor.fornecedor</base-name><var>fornecedorResource</var></resource-bundle>
 		<resource-bundle><base-name>basico.cadastro.empresa.empresa</base-name><var>empresaResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.cbo.cbo</base-name><var>cboResource</var></resource-bundle>
 	</application>
 </faces-config>

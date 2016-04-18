@@ -7,7 +7,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
+
+import javax.faces.context.FacesContext;
 
 
 public class GenericSearchWindow<Entity,Filter> {
@@ -27,8 +31,6 @@ public class GenericSearchWindow<Entity,Filter> {
 	private String directory;
 	
 	private List<ColumnModel> columns;
-	
-	private String columnTemplate = "codigoOcupacao;tituloOcupacao";
 	
 	public GenericSearchWindow(GenericRepository<Entity> repository) {
 		super();
@@ -51,11 +53,14 @@ public class GenericSearchWindow<Entity,Filter> {
 	}
 	
 	private void createDynamicColumns() {
-        String[] columnKeys = columnTemplate.split(";");
+        String[] columnKeys = getColumnTemplate().split(";");
         columns = new ArrayList<ColumnModel>();   
-         
+        
+        Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        ResourceBundle bundle = ResourceBundle.getBundle(getParhResource(), locale);
+        
         for(String columnKey : columnKeys) {
-            columns.add(new ColumnModel(columnKey.toUpperCase(), columnKey));
+            columns.add(new ColumnModel(bundle.getString(columnKey.toString()), columnKey));
         }
     }
 
@@ -70,6 +75,11 @@ public class GenericSearchWindow<Entity,Filter> {
 	
 	public void setParameterInFilter() {
 		Class<?> classe = filter.getClass();
+		
+		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        ResourceBundle bundle = ResourceBundle.getBundle(getParhResource(), locale);
+        
+        ;
 		
 		for (Field field : classe.getDeclaredFields()) {
 			if (field.isAnnotationPresent(FilterLabel.class)) {
@@ -159,8 +169,13 @@ public class GenericSearchWindow<Entity,Filter> {
 		this.columns = columns;
 	}
 
-
-
+	public String getParhResource() {
+		return null;
+	}
+	
+	public String getColumnTemplate(){
+		return null;
+	}
 
 	static public class ColumnModel implements Serializable {
  

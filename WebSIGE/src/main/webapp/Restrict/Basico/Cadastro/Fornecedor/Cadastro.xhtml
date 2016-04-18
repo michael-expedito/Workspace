@@ -17,15 +17,14 @@
 	<ui:param name="controller" value="#{fornecedorBean}"></ui:param>
 
 	<ui:define name="informacao"> 
-		Registra os dados das filiais de uma empresa. O campo identificador da entidade é o código da fornecedor juntamente como o código da empresa.
-	    Neste cadastro é informado dados como CNPJ, IE, IM IS e outros dados que geralmente são diferentes dos dados da empresa principal.
+		#{fornecedorResource.informacao}
 	</ui:define>
 
 	<ui:define name="content-cadastro">
 
-		<p:fieldset legend="Fornecedor" toggleable="true" toggleSpeed="500">
+		<p:fieldset legend="#{fornecedorResource.titulo}" toggleable="true" toggleSpeed="500" style="margin-top:20px">
 
-			<h2 class="BigTopic">Dados Principais</h2>
+			<h2 class="BigTopic">#{fornecedorResource.tituloDadosPrincipais}</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<h:outputText value="#{fornecedorResource.codigo}" for="codigo" />
 				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
@@ -46,41 +45,41 @@
 
 			<h2 class="BigTopic">Documentação legal</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
-				<p:outputLabel value="Nome" for="nome" />
+				<p:outputLabel value="#{fornecedorResource.nome}" for="nome" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.nome}"
 					id="nome" size="60" />
 
-				<h:outputLabel value="CPF" for="cpf" />
+				<h:outputLabel value="#{fornecedorResource.cpf}" for="cpf" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cpf}"
 					id="cpf" />
 
-				<p:outputLabel value="Identificação" for="identificacao" />
+				<p:outputLabel value="#{fornecedorResource.identificacao}" for="identificacao" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.identificacao}"
 					id="identificacao" />
 
-				<p:outputLabel value="Orgão emissor" for="orgaoEmissor" />
+				<p:outputLabel value="#{fornecedorResource.orgaoEmissor}" for="orgaoEmissor" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.orgaoEmissor}"
 					id="orgaoEmissor" />
 
-				<p:outputLabel value="Data emissão" for="dataEmissao" />
+				<p:outputLabel value="#{fornecedorResource.dataEmissao}" for="dataEmissao" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataEmissao}"
 					id="dataEmissao" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
-				<p:outputLabel value="PIS/PASEB" for="pisPaseb" />
+				<p:outputLabel value="#{fornecedorResource.pisPaseb}" for="pisPaseb" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.pis}"
 					id="pisPaseb" />
 
-				<p:outputLabel value="Data nascimento" for="dataNascimento" />
+				<p:outputLabel value="#{fornecedorResource.dataNascimento}" for="dataNascimento" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataNascimento}"
 					id="dataNascimento" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
-				<p:outputLabel value="Estado civil" for="estadoCivil" />
+				<p:outputLabel value="#{fornecedorResource.estadoCivil}" for="estadoCivil" />
 				<p:selectOneMenu id="estadoCivil"
 					value="#{fornecedorBean.fornecedor.pessoaFisica.estadoCivil}">
 					<f:selectItems value="#{fornecedorBean.estadosCivis}"
@@ -111,7 +110,7 @@
 					value="#{fornecedorBean.fornecedor.pessoaFisica.tetoMaximo}"
 					id="tetoMaximo" />
 
-				<p:outputLabel value="CBO" for="cbo" />
+				<p:outputLabel value="#{cboResource.tituloOcupacao}" for="cbo" />
 				<h:panelGroup>
 				
 						
