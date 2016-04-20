@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+      
+    <composite:interface>
+    
+    	<composite:attribute name="value" required="true" />    	
+   		<composite:attribute name="eventEnitySelected" method-signature="java.lang.String listener(org.primefaces.event.SelectEvent)"/>
+    		
+    </composite:interface>
+    
+    	<composite:implementation>
+    	
+    	<p:autoComplete id="cbo" value="#{cc.attrs.value}" completeMethod="#{cBOSearchWindow.complete}"
+                        var="cbo" itemLabel="#{cbo.tituloOcupacao}" minQueryLength="5" itemValue="#{cbo}" forceSelection="true" size="60"/>
+                        
+					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
+						title="Pesquisa" style="-webkit-border-radius: 0px 15px 15px 0px !important;" 
+						action="#{cBOSearchWindow.openSearch}" process="@this"
+						update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{cc.attrs.eventEnitySelected}" process="@this"
+							update="cbo" />
+					</p:commandButton>
+					
+    	</composite:implementation>
+	
+</html>

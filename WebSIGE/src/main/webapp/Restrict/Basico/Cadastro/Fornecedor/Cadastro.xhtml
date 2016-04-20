@@ -4,7 +4,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:basico="http://java.sun.com/jsf/composite/searchWindows/basico">
 
 	<f:metadata>
 		<o:viewParam name="fornecedor" value="#{fornecedorBean.fornecedor}" />
@@ -110,23 +112,11 @@
 					value="#{fornecedorBean.fornecedor.pessoaFisica.tetoMaximo}"
 					id="tetoMaximo" />
 
-				<p:outputLabel value="#{cboResource.tituloOcupacao}" for="cbo" />
+				<p:outputLabel value="#{cboResource.tituloOcupacao}" />
 				<h:panelGroup>
-				
-						
-                    <p:autoComplete id="cbo" value="#{fornecedorBean.fornecedor.pessoaFisica.cbo}" completeMethod="#{cBOSearchWindow.complete}"
-                        var="cbo" itemLabel="#{cbo.tituloOcupacao}" minQueryLength="5" itemValue="#{cbo}" forceSelection="true" size="60"/>
-                        
-					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
-						title="Pesquisa" style="-webkit-border-radius: 0px 15px 15px 0px !important;" 
-						action="#{cBOSearchWindow.openSearch}" process="@this"
-						update="@none">
-						<p:ajax event="dialogReturn"
-							listener="#{fornecedorBean.cboSelecionado}" process="@this"
-							update="cbo" />
-					</p:commandButton>
+					<basico:cbo value="#{fornecedorBean.fornecedor.pessoaFisica.cbo}"
+								eventEnitySelected="#{fornecedorBean.cboSelecionado}" />
 				</h:panelGroup>
-
 			</p:panelGrid>
 
 			<p:panelGrid columns="2" style="margin-bottom:20px">

@@ -48,6 +48,7 @@ public class CBOSearchWindow extends GenericSearchWindow<CBO, CBOFilter> impleme
 		return new CBOFilter();
 	}
 	
+	@Override
 	public List<CBO> complete(String query){
 		setFilter(createFilter());
 		getFilter().setTituloOcupacao(query);

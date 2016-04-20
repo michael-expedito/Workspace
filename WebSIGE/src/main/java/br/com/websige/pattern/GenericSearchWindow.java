@@ -77,9 +77,7 @@ public class GenericSearchWindow<Entity,Filter> {
 		Class<?> classe = filter.getClass();
 		
 		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        ResourceBundle bundle = ResourceBundle.getBundle(getParhResource(), locale);
-        
-        ;
+        //ResourceBundle bundle = ResourceBundle.getBundle(getParhResource(), locale);
 		
 		for (Field field : classe.getDeclaredFields()) {
 			if (field.isAnnotationPresent(FilterLabel.class)) {
@@ -98,6 +96,13 @@ public class GenericSearchWindow<Entity,Filter> {
 				}
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Entity> complete(String query){
+		filter = createFilter();
+		//getFilter().setTituloOcupacao(query);
+		return repository.getByFilter((GenericFilter<Entity>) filter);
 	}
 
 	public void openSearch() {
