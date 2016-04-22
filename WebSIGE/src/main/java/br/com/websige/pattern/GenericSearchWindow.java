@@ -2,6 +2,8 @@ package br.com.websige.pattern;
 
 import org.primefaces.context.RequestContext;
 
+import br.com.websige.pattern.annotations.FilterLabel;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class GenericSearchWindow<Entity,Filter> {
 	public void setParameterInFilter() {
 		Class<?> classe = filter.getClass();
 		
-		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+		//Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         //ResourceBundle bundle = ResourceBundle.getBundle(getParhResource(), locale);
 		
 		for (Field field : classe.getDeclaredFields()) {

@@ -1,8 +1,8 @@
 package br.com.websige.filter.basico;
 
 import br.com.websige.model.basico.CBO;
-import br.com.websige.pattern.FilterLabel;
 import br.com.websige.pattern.GenericFilter;
+import br.com.websige.pattern.annotations.FilterLabel;
 
 public class CBOFilter extends GenericFilter<CBO> {
 	

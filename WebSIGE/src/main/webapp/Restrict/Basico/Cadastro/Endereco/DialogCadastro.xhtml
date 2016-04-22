@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/templates/pattern/dialogCadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="title"> Endereço </ui:define>
+
+	<ui:define name="body">
+
+		<p:panelGrid columns="2" id="gridPrincipal"
+			style="width: 100%; margin-top: 10px;">
+
+			<p:outputLabel value="Codigo" for="codigo" />
+			<p:inputText id="codigo" value="#{enderecoBean.endereco.codigo}"
+				size="10" maxlength="6" />
+
+			<p:outputLabel value="Codigo" for="cep" />
+			<p:inputText id="cep" value="#{enderecoBean.endereco.cep}"
+				size="10" maxlength="6" />
+
+			<p:outputLabel value="Codigo" for="logradouro" />
+			<p:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
+				size="10" maxlength="6" />
+
+			<p:outputLabel value="Codigo" for="numero" />
+			<p:inputText id="numero" value="#{enderecoBean.endereco.numero}"
+				size="10" maxlength="6" />
+				
+			<p:outputLabel value="Codigo" for="complemento" />
+			<p:inputText id="complemento" value="#{enderecoBean.endereco.complemento}"
+				size="10" maxlength="6" />
+				
+			<p:outputLabel value="Codigo" for="bairro" />
+			<p:inputText id="bairro" value="#{enderecoBean.endereco.bairro}"
+				size="10" maxlength="6" />
+				
+			<p:outputLabel value=Cidade for="bairro" />
+			
+			<p:outputLabel value="UF" for="bairro" />
+			
+			<p:outputLabel value="Estado" for="bairro" />
+				
+			<p:outputLabel value="Observação" for="observacao" />
+			<p:inputText id="observacao" value="#{enderecoBean.endereco.observacao}"
+				size="10" maxlength="6" />
+				
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+

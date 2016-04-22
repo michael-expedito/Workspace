@@ -39,6 +39,9 @@ public class Endereco implements IBaseEntity ,Serializable{
 	@Column(name = "END_DSCOMPLEMENTO", nullable = false, length = 20)
 	private String complemento;
 	
+	@Column(name = "END_NMBAIRRO" , nullable = false, length = 25)
+	private String bairro;
+	
 	@ManyToOne
 	@JoinColumn(name = "END_IDCIDADE", nullable = false, foreignKey = @ForeignKey(name = "FK1_ENDERECO_END"))
 	private Cidade cidade;
@@ -100,6 +103,15 @@ public class Endereco implements IBaseEntity ,Serializable{
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 	public Cidade getCidade() {
