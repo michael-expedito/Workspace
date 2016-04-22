@@ -7,8 +7,22 @@
 
 <h:head>
 	<meta charset="UTF-8" />
+
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title><ui:insert name="title" /></title>
 	<h:outputStylesheet name="style.css" library="css" />
-	<title>Seleção de cliente</title>
+	<h:outputScript name="js/ripple-effect.js" library="adamantium-layout" />
+	<h:outputScript name="js/perfect-scrollbar.js"
+		library="adamantium-layout" />
+	<h:outputScript name="js/layout.js" library="adamantium-layout" />
+
+	
 </h:head>
 
 <h:body>
@@ -34,8 +48,9 @@
 		</ui:insert>
 
 		<p:dataTable id="entitiesList" var="entity"
-			value="#{controller.entityListed}" widgetVar="entityTable"
-			rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			value="#{controller.entityListed}" widgetVar="entityTable" rows="10"
+			paginator="true" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom">
 			<p:columns value="#{controller.columns}" var="column"
 				columnIndexVar="colIndex" sortBy="#{entity[column.property]}">
 				<f:facet name="header">
@@ -44,15 +59,26 @@
 				<h:outputText value="#{entity[column.property]}" />
 
 			</p:columns>
-			
+
 			<p:column style="width: 30px; text-align: center">
-    			<p:commandButton icon="fa fa-search" styleClass="BlueButton"
-    				action="#{controller.select(entity)}"
-    				process="@this" />
-    		</p:column>
+				<p:commandButton icon="fa fa-search" styleClass="BlueButton"
+					action="#{controller.select(entity)}" process="@this" />
+			</p:column>
 		</p:dataTable>
 
 	</h:form>
-
+	<h:outputStylesheet name="css/core-layout.css"
+		library="adamantium-layout" />
+	<h:outputStylesheet name="css/animate.css" library="adamantium-layout" />
+	<h:outputStylesheet name="css/adamantium-font.css"
+		library="adamantium-layout" />
+	<h:outputStylesheet name="css/ripple-effect.css"
+		library="adamantium-layout" />
+	<h:outputStylesheet name="css/perfect-scrollbar.css"
+		library="adamantium-layout" />
+	<h:outputStylesheet name="css/font-awesome.css"
+		library="adamantium-layout" />
+	<h:outputStylesheet name="css/adamantium-layout.css"
+		library="adamantium-layout" />
 </h:body>
 </html>

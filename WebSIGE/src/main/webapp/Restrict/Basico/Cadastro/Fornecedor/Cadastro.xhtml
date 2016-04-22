@@ -160,9 +160,16 @@
 				value="#{fornecedorBean.fornecedor.enderecos}">
 
 				<f:facet name="{Buttons}">
-					<h:commandLink style="text-align: right;">
+				
+					<p:commandLink style="text-align: right;" >
 						<i class="fa fa-plus-circle Fs30 White"></i>
-					</h:commandLink>
+					</p:commandLink>
+					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
+						title="Pesquisa"
+						action="#{enderecoBean.openWindow}" process="@this"
+						update="@none">
+						
+					</p:commandButton>
 				</f:facet>
 
 				<p:column headerText="Código" style="text-align: left">

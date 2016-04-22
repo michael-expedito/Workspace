@@ -26,23 +26,17 @@ public class CBOSearchWindow extends GenericSearchWindow<CBO, CBOFilter> impleme
 		super(repository);
 		super.setDirectory("/SearchWindow/Basico/CBOSearchWindow");
 	}
-	
-	
-	
+
 	@Override
 	public String getParhResource() {
 		return "basico.cadastro.cbo.cbo";
 	}
-
-
-
+	
 	@Override
 	public String getColumnTemplate() {
 		return "codigoOcupacao;tituloOcupacao";
 	}
-
-
-
+	
 	@Override
 	public CBOFilter createFilter() {
 		return new CBOFilter();
