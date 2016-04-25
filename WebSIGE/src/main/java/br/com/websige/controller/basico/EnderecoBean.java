@@ -30,8 +30,5 @@ public class EnderecoBean implements Serializable {
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 470);
-
-		RequestContext.getCurrentInstance().openDialog("/Restrict/Basico/Cadastro/Endereco/DialogCadastro", opcoes, null); // "/SearchWindow/Basico/EmpresaSearchWindow"
 	}
 }
