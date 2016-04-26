@@ -5,7 +5,7 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('23', 'Cear�', 'CE');
+   ('23', 'Ceará', 'CE');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -17,7 +17,7 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('16', 'Amap�', 'AP');
+   ('16', 'Amapá', 'AP');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -33,15 +33,15 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('32', 'Esp�rito Santo', 'ES');
+   ('32', 'Espárito Santo', 'ES');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('52', 'Goi�s', 'GO');
+   ('52', 'Goiás', 'GO');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('21', 'Maranh�o', 'MA');
+   ('21', 'Maranháo', 'MA');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -57,11 +57,11 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('15', 'Par�', 'PA');
+   ('15', 'Pará', 'PA');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('25', 'Para�ba', 'PB');
+   ('25', 'Paraába', 'PB');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -69,11 +69,11 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('41', 'Paran�', 'PR');
+   ('41', 'Paraná', 'PR');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('22', 'Piau�', 'PI');
+   ('22', 'Piauí', 'PI');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -93,7 +93,7 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('11', 'Rond�nia', 'RO');
+   ('11', 'Rondõnia', 'RO');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
@@ -101,7 +101,7 @@ Insert into ESTADOUF_EUF
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values
-   ('35', 'S�o Paulo', 'SP');
+   ('35', 'São Paulo', 'SP');
 Insert into ESTADOUF_EUF
    (EUF_CDESTADO, EUF_DSESTADO, EUF_SGESTADO)
  Values

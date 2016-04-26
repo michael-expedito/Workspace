@@ -13,7 +13,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.websige.filter.basico.CidadeFilter;
-import br.com.websige.model.basico.CBO;
 import br.com.websige.model.basico.endereco.Cidade;
 import br.com.websige.pattern.GenericFilter;
 import br.com.websige.pattern.GenericRepository;
@@ -32,7 +31,7 @@ public class CidadeRepository extends GenericRepository<Cidade> implements Seria
 	public List<Cidade> getByFilter(GenericFilter<Cidade> filter) {
 		CidadeFilter cidadeFilter = (CidadeFilter) filter;
 		Session session = this.entityManager.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(CBO.class);
+		Criteria criteria = session.createCriteria(Cidade.class);
 		
 		if (cidadeFilter.getCodigo() != null && !"".equals(cidadeFilter.getCodigo())) {
 			criteria.add(Restrictions.eq("codigo", ((CidadeFilter) filter).getCodigo()));

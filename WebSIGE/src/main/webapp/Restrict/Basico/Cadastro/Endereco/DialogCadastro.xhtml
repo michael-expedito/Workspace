@@ -40,10 +40,10 @@
 				size="10" maxlength="6" />
 				
 			<p:outputLabel value="#{cboResource.tituloOcupacao}" />
-			<h:panelGroup>
+			
 				<basico:cidade value="#{enderecoBean.endereco.cidade}"
 								eventEnitySelected="#{enderecoBean.cidadeSelecionada}" />
-			</h:panelGroup>
+			
 				
 			<p:outputLabel value="#{enderecoResource.observacao}" for="observacao" />
 			<p:inputText id="observacao" value="#{enderecoBean.endereco.observacao}"

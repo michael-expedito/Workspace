@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
+import br.com.websige.model.basico.CBO;
 import br.com.websige.model.basico.endereco.Cidade;
 import br.com.websige.model.basico.endereco.Endereco;
 
@@ -28,9 +29,14 @@ public class EnderecoBean implements Serializable {
 	}
 
 	public void openWindow() {
+		endereco = new Endereco();
+		endereco.setCidade(new Cidade());
+		
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 600);
+		opcoes.put("contentWidth", 700);
 		RequestContext.getCurrentInstance().openDialog("/Restrict/Basico/Cadastro/Endereco/DialogCadastro" , opcoes, null);
 		
 	}
@@ -39,4 +45,6 @@ public class EnderecoBean implements Serializable {
 		Cidade cidade = (Cidade) event.getObject();
 		endereco.setCidade(cidade);
 	}
+	
+
 }

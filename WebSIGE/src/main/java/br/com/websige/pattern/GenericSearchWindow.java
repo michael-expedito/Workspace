@@ -106,8 +106,8 @@ public abstract class GenericSearchWindow<Entity,Filter> {
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 470);
-		
+		opcoes.put("contentHeight", 500);
+		opcoes.put("contentWidth", 600);
 		RequestContext.getCurrentInstance().openDialog(directory , opcoes, null); // "/SearchWindow/Basico/EmpresaSearchWindow"
 	}
 		

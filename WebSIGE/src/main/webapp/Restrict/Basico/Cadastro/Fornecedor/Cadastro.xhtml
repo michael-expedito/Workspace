@@ -4,8 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:basico="http://java.sun.com/jsf/composite/searchWindows/basico">
 
 	<f:metadata>
@@ -24,18 +23,21 @@
 
 	<ui:define name="content-cadastro">
 
-		<p:fieldset legend="#{fornecedorResource.titulo}" toggleable="true" toggleSpeed="500" style="margin-top:20px">
+		<p:fieldset legend="#{fornecedorResource.titulo}" toggleable="true"
+			toggleSpeed="500" style="margin-top:20px">
 
 			<h2 class="BigTopic">#{fornecedorResource.tituloDadosPrincipais}</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
 				<h:outputText value="#{fornecedorResource.codigo}" for="codigo" />
 				<p:inputText value="#{fornecedorBean.fornecedor.codigo}" id="codigo" />
 
-				<h:outputText value="#{fornecedorResource.descricao}" for="descricao" />
+				<h:outputText value="#{fornecedorResource.descricao}"
+					for="descricao" />
 				<p:inputText value="#{fornecedorBean.fornecedor.descricao}"
 					id="descricao" size="60" />
 
-				<h:outputText value="#{fornecedorResource.tipoPessoa}" for="tipoPessoa" />
+				<h:outputText value="#{fornecedorResource.tipoPessoa}"
+					for="tipoPessoa" />
 				<p:selectOneMenu id="tipoPessoa"
 					value="#{fornecedorBean.fornecedor.tipoPessoa}">
 					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
@@ -55,17 +57,20 @@
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cpf}"
 					id="cpf" />
 
-				<p:outputLabel value="#{fornecedorResource.identificacao}" for="identificacao" />
+				<p:outputLabel value="#{fornecedorResource.identificacao}"
+					for="identificacao" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.identificacao}"
 					id="identificacao" />
 
-				<p:outputLabel value="#{fornecedorResource.orgaoEmissor}" for="orgaoEmissor" />
+				<p:outputLabel value="#{fornecedorResource.orgaoEmissor}"
+					for="orgaoEmissor" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.orgaoEmissor}"
 					id="orgaoEmissor" />
 
-				<p:outputLabel value="#{fornecedorResource.dataEmissao}" for="dataEmissao" />
+				<p:outputLabel value="#{fornecedorResource.dataEmissao}"
+					for="dataEmissao" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataEmissao}"
 					id="dataEmissao" size="12" pattern="dd/MM/yyyy">
@@ -75,13 +80,15 @@
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.pis}"
 					id="pisPaseb" />
 
-				<p:outputLabel value="#{fornecedorResource.dataNascimento}" for="dataNascimento" />
+				<p:outputLabel value="#{fornecedorResource.dataNascimento}"
+					for="dataNascimento" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataNascimento}"
 					id="dataNascimento" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
-				<p:outputLabel value="#{fornecedorResource.estadoCivil}" for="estadoCivil" />
+				<p:outputLabel value="#{fornecedorResource.estadoCivil}"
+					for="estadoCivil" />
 				<p:selectOneMenu id="estadoCivil"
 					value="#{fornecedorBean.fornecedor.pessoaFisica.estadoCivil}">
 					<f:selectItems value="#{fornecedorBean.estadosCivis}"
@@ -115,7 +122,7 @@
 				<p:outputLabel value="#{cboResource.tituloOcupacao}" />
 				<h:panelGroup>
 					<basico:cbo value="#{fornecedorBean.fornecedor.pessoaFisica.cbo}"
-								eventEnitySelected="#{fornecedorBean.cboSelecionado}" />
+						eventEnitySelected="#{fornecedorBean.cboSelecionado}" />
 				</h:panelGroup>
 			</p:panelGrid>
 
@@ -160,15 +167,9 @@
 				value="#{fornecedorBean.fornecedor.enderecos}">
 
 				<f:facet name="{Buttons}">
-				
-					<p:commandLink style="text-align: right;" >
-						<i class="fa fa-plus-circle Fs30 White"></i>
-					</p:commandLink>
-					<p:commandButton icon="fa fa-search White" styleClass="BlueButton"
-						title="Pesquisa"
-						action="#{enderecoBean.openWindow}" process="@this"
-						update="@none">
-						
+					<p:commandButton icon="fa fa-plus-circle White"
+						styleClass="BlueButton" title="Pesquisa" value="Incluir"
+						action="#{enderecoBean.openWindow}" process="@this" update="@none">
 					</p:commandButton>
 				</f:facet>
 
@@ -183,15 +184,15 @@
 				<p:column headerText="Logradouro" style="text-align: left">
 					<p:outputLabel value="#{endereco.logradouro}" />
 				</p:column>
-				
+
 				<p:column headerText="Número" style="text-align: left">
 					<p:outputLabel value="#{endereco.numero}" />
 				</p:column>
-				
+
 				<p:column headerText="Cidade" style="text-align: left">
 					<p:outputLabel value="#{endereco.cidade.nome}" />
 				</p:column>
-				
+
 				<p:column headerText="UF" style="text-align: left">
 					<p:outputLabel value="#{endereco.estado.sigla}" />
 				</p:column>
@@ -204,13 +205,15 @@
 		<p:fieldset legend="Outras informações" toggleable="true"
 			toggleSpeed="500" style="margin-top:20px">
 			<p:panelGrid columns="2" style="margin-bottom:20px">
-			
+
 				<h:outputText value="Telefone" for="telefone" />
-				<p:inputText value="#{fornecedorBean.fornecedor.telefone}" id="telefone" size="10" />
+				<p:inputText value="#{fornecedorBean.fornecedor.telefone}"
+					id="telefone" size="10" />
 
 				<h:outputText value="E-mail" for="email" />
-				<p:inputText value="#{fornecedorBean.fornecedor.email}" id="email" size="60" />
-				
+				<p:inputText value="#{fornecedorBean.fornecedor.email}" id="email"
+					size="60" />
+
 			</p:panelGrid>
 		</p:fieldset>
 
