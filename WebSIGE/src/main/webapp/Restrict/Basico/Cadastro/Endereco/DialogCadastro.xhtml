@@ -5,7 +5,8 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:basico="http://java.sun.com/jsf/composite/searchWindows/basico">
 
 	<ui:define name="title"> Endereço </ui:define>
 
@@ -14,37 +15,37 @@
 		<p:panelGrid columns="2" id="gridPrincipal"
 			style="width: 100%; margin-top: 10px;">
 
-			<p:outputLabel value="Codigo" for="codigo" />
+			<p:outputLabel value="#{enderecoResource.codigo}" for="codigo" />
 			<p:inputText id="codigo" value="#{enderecoBean.endereco.codigo}"
 				size="10" maxlength="6" />
 
-			<p:outputLabel value="Codigo" for="cep" />
+			<p:outputLabel value="#{enderecoResource.cep}" for="cep" />
 			<p:inputText id="cep" value="#{enderecoBean.endereco.cep}"
 				size="10" maxlength="6" />
 
-			<p:outputLabel value="Codigo" for="logradouro" />
+			<p:outputLabel value="#{enderecoResource.logradouro}" for="logradouro" />
 			<p:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
 				size="10" maxlength="6" />
 
-			<p:outputLabel value="Codigo" for="numero" />
+			<p:outputLabel value="#{enderecoResource.numero}" for="numero" />
 			<p:inputText id="numero" value="#{enderecoBean.endereco.numero}"
 				size="10" maxlength="6" />
 				
-			<p:outputLabel value="Codigo" for="complemento" />
+			<p:outputLabel value="#{enderecoResource.complemento}" for="complemento" />
 			<p:inputText id="complemento" value="#{enderecoBean.endereco.complemento}"
 				size="10" maxlength="6" />
 				
-			<p:outputLabel value="Codigo" for="bairro" />
+			<p:outputLabel value="#{enderecoResource.bairro}" for="bairro" />
 			<p:inputText id="bairro" value="#{enderecoBean.endereco.bairro}"
 				size="10" maxlength="6" />
 				
-			<p:outputLabel value=Cidade for="bairro" />
-			
-			<p:outputLabel value="UF" for="bairro" />
-			
-			<p:outputLabel value="Estado" for="bairro" />
+			<p:outputLabel value="#{cboResource.tituloOcupacao}" />
+			<h:panelGroup>
+				<basico:cidade value="#{enderecoBean.endereco.cidade}"
+								eventEnitySelected="#{enderecoBean.cidadeSelecionada}" />
+			</h:panelGroup>
 				
-			<p:outputLabel value="Observação" for="observacao" />
+			<p:outputLabel value="#{enderecoResource.observacao}" for="observacao" />
 			<p:inputText id="observacao" value="#{enderecoBean.endereco.observacao}"
 				size="10" maxlength="6" />
 				

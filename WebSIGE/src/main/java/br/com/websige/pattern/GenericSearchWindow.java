@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
 
 
-public class GenericSearchWindow<Entity,Filter> {
+public abstract class GenericSearchWindow<Entity,Filter> {
 	
 	private Filter filter;
 	
@@ -100,12 +100,7 @@ public class GenericSearchWindow<Entity,Filter> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Entity> complete(String query){
-		filter = createFilter();
-		//getFilter().setTituloOcupacao(query);
-		return repository.getByFilter((GenericFilter<Entity>) filter);
-	}
+	public abstract List<Entity> complete(String query);
 
 	public void openSearch() {
 		Map<String, Object> opcoes = new HashMap<>();
@@ -120,9 +115,7 @@ public class GenericSearchWindow<Entity,Filter> {
 		RequestContext.getCurrentInstance().closeDialog(entity);
 	}
 	
-	public Filter createFilter(){
-		return null;
-	}
+	public abstract Filter createFilter();
 
 	public Filter getFilter() {
 		return filter;
@@ -176,13 +169,19 @@ public class GenericSearchWindow<Entity,Filter> {
 		this.columns = columns;
 	}
 
-	public String getParhResource() {
-		return null;
-	}
+	public abstract String getParhResource(); 
 	
-	public String getColumnTemplate(){
-		return null;
+	public abstract String getColumnTemplate();
+
+	
+	public GenericRepository<Entity> getRepository() {
+		return repository;
 	}
+
+	public void setRepository(GenericRepository<Entity> repository) {
+		this.repository = repository;
+	}
+
 
 	static public class ColumnModel implements Serializable {
  

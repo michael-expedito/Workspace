@@ -1,6 +1,7 @@
 package br.com.websige.searchwindow.basico;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -26,5 +27,23 @@ public class EmpresaSearchWindow extends GenericSearchWindow<Empresa, EmpresaFil
 	@Override
 	public EmpresaFilter createFilter() {
 		return new EmpresaFilter();
+	}
+
+	@Override
+	public String getParhResource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Empresa> complete(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getColumnTemplate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
