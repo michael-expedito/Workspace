@@ -48,11 +48,14 @@ public class CadastroBean<Entity,Filter> {
 	}
 
 	public void salvar() {
-		service.process(getEntity());
-		if(!service.hasFatalError()){
-			setEntity(createEntity());
+		try {
+			service.process(getEntity());
+			if(!service.hasFatalError()){
+				setEntity(createEntity());
+			}
+		} finally {
+			FacesUtil.addListMessageService(service.messages);
 		}
-		FacesUtil.addListMessageService(service.messages);
 	}
 	
 	public void excluir() {

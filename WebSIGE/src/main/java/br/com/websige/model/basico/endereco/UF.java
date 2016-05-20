@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.websige.pattern.annotations.ResourceEntity;
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name="ESTADOUF_EUF")
+@ResourceEntity(resourceDirectory="basico.cadastro.uf.uf")
 public class UF implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;

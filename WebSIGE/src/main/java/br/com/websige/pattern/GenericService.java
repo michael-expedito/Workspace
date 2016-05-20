@@ -33,13 +33,17 @@ public class GenericService<T> implements Serializable {
 		repository.validateEntity(entity, messages);
 
 		// Efetua as validações básicas da entidade
-		repository.validateSaveEntityBasic(entity, messages);
+	    repository.validateSaveEntityBasic(entity, messages);
 
 		// Se não foi encontrado nenhum erro FATAL ou ERRO nas validações acima
 		// o service segue persistindo
 		if (!hasFatalError()) {
-			((GenericRepository<T>) this.repository).persist(entity);
-			messages.add(new MessageService("INC0001", "Regisntro gravado com sucesso.", TypeMessageService.DEFAULT));
+			try {
+				((GenericRepository<T>) this.repository).persist(entity);
+				messages.add(new MessageService("INC0001", "Regisntro gravado com sucesso.", TypeMessageService.DEFAULT));	
+			} catch (Exception e) {
+				messages.add(new MessageService("INT000?",	"Erro não rastreado ao persistir a entidade", TypeMessageService.FATAL));
+			}
 		}
 	}
 	
@@ -52,7 +56,7 @@ public class GenericService<T> implements Serializable {
 		
 		if (!hasFatalError()) {
 			((GenericRepository<T>) this.repository).delete(entity);
-			messages.add(new MessageService("EXC0001", "Regisntro removido com sucesso.", TypeMessageService.DEFAULT));
+			messages.add(new MessageService("EXC0001", "Registro removido com sucesso.", TypeMessageService.DEFAULT));
 		}
 	}
 

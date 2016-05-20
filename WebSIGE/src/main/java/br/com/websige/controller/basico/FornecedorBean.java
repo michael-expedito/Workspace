@@ -92,14 +92,8 @@ public class FornecedorBean extends CadastroBean<Fornecedor, FornecedorFilter>im
 		getEntity().getPessoaFisica().setCbo(cbo);
 	}
 	
-	/*
-	public void empresaSelecionada(SelectEvent event) {
-		Empresa empresa = (Empresa) event.getObject();
-		getEntity().setEmpresa(empresa);
+	public void enderecoRetornado(org.primefaces.event.SelectEvent event) {
+		Endereco endereco = (Endereco) event.getObject();
+		getEntity().getEnderecos().add(endereco);
 	}
-
-	public List<Empresa> getEmpresaListFilter() {
-		return empresaRepository.getAll();
-	}
-	*/
 }

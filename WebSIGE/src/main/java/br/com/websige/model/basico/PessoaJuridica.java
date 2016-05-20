@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.websige.pattern.annotations.ResourceEntity;
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name="PESJURIDICA_PJ")
+@ResourceEntity(resourceDirectory="basico.cadastro.pessoajuridica.pessoajuridica")
 public class PessoaJuridica implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -21,10 +23,10 @@ public class PessoaJuridica implements IBaseEntity ,Serializable{
 	@Column(name = "PJ_ID")
 	private Long id;
 	
-	@Column(name = "PJ_DCCNPJ", nullable = true, length = 14)
+	@Column(name = "PJ_DCCNPJ", nullable = false, length = 14)
 	private String cnpj;
 	
-	@Column(name = "PJ_NMRAZAOSOCIAL", nullable = true, length = 40)
+	@Column(name = "PJ_NMRAZAOSOCIAL", nullable = false, length = 40)
 	private String razaoSocial;
 	
 	@Column(name = "PJ_NMFANTASIA", nullable = true, length = 40)

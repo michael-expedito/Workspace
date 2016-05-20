@@ -30,5 +30,10 @@
 		<resource-bundle><base-name>basico.cadastro.empresa.empresa</base-name><var>empresaResource</var></resource-bundle>
 		<resource-bundle><base-name>basico.cadastro.cbo.cbo</base-name><var>cboResource</var></resource-bundle>
 		<resource-bundle><base-name>basico.cadastro.endereco.endereco</base-name><var>enderecoResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.cidade.cidade</base-name><var>cidadeResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.pais.pais</base-name><var>paisResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.pessoafisica.pessoafisica</base-name><var>pessoafisicaResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.pessoajuridica.pessoajuridica</base-name><var>pessoajuridicaResource</var></resource-bundle>
+		
 	</application>
 </faces-config>

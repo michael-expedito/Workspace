@@ -19,10 +19,12 @@ import javax.persistence.TemporalType;
 
 import br.com.websige.model.basico.endereco.Pais;
 import br.com.websige.model.basico.enuns.EstadoCivil;
+import br.com.websige.pattern.annotations.ResourceEntity;
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name="PESFISICA_PF")
+@ResourceEntity(resourceDirectory="basico.cadastro.pessoafisica.pessoafisica")
 public class PessoaFisica implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -62,7 +64,7 @@ public class PessoaFisica implements IBaseEntity ,Serializable{
 	@Column(name = "PF_DCINSCRICAOINSS", nullable = true, length = 15)
 	private String matriculaInss;
 	
-	@Column(name = "PF_VLSALARIOCONTRIBUICAO", precision = 10, scale = 2)
+	@Column(name = "PF_VLSALARIOCONTRIBUICAO", nullable = true, precision = 10, scale = 2)
 	private BigDecimal salarioContribuicao;
 	
 	@Column(name = "PF_NRDEPENDENTES", nullable = true)

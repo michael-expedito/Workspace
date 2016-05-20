@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.websige.pattern.annotations.ResourceEntity;
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name="PAIS_PAS")
+@ResourceEntity(resourceDirectory="basico.cadastro.pais.pais")
 public class Pais implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;

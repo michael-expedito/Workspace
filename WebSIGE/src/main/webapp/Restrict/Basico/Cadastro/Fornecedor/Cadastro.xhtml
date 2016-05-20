@@ -49,45 +49,45 @@
 
 			<h2 class="BigTopic">Documentação legal</h2>
 			<p:panelGrid columns="2" style="margin-bottom:20px">
-				<p:outputLabel value="#{fornecedorResource.nome}" for="nome" />
+				<p:outputLabel value="#{pessoafisicaResource.nome}" for="nome" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.nome}"
 					id="nome" size="60" />
 
-				<h:outputLabel value="#{fornecedorResource.cpf}" for="cpf" />
+				<h:outputLabel value="#{pessoafisicaResource.cpf}" for="cpf" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.cpf}"
 					id="cpf" />
 
-				<p:outputLabel value="#{fornecedorResource.identificacao}"
+				<p:outputLabel value="#{pessoafisicaResource.identificacao}"
 					for="identificacao" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.identificacao}"
 					id="identificacao" />
 
-				<p:outputLabel value="#{fornecedorResource.orgaoEmissor}"
+				<p:outputLabel value="#{pessoafisicaResource.orgaoEmissor}"
 					for="orgaoEmissor" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.orgaoEmissor}"
 					id="orgaoEmissor" />
 
-				<p:outputLabel value="#{fornecedorResource.dataEmissao}"
+				<p:outputLabel value="#{pessoafisicaResource.dataEmissao}"
 					for="dataEmissao" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataEmissao}"
 					id="dataEmissao" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
-				<p:outputLabel value="#{fornecedorResource.pisPaseb}" for="pisPaseb" />
+				<p:outputLabel value="#{pessoafisicaResource.pis}" for="pisPaseb" />
 				<p:inputText value="#{fornecedorBean.fornecedor.pessoaFisica.pis}"
 					id="pisPaseb" />
 
-				<p:outputLabel value="#{fornecedorResource.dataNascimento}"
+				<p:outputLabel value="#{pessoafisicaResource.dataNascimento}"
 					for="dataNascimento" />
 				<p:calendar
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dataNascimento}"
 					id="dataNascimento" size="12" pattern="dd/MM/yyyy">
 				</p:calendar>
 
-				<p:outputLabel value="#{fornecedorResource.estadoCivil}"
+				<p:outputLabel value="#{pessoafisicaResource.estadoCivil}"
 					for="estadoCivil" />
 				<p:selectOneMenu id="estadoCivil"
 					value="#{fornecedorBean.fornecedor.pessoaFisica.estadoCivil}">
@@ -96,12 +96,12 @@
 						itemLabel="#{estadoCivil.descricao}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Matrícula INSS" for="matriculaInss" />
+				<p:outputLabel value="#{pessoafisicaResource.matriculaInss}" for="matriculaInss" />
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaFisica.matriculaInss}"
 					id="matriculaInss" />
 
-				<p:outputLabel value="Salario da contribuição"
+				<p:outputLabel value="#{pessoafisicaResource.salarioContribuicao}"
 					for="salarioContribuicao" />
 				<p:inputText id="salarioContribuicao"
 					value="#{fornecedorBean.fornecedor.pessoaFisica.salarioContribuicao}">
@@ -109,17 +109,17 @@
 						minFractionDigits="2" />
 				</p:inputText>
 
-				<p:outputLabel value="Número de dependentes" for="depententes" />
+				<p:outputLabel value="#{pessoafisicaResource.dependentes}" for="depententes" />
 				<p:spinner
 					value="#{fornecedorBean.fornecedor.pessoaFisica.dependentes}"
 					id="depententes" />
 
-				<h:outputText value="Teto máximo" for="tetoMaximo" />
+				<h:outputText value="#{pessoafisicaResource.tetoMaximo}" for="tetoMaximo" />
 				<p:selectBooleanCheckbox
 					value="#{fornecedorBean.fornecedor.pessoaFisica.tetoMaximo}"
 					id="tetoMaximo" />
 
-				<p:outputLabel value="#{cboResource.tituloOcupacao}" />
+				<p:outputLabel value="#{pessoafisicaResource.cbo}" />
 				<h:panelGroup>
 					<basico:cbo value="#{fornecedorBean.fornecedor.pessoaFisica.cbo}"
 						eventEnitySelected="#{fornecedorBean.cboSelecionado}" />
@@ -155,6 +155,12 @@
 				<p:inputText
 					value="#{fornecedorBean.fornecedor.pessoaJuridica.inscricaoSuframa}"
 					id="inscricaoSuframa" />
+
+				<p:outputLabel value="Inscrição Cidade" for="cidade" />
+				<p:autoComplete id="cidade"
+					completeMethod="#{cidadeSearchWindow.complete}" var="cidade" converter="cidadeConverter"
+					minQueryLength="5" itemValue="#{cidade}" forceSelection="true" itemLabel="#{cidade.nome}"
+					size="40" />
 			</p:panelGrid>
 
 		</p:fieldset>
@@ -170,6 +176,9 @@
 					<p:commandButton icon="fa fa-plus-circle White"
 						styleClass="BlueButton" title="Pesquisa" value="Incluir"
 						action="#{enderecoBean.openWindow}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{fornecedorBean.enderecoRetornado}" process="@this"
+							update="dtEnderecos" />
 					</p:commandButton>
 				</f:facet>
 
@@ -197,7 +206,6 @@
 					<p:outputLabel value="#{endereco.estado.sigla}" />
 				</p:column>
 
-
 			</p:dataTable>
 
 		</p:fieldset>
@@ -216,7 +224,6 @@
 
 			</p:panelGrid>
 		</p:fieldset>
-
 
 	</ui:define>
 </ui:composition>

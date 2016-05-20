@@ -18,10 +18,9 @@
 <composite:implementation>
 
 	<p:autoComplete id="cidade" value="#{cc.attrs.value}"
-		completeMethod="#{cidadeSearchWindow.complete}" var="cidade"
-		itemLabel="#{cidade.nome}" minQueryLength="5" itemValue="#{cidade}"
-		forceSelection="true" size="40" />
-
+					completeMethod="#{cidadeSearchWindow.complete}" var="cidade" converter="cidadeConverter"
+					minQueryLength="5" itemValue="#{cidade}" forceSelection="true" itemLabel="#{cidade.nome}"
+					size="40" />
 	<p:commandButton icon="fa fa-search White" styleClass="RedButton"
 		title="Pesquisa"
 		style="-webkit-border-radius: 0px 15px 15px 0px !important;"

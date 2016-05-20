@@ -10,9 +10,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import br.com.websige.pattern.GenericEntity;
+import br.com.websige.pattern.annotations.ResourceEntity;
 
 @Entity
 @Table(name = "EMPRESA_EMP")
+@ResourceEntity(resourceDirectory="basico.cadastro.empresa.empresa")
 public class Empresa extends GenericEntity<Empresa> implements Serializable {
 
 	private static final long serialVersionUID = 1L;

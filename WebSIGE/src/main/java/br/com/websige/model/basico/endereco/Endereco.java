@@ -11,10 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.websige.pattern.annotations.ResourceEntity;
 import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name = "ENDERECO_END")
+@ResourceEntity(resourceDirectory="basico.cadastro.endereco.endereco")
 public class Endereco implements IBaseEntity ,Serializable{
 
 	private static final long serialVersionUID = 1L;

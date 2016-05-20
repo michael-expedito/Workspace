@@ -11,46 +11,73 @@
 	<ui:define name="title"> Endereço </ui:define>
 
 	<ui:define name="body">
+		<h:form id="frmEndereco">
+			<p:panelGrid columns="2" id="gridPrincipal"
+				style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
 
-		<p:panelGrid columns="2" id="gridPrincipal"
-			style="width: 100%; margin-top: 10px;">
+				<p:outputLabel value="#{enderecoResource.codigo}" for="codigo" />
+				<p:inputText id="codigo" value="#{enderecoBean.endereco.codigo}"
+					size="3" maxlength="3" />
 
-			<p:outputLabel value="#{enderecoResource.codigo}" for="codigo" />
-			<p:inputText id="codigo" value="#{enderecoBean.endereco.codigo}"
-				size="10" maxlength="6" />
+				<p:outputLabel value="#{enderecoResource.cep}" for="cep" />
+				<p:inputText id="cep" value="#{enderecoBean.endereco.cep}" size="9"
+					maxlength="9" />
 
-			<p:outputLabel value="#{enderecoResource.cep}" for="cep" />
-			<p:inputText id="cep" value="#{enderecoBean.endereco.cep}"
-				size="10" maxlength="6" />
+				<p:outputLabel value="#{enderecoResource.logradouro}"
+					for="logradouro" />
+				<p:inputText id="logradouro"
+					value="#{enderecoBean.endereco.logradouro}" size="40"
+					maxlength="40" />
 
-			<p:outputLabel value="#{enderecoResource.logradouro}" for="logradouro" />
-			<p:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
-				size="10" maxlength="6" />
+				<p:outputLabel value="#{enderecoResource.numero}" for="numero" />
+				<p:inputText id="numero" value="#{enderecoBean.endereco.numero}"
+					size="7" maxlength="7" />
 
-			<p:outputLabel value="#{enderecoResource.numero}" for="numero" />
-			<p:inputText id="numero" value="#{enderecoBean.endereco.numero}"
-				size="10" maxlength="6" />
+				<p:outputLabel value="#{enderecoResource.complemento}"
+					for="complemento" />
+				<p:inputText id="complemento"
+					value="#{enderecoBean.endereco.complemento}" size="20"
+					maxlength="20" />
+
+				<p:outputLabel value="#{enderecoResource.bairro}" for="bairro" />
+				<p:inputText id="bairro" value="#{enderecoBean.endereco.bairro}"
+					size="25" maxlength="25" />
+
+				<p:outputLabel value="#{enderecoResource.cidade}" />
+				<p:autoComplete id="cidade" value="#{enderecoBean.endereco.cidade}"
+					completeMethod="#{cidadeSearchWindow.complete}" var="cidade"
+					converter="cidadeConverter" minQueryLength="4"
+					itemValue="#{cidade}" forceSelection="true" dropdown="true"
+					itemLabel="#{cidade.nome}" size="35" maxlength="35" scrollHeight="100"/>
+
+				<p:outputLabel value="Estado" for="estado"/>
+				<p:selectOneMenu id="estado" value="#{enderecoBean.endereco.estado}">
+					<f:selectItem itemLabel="Selecione"/>
+					<f:selectItems value="#{enderecoBean.UFs}" var="uf"
+						itemValue="#{uf}" itemLabel="#{uf.sigla}" />
+				</p:selectOneMenu>
 				
-			<p:outputLabel value="#{enderecoResource.complemento}" for="complemento" />
-			<p:inputText id="complemento" value="#{enderecoBean.endereco.complemento}"
-				size="10" maxlength="6" />
-				
-			<p:outputLabel value="#{enderecoResource.bairro}" for="bairro" />
-			<p:inputText id="bairro" value="#{enderecoBean.endereco.bairro}"
-				size="10" maxlength="6" />
-				
-			<p:outputLabel value="#{cboResource.tituloOcupacao}" />
-			
-				<basico:cidade value="#{enderecoBean.endereco.cidade}"
-								eventEnitySelected="#{enderecoBean.cidadeSelecionada}" />
-			
-				
-			<p:outputLabel value="#{enderecoResource.observacao}" for="observacao" />
-			<p:inputText id="observacao" value="#{enderecoBean.endereco.observacao}"
-				size="10" maxlength="6" />
-				
-		</p:panelGrid>
+				<p:outputLabel value="Pais" />
+				<p:autoComplete id="pais" value="#{enderecoBean.endereco.pais}"
+					completeMethod="#{paisSearchWindow.complete}" var="pais"
+					converter="PaisConverter" minQueryLength="4"
+					itemValue="#{pais}" forceSelection="true" dropdown="true"
+					itemLabel="#{pais.nome}" size="35" maxlength="48" scrollHeight="100"/>
 
+				<p:outputLabel value="#{enderecoResource.observacao}"
+					for="observacao" />
+				<p:inputTextarea value="#{enderecoBean.endereco.observacao}"
+					rows="2" cols="40" maxlength="80" autoResize="false"
+					id="observacao" />
+			</p:panelGrid>
+			<p:toolbar>
+				<f:facet name="right">
+					<p:commandButton value="Confirmar" icon="fa fa-check"
+						action="#{enderecoBean.confirmar}" process="frmEndereco @this" />
+				</f:facet>
+			</p:toolbar>
+
+		</h:form>
 	</ui:define>
 
 </ui:composition>

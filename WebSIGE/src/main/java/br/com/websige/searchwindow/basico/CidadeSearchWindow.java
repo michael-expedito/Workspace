@@ -19,6 +19,9 @@ public class CidadeSearchWindow extends GenericSearchWindow<Cidade, CidadeFilter
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
+	private CidadeRepository cidadeRepository;
+	
+	@Inject
 	public CidadeSearchWindow(CidadeRepository repository) {
 		super(repository);
 		super.setDirectory("/SearchWindow/Basico/CidadeSearchWindow");
@@ -28,7 +31,8 @@ public class CidadeSearchWindow extends GenericSearchWindow<Cidade, CidadeFilter
 	public List<Cidade> complete(String query) {
 		setFilter(createFilter());
 		getFilter().setNome(query);
-		return super.getRepository().getByFilter(getFilter());	}
+		return cidadeRepository.getByFilter(getFilter());	
+	}
 
 	@Override
 	public CidadeFilter createFilter() {
