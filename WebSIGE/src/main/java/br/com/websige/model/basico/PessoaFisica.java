@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,20 +17,15 @@ import javax.persistence.TemporalType;
 
 import br.com.websige.model.basico.endereco.Pais;
 import br.com.websige.model.basico.enuns.EstadoCivil;
+import br.com.websige.pattern.GenericEntity;
 import br.com.websige.pattern.annotations.ResourceEntity;
-import br.com.websige.pattern.interfaces.IBaseEntity;
 
 @Entity
 @Table(name="PESFISICA_PF")
 @ResourceEntity(resourceDirectory="basico.cadastro.pessoafisica.pessoafisica")
-public class PessoaFisica implements IBaseEntity ,Serializable{
+public class PessoaFisica extends GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "PF_ID")
-	private Long id;
 	
 	@Column(name = "PF_DCCPF", nullable = false, length = 11)
 	private String cpf;
@@ -80,14 +73,6 @@ public class PessoaFisica implements IBaseEntity ,Serializable{
 	@ManyToOne
 	@JoinColumn(name = "PF_IDPAISNACIONALIDADE", nullable = true, foreignKey = @ForeignKey(name = "FK2_PESFISICA_PF") )
 	private Pais nacionalidade;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getCpf() {
 		return cpf;
@@ -199,30 +184,5 @@ public class PessoaFisica implements IBaseEntity ,Serializable{
 
 	public void setNacionalidade(Pais nacionalidade) {
 		this.nacionalidade = nacionalidade;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PessoaFisica other = (PessoaFisica) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 }

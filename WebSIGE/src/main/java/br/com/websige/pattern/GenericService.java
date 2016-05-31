@@ -40,7 +40,7 @@ public class GenericService<T> implements Serializable {
 		if (!hasFatalError()) {
 			try {
 				((GenericRepository<T>) this.repository).persist(entity);
-				messages.add(new MessageService("INC0001", "Regisntro gravado com sucesso.", TypeMessageService.DEFAULT));	
+				messages.add(new MessageService("INC0001", "Registro gravado com sucesso.", TypeMessageService.DEFAULT));	
 			} catch (Exception e) {
 				messages.add(new MessageService("INT000?",	"Erro não rastreado ao persistir a entidade", TypeMessageService.FATAL));
 			}

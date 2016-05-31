@@ -10,12 +10,12 @@
         <h:form id="menuform">
             <pm:menu>
                 <p:menuitem id="rm_dashboard" value=" Dashboard" icon="icon-feather"/>
-                <!-- <p:submenu id="rm_orientation" label=" Menu Options" icon="icon-menu">
+                 <p:submenu id="rm_orientation" label=" Menu Options" icon="icon-menu">
                     <p:menuitem id="rm_top" value=" Top Menu" icon="icon-layout7" url="#" onclick="Adamantium.changeMenuLayout('top');return false;" />
                     <p:menuitem id="rm_left" value=" Left Menu" icon="icon-layout14" url="#" onclick="Adamantium.changeMenuLayout('left');return false;" />
                     <p:menuitem id="rm_dark" value=" Dark Menu" icon="icon-pen-alt-fill" url="#" onclick="$('body').addClass('dark');return false;" />
                     <p:menuitem id="rm_light" value=" Light Menu" icon="icon-pen-alt-stroke" url="#" onclick="$('body').removeClass('dark');return false;" />
-                </p:submenu> -->
+                </p:submenu>
 
                 <p:submenu id="comuns" label="Cadastros Comuns" icon="icon-ruler">
                     <p:submenu id="rm_sm1" label="Cadastros" icon="icon-plus-alt">
@@ -25,6 +25,27 @@
                          <p:menuitem id="cliente" value="Cliente"  />
                     </p:submenu>
                     <p:submenu id="rm_sm2" label="Processos" icon="icon-folder-stroke">
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu id="crm" label="CRM" icon="icon-ruler">
+                    <p:submenu id="crm_c" label="Cadastros" icon="icon-plus-alt">
+                         
+                    </p:submenu>
+                    <p:submenu id="crm_p" label="Processos" icon="icon-folder-stroke">
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu id="contasReceber" label="Contas a Receber" icon="icon-ruler">
+                    <p:submenu id="contasReceber_c" label="Cadastros" icon="icon-plus-alt">
+                         
+                    </p:submenu>
+                    <p:submenu id="contasReceber_p" label="Processos" icon="icon-folder-stroke">
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu id="contasPagar" label="Contas a Pagar" icon="icon-ruler">
+                    <p:submenu id="contasPagar_c" label="Cadastros" icon="icon-plus-alt">
+                         
+                    </p:submenu>
+                    <p:submenu id="contasPagar_p" label="Processos" icon="icon-folder-stroke">
                     </p:submenu>
                 </p:submenu>
                 <!-- <p:menuitem id="rm_promotion" value=" Promotion Page" icon="icon-globe" outcome="/promotion-page"/>

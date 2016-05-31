@@ -1,7 +1,7 @@
 package br.com.websige.model.basico.enuns;
 
 public enum TipoPessoa {
-	FISICA("Física"), JURIDICA("Jurídica");
+	JURIDICA("Jurídica"), FISICA("Física");
 	
 	private String descricao;
 	

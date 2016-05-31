@@ -79,5 +79,11 @@ public class FilialBean extends CadastroBean<Filial, FilialFilter>implements Ser
 	public List<Empresa> getEmpresaListFilter() {
 		return empresaRepository.getAll();
 	}
+
+	@Override
+	public void createSubEntities() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

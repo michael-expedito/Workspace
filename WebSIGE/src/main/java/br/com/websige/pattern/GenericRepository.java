@@ -48,7 +48,7 @@ public class GenericRepository<T> implements Serializable {
 	}
 
 	public void delete(T entity) {
-		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity<T>) entity).getId()));
+		entityManager.remove(this.entityManager.getReference(getTypeClass(), ((GenericEntity) entity).getId()));
 	}
 
 	public List<T> getAll() {
@@ -61,7 +61,7 @@ public class GenericRepository<T> implements Serializable {
 
 	public void validateSaveEntityBasic(T entity, List<MessageService> messages) {
 		Class<?> classe = entity.getClass();
-		String resourceDirectory, fieldNameTranslated = null;
+		String resourceDirectory, fieldNameTranslated, classNameTranslated = null;
 		ResourceBundle bundle = null;
 		if (classe.isAnnotationPresent(ResourceEntity.class)){
 			ResourceEntity resourceEntity = classe.getAnnotation(ResourceEntity.class);
@@ -69,6 +69,7 @@ public class GenericRepository<T> implements Serializable {
 			if (resourceDirectory != null){
 				Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		        bundle = ResourceBundle.getBundle(resourceDirectory, locale);
+		        classNameTranslated =  bundle.getString("entityName");
 			}
 		}
 
@@ -89,16 +90,16 @@ public class GenericRepository<T> implements Serializable {
 					if (valueObj != null) {	
 						String value = valueObj.toString();
 						if ((coluna.nullable() == false) && value.trim() == "") {
-							messages.add(new MessageService("INT0002", fieldNameTranslated + " é um campo obrigatório",
+							messages.add(new MessageService("INT0002","(" + classNameTranslated + ") " + fieldNameTranslated + " é um campo obrigatório",
 									TypeMessageService.FATAL));
 						}
 						if ((coluna.length() > 0) && (value.length() > coluna.length())) {
-							messages.add(new MessageService("INT0003", "O campo " + fieldNameTranslated
+							messages.add(new MessageService("INT0003","(" + classNameTranslated + ") O campo " + fieldNameTranslated
 									+ " pode ter no máximo " + coluna.length() + " caracteres.",
 									TypeMessageService.FATAL));
 						}
 					} else if (valueObj == null && coluna.nullable() == false) {
-						messages.add(new MessageService("INT0002", fieldNameTranslated + " é um campo obrigatório",
+						messages.add(new MessageService("INT0002","(" + classNameTranslated + ") " + fieldNameTranslated + " é um campo obrigatório",
 								TypeMessageService.FATAL));
 					}
 				}
@@ -110,7 +111,7 @@ public class GenericRepository<T> implements Serializable {
 						} else {
 							fieldNameTranslated = field.getName();
 						}
-						messages.add(new MessageService("INT0002", fieldNameTranslated + " é um campo obrigatório",
+						messages.add(new MessageService("INT0002","(" + classNameTranslated + ") " + fieldNameTranslated + " é um campo obrigatório",
 								TypeMessageService.FATAL));
 					} else if (valueObj != null){
 						validateSaveEntityBasic((T) field.get(entity), messages);

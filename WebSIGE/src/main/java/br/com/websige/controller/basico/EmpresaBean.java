@@ -61,5 +61,11 @@ public class EmpresaBean extends CadastroBean<Empresa, EmpresaFilter>implements 
 	@Override
 	protected String getParameterURL(Empresa entityConsulted) {
 		return "empresa=" + entityConsulted.getId();
+	}
+
+	@Override
+	public void createSubEntities() {
+		// TODO Auto-generated method stub
+		
 	};
 }

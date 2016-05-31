@@ -1,10 +1,13 @@
 package br.com.websige.pattern;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.faces.context.FacesContext;
 
 import br.com.websige.util.FacesUtil;
 
-public class CadastroBean<Entity,Filter> {
+public abstract class CadastroBean<Entity,Filter> {
 
 	private Entity entity;
 	private Filter filter;
@@ -13,6 +16,11 @@ public class CadastroBean<Entity,Filter> {
 	private GenericService<Entity> service;
 	
 	private String directory;
+	
+	public abstract Entity createEntity();
+	protected abstract String getParameterURL(Entity entityConsulted);
+	public abstract Filter createFilter();
+	public abstract void createSubEntities();
 	
 	public CadastroBean(GenericRepository<Entity> repository, GenericService<Entity> service) {
 		if (getEntity() == null) {
@@ -26,44 +34,51 @@ public class CadastroBean<Entity,Filter> {
 	public void startCadastro() {
 		if (getEntity() == null) {
 			setEntity(createEntity());
-			createSubEntities();
 		}
-	}
-	
-	public void createSubEntities(){
-		
+		createSubEntities();
 	}
 	
 	public void startConsulta() {
 		if (getFilter() == null) {
-			setFilter(createFilter());
-			
+			setFilter(createFilter());		
 		}
 		listEntity = getRepository().getAll();
-		loadEntitiesFilters();
-	}
-	
-	public void loadEntitiesFilters(){
-		
 	}
 
 	public void salvar() {
 		try {
 			service.process(getEntity());
+			FacesUtil.addListMessageService(service.messages);
 			if(!service.hasFatalError()){
 				setEntity(createEntity());
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/WebSIGE"+directory+"Cadastro.xhtml");
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
-			FacesUtil.addListMessageService(service.messages);
-		}
+			createSubEntities();
+		}	
+	}
+	
+	public void limpar(){
+		setEntity(createEntity());
 	}
 	
 	public void excluir() {
-		service.revertProcess(getEntity());
-		if(!service.hasFatalError()){
-			setEntity(createEntity());
+		try {
+			service.revertProcess(getEntity());
+			FacesUtil.addListMessageService(service.messages);
+			if(!service.hasFatalError()){
+				setEntity(createEntity());
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/WebSIGE"+directory+"Cadastro.xhtml");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			createSubEntities();
 		}
-		FacesUtil.addListMessageService(service.messages);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -89,10 +104,6 @@ public class CadastroBean<Entity,Filter> {
 	
 	public String openEntity(Entity entityConsulted){
 		return this.directory + "Cadastro?faces-redirect=true&" + getParameterURL(entityConsulted);
-	}
-
-	protected String getParameterURL(Entity entityConsulted) {
-		return null;
 	}
 
 	public boolean getRenderedSalvar()
@@ -156,18 +167,7 @@ public class CadastroBean<Entity,Filter> {
 		this.listEntity = listEntity;
 	}
 
-	public Entity createEntity(){
-		return null;
-	}
-	
 	public List<Entity> createListEntity(){
 		return null;
 	}
-	
-	public Filter createFilter(){
-		return null;
-	}
-	
-	
-	
 }

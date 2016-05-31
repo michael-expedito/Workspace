@@ -35,5 +35,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ronin-theme-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/adamantium-theme-2.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/volt-theme-2.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

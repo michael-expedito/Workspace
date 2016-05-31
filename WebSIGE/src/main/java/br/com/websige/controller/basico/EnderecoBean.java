@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,11 +40,18 @@ public class EnderecoBean implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public void openWindow() {
-		endereco = new Endereco();
-		endereco.setCidade(new Cidade());
-		endereco.setEstado(new UF());
-
+	public void openWindow(Endereco entity) {
+		if (entity == null){
+			endereco = new Endereco();
+		} else {
+			endereco = entity;
+		}
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String id = params.get("id");
+		if (id != null)	{ 
+			endereco.setId(new Long(id));
+		}
+		
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);

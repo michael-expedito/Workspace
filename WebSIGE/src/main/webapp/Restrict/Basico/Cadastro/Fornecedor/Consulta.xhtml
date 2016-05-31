@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/pattern/consulta.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	
+	<f:metadata>
+		<f:viewAction action="#{fornecedorBean.startConsulta}" />
+	</f:metadata>
+	
+	<ui:define name="title-complemento"> - Consultas </ui:define>
+	
+	<ui:param name="controller" value="#{fornecedorBean}"></ui:param>
+	
+	<ui:define name="content-filtros">
+		<p:panel id="panelFiltros" style="margin-top:4px">
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 1px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Código" />
+				<p:inputText id="codigo" size="10"
+					value="#{fornecedorBean.fornecedorFilter.codigo}" />
+
+				<p:outputLabel value="Descrição" />
+				<p:inputText id="descricaoFilter" size="20" value="#{fornecedorBean.fornecedorFilter.descricao}" />
+
+				<p:outputLabel value="Razão Social" />
+				<p:inputText id="razaoSocialFilter" size="80" value="#{fornecedorBean.fornecedorFilter.razaoSocial}" />
+				
+				<p:outputLabel value="CNPJ" />
+				<p:inputText id="cnpjFilter" size="80" value="#{fornecedorBean.fornecedorFilter.cnpj}" />
+				
+				<p:outputLabel value="Nome" />
+				<p:inputText id="nomeFilter" size="80" value="#{fornecedorBean.fornecedorFilter.nomeFisico}" />
+				
+				<p:outputLabel value="CPF" />
+				<p:inputText id="cpfFilter" size="80" value="#{fornecedorBean.fornecedorFilter.cpf}" />
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+
+	<ui:define name="content-grid">
+		<p:dataTable value="#{fornecedorBean.listEntity}" var="fornecedor"
+			id="dtList" paginator="true" rows="25"
+			emptyMessage="Registros não encontrados"
+			rowStyleClass="ui-datatable-empty" paginatorPosition="bottom"
+			styleClass="borderless" style="margin-top:5px">
+
+			<p:column headerText="" width="20">
+				<p:commandLink icon="ui-icon-pencil"
+					style="float:left;margin-right:10px; text-align: left; text-decoration:none; "
+					action="#{fornecedorBean.openEntity(fornecedor)}">
+
+					<i class="fa fa-pencil-square  Fs20 blue"></i>
+				</p:commandLink>
+			</p:column>
+
+			<p:column headerText="Codigo" style="text-align: left" width="50">
+				<p:outputLabel value="#{fornecedor.codigo}">
+				</p:outputLabel>
+			</p:column>
+
+			<p:column headerText="Razão social" style="text-align: left" width="220">
+				<p:outputLabel value="#{fornecedor.pessoaJuridica.razaoSocial}" />
+			</p:column>
+
+			<p:column headerText="CNPJ" style="text-align: left" width="110">
+				<p:outputLabel value="#{fornecedor.pessoaJuridica.cnpj}" />
+			</p:column>
+			
+			<p:column headerText="Nome" style="text-align: left" width="220">
+				<p:outputLabel value="#{fornecedor.pessoaFisica.nome}" />
+			</p:column>
+
+			<p:column headerText="CPF" style="text-align: left" width="110">
+				<p:outputLabel value="#{fornecedor.pessoaFisica.cpf}" />
+			</p:column>
+			
+			<p:column headerText="Telefone" style="text-align: left" width="100">
+				<p:outputLabel value="#{fornecedor.telefone}" />
+			</p:column>
+
+			<p:column headerText="E-mail" style="text-align: left">
+				<p:outputLabel value="#{fornecedor.email}" />
+			</p:column>
+			
+		</p:dataTable>
+
+	</ui:define>
+
+</ui:composition>

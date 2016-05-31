@@ -5,25 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import br.com.websige.pattern.interfaces.IBaseEntity;
+import br.com.websige.pattern.GenericEntity;
 
 @Entity
 @Table(name="FILIAL_FIL")
-public class Filial implements IBaseEntity ,Serializable{
+public class Filial extends GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue
-	@Column(name="FIL_ID")
-	private long id;
 	
 	@NotNull(message = "Código")
 	@Column(name = "FIL_CDFILIAL", nullable = false, length = 6)
@@ -78,15 +71,6 @@ public class Filial implements IBaseEntity ,Serializable{
 	@ManyToOne
 	@JoinColumn(name = "FIL_IDEMPRESA", nullable = false, foreignKey = @ForeignKey(name = "FK1_FILIAL_FIL"))
 	private Empresa empresa;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-		
-	}
 	
 	public String getCodigo() {
 		return codigo;
@@ -217,30 +201,4 @@ public class Filial implements IBaseEntity ,Serializable{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Filial other = (Filial) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
-
-	
-	
 }

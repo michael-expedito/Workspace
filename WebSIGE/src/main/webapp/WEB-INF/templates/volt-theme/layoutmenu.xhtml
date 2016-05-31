@@ -1,0 +1,85 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pv="http://primefaces.org/volt">
+
+    <h:form id="menuform">
+        <pv:menu model="#{menuController.menuModel}"/>
+        <pv:menu>
+           <!-- 
+            <p:submenu id="rm_menupos" label="Menu Position" icon="icon-select">
+                <p:menuitem id="rm_left" url="#" value="Inline Menu" icon="icon-uniE675" onclick="$('body').removeClass('PopupMenu');return false;"/>
+                <p:menuitem id="rm_popup" url="#" value="Popup Menu" icon="icon-windows" onclick="$('body').addClass('PopupMenu');return false;"/>
+            </p:submenu>
+            
+            <p:submenu id="rm_colors" label="Body Colors" icon="icon-lab">
+                <p:menuitem id="rm_bg_blue" url="#" value="Blue" icon="icon-syringe" onclick="$('body').removeClass().addClass('BlueBody');return false;"/>
+                <p:menuitem id="rm_bg_leaden" url="#" value="Leaden" icon="icon-syringe" onclick="$('body').removeClass().addClass('LeadenBody');return false;"/>
+                <p:menuitem id="rm_bg_red" url="#" value="Red" icon="icon-syringe" onclick="$('body').removeClass().addClass('RedBody');return false;"/>
+                <p:menuitem id="rm_bg_green" url="#" value="Green" icon="icon-syringe" onclick="$('body').removeClass().addClass('GreenBody');return false;"/>
+                <p:menuitem id="rm_bg_cf" url="#" value="CornFlower" icon="icon-syringe" onclick="$('body').removeClass().addClass('CornFlowerBody');return false;"/>
+                <p:menuitem id="rm_bg_gray" url="#" value="Gray" icon="icon-syringe" onclick="$('body').removeClass().addClass('DarkGrayBody');return false;"/>
+            </p:submenu>
+          
+            <p:submenu id="rm_default" label="Default Pages" icon="icon-list">
+                <p:menuitem id="rm_empty" value="Empty Page" icon="icon-code-outline" outcome="/empty-page" />
+                <p:menuitem id="rm_login" value="Login Page" icon="icon-key-outline" outcome="/login" />
+                <p:menuitem id="rm_error" value="Error Page" icon="icon-radar-outline" outcome="/error" />
+                <p:menuitem id="rm_404" value="404 Page" icon="icon-search" outcome="/404" />
+                <p:menuitem id="rm_access" value="Access Denied Page" icon="icon-eye-outline" outcome="/access-denied" />
+            </p:submenu>
+             -->
+            <p:submenu id="crm" label="CRM" icon="fa fa-group">
+                <p:submenu id="crm_c" label="Cadastros" icon="fa fa-pencil-square">
+                    <p:menuitem id="crm_c_clientes" value="Clientes" url="#" />
+                	<p:menuitem id="crm_c_contatos" value="Contatos" url="#" />
+                    <p:menuitem id="crm_c_segmentos" value="Segmentos" url="#" />
+                </p:submenu>   
+                
+                <p:menuitem id="crm_p_negocios" value="Negocios" icon="fa fa-dollar" url="#" />
+                
+                <p:submenu id="crm_r" label="Relatórios" icon="icon-graph">  
+                	
+                </p:submenu>
+            </p:submenu>
+            
+            <p:submenu id="scr" label="Contas a receber" icon="fa fa-plus-square">
+                <p:submenu id="scr_c" label="Cadastros" icon="fa fa-pencil-square">
+                </p:submenu>   
+                <p:submenu id="scr_p" label="Processos" icon="fa fa-gears">
+                </p:submenu>
+                <p:submenu id="scr_r" label="Relatórios" icon="icon-graph">
+                </p:submenu>
+                <p:submenu id="scr_u" label="Utilitários" icon="fa fa-gear">
+                </p:submenu>
+            </p:submenu>
+            
+            <p:submenu id="scp" label="Contas a pagar" icon="fa fa-minus-square">
+                <p:submenu id="scp_c" label="Cadastros" icon="fa fa-pencil-square">
+                	<p:menuitem id="scp_c_fornecedor" value="Fornecedor"  url="/Restrict/Basico/Cadastro/Fornecedor/Consulta.xhtml" />
+                </p:submenu>   
+                <p:submenu id="scp_p" label="Processos" icon="fa fa-gears">
+                </p:submenu>
+                <p:submenu id="scp_r" label="Relatórios" icon="icon-graph">
+                </p:submenu>
+                <p:submenu id="scp_u" label="Utilitários" icon="fa fa-gear">
+                </p:submenu>            
+            </p:submenu>
+            
+            <p:submenu id="st" label="Tesouraria" icon="fa fa-bank">
+                <p:submenu id="st_c" label="Cadastros" icon="fa fa-pencil-square">
+                </p:submenu>   
+                <p:submenu id="st_p" label="Processos" icon="fa fa-gears">
+                </p:submenu>
+                <p:submenu id="st_r" label="Relatórios" icon="icon-graph">
+                </p:submenu>
+                <p:submenu id="st_u" label="Utilitários" icon="fa fa-gear">
+                </p:submenu>            
+            </p:submenu>
+        </pv:menu>
+    </h:form>
+
+</ui:composition>
