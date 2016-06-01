@@ -24,7 +24,7 @@ public class Telefone extends GenericEntity implements Serializable {
 	private String ddd;
 	
 	@Column(name="TEL_NRTELEFONE", nullable = false, length = 25)
-	private String telefone;
+	private String numero;
 	
 	@Column(name = "TEL_TPTELEFONE", nullable = true)
 	@Enumerated(EnumType.ORDINAL)
@@ -54,12 +54,12 @@ public class Telefone extends GenericEntity implements Serializable {
 		this.ddd = ddd;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public TipoTelefone getTipoTelefone() {

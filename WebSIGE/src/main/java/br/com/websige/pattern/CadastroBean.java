@@ -18,7 +18,6 @@ public abstract class CadastroBean<Entity,Filter> {
 	private String directory;
 	
 	public abstract Entity createEntity();
-	protected abstract String getParameterURL(Entity entityConsulted);
 	public abstract Filter createFilter();
 	public abstract void createSubEntities();
 	
@@ -85,6 +84,10 @@ public abstract class CadastroBean<Entity,Filter> {
 	public void consult(){
 		listEntity = getRepository().getByFilter((GenericFilter<Entity>) filter);
 	}
+	
+	protected String getParameterURL(Entity entityConsulted){
+		return "entity=" + ((GenericEntity) entityConsulted).getId();
+	};
 	
 	protected String getDirectory() {
 		return directory;

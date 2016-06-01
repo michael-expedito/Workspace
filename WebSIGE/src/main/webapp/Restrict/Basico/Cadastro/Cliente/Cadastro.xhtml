@@ -8,10 +8,319 @@
 	xmlns:basico="http://java.sun.com/jsf/composite/searchWindows/basico">
 
 	<f:metadata>
-		<o:viewParam name="entity" value="#{clienteBean.entity}" />
+		<o:viewParam name="entity" value="#{clienteBean.cliente}" />
 		<f:viewAction action="#{clienteBean.startCadastro}"
 			type="preRenderView" />
 	</f:metadata>
-	
 
-	
+	<ui:define name="title-complemento"> - Cliente </ui:define>
+
+	<ui:param name="controller" value="#{clienteBean}"></ui:param>
+
+	<ui:define name="informacao"> 
+		#{clienteResource.informacao}
+	</ui:define>
+
+	<ui:define name="content-cadastro">
+
+		<p:fieldset legend="#{clienteResource.titulo}" toggleable="true"
+			toggleSpeed="500" style="margin-top:20px">
+			<h2 class="BigTopic">#{clienteResource.tituloDadosPrincipais}</h2>
+			<p:panelGrid columns="2" style="margin-bottom:20px;width: 100%;">
+				<h:outputText value="#{clienteResource.codigo}" for="codigo" />
+				<p:inputText value="#{clienteBean.cliente.codigo}" id="codigo" />
+				
+				<h:outputText value="#{clienteResource.nome}" for="nome" />
+				<p:inputText value="#{clienteBean.cliente.nome}" id="nome" />
+				
+				<h:outputText value="#{clienteResource.descricao}" for="descricao" />
+				<p:inputText value="#{clienteBean.cliente.descricao}" id="descricao" />
+				
+				<h:outputText value="#{clienteResource.tipoPessoa}"
+					for="tipoPessoa" />
+				<p:selectOneMenu id="tipoPessoa"
+					value="#{clienteBean.cliente.tipoPessoa}">
+					<f:selectItems value="#{clienteBean.tipoPessoas}"
+						var="tipoPessoa" itemValue="#{tipoPessoa}"
+						itemLabel="#{tipoPessoa.descricao}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			
+			<h2 class="BigTopic">Documentação legal</h2>
+			<p:tabView>
+				<p:tab title="Pessoa Jurídica">
+					<p:panelGrid columns="2" style="margin-bottom:20px;width: 100%;" id="pngJuridica">
+						<p:outputLabel value="#{pessoajuridicaResource.cnpj}" for="cnpj" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.cnpj}"
+							id="cnpj" />
+
+						<p:outputLabel value="#{pessoajuridicaResource.razaoSocial}"
+							for="razaoSocial" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.razaoSocial}"
+							id="razaoSocial" />
+
+						<p:outputLabel value="#{pessoajuridicaResource.nomeFantasia}"
+							for="nomeFantasia" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.nomeFantasia}"
+							id="nomeFantasia" />
+
+						<p:outputLabel value="#{pessoajuridicaResource.inscricaoEstadual}"
+							for="inscricaoEstadual" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.inscricaoEstadual}"
+							id="inscricaoEstadual" />
+
+						<p:outputLabel
+							value="#{pessoajuridicaResource.inscricaoMunicipal}"
+							for="inscricaoMunicipal" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.inscricaoMunicipal}"
+							id="inscricaoMunicipal" />
+
+						<p:outputLabel value="#{pessoajuridicaResource.inscricaoSuframa}"
+							for="inscricaoSuframa" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaJuridica.inscricaoSuframa}"
+							id="inscricaoSuframa" />
+
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="Pessoa Física">
+					<p:panelGrid columns="2" style="margin-bottom:20px;width: 100%;" id="pngFisica">
+						<p:outputLabel value="#{pessoafisicaResource.nome}" for="nome" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaFisica.nome}" id="nome"
+							size="60" />
+
+						<h:outputLabel value="#{pessoafisicaResource.cpf}" for="cpf" />
+						<p:inputText value="#{clienteBean.cliente.pessoaFisica.cpf}"
+							id="cpf" />
+
+						<p:outputLabel value="#{pessoafisicaResource.identificacao}"
+							for="identificacao" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaFisica.identificacao}"
+							id="identificacao" />
+
+						<p:outputLabel value="#{pessoafisicaResource.orgaoEmissor}"
+							for="orgaoEmissor" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaFisica.orgaoEmissor}"
+							id="orgaoEmissor" />
+
+						<p:outputLabel value="#{pessoafisicaResource.dataEmissao}"
+							for="dataEmissao" />
+						<p:calendar
+							value="#{clienteBean.cliente.pessoaFisica.dataEmissao}"
+							id="dataEmissao" size="12" pattern="dd/MM/yyyy">
+						</p:calendar>
+
+						<p:outputLabel value="#{pessoafisicaResource.pis}" for="pisPaseb" />
+						<p:inputText value="#{clienteBean.cliente.pessoaFisica.pis}"
+							id="pisPaseb" />
+
+						<p:outputLabel value="#{pessoafisicaResource.dataNascimento}"
+							for="dataNascimento" />
+						<p:calendar
+							value="#{clienteBean.cliente.pessoaFisica.dataNascimento}"
+							id="dataNascimento" size="12" pattern="dd/MM/yyyy">
+						</p:calendar>
+
+						<p:outputLabel value="#{pessoafisicaResource.estadoCivil}"
+							for="estadoCivil" />
+						<p:selectOneMenu id="estadoCivil"
+							value="#{clienteBean.cliente.pessoaFisica.estadoCivil}">
+							<f:selectItems value="#{clienteBean.estadosCivis}"
+								var="estadoCivil" itemValue="#{estadoCivil}"
+								itemLabel="#{estadoCivil.descricao}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{pessoafisicaResource.matriculaInss}"
+							for="matriculaInss" />
+						<p:inputText
+							value="#{clienteBean.cliente.pessoaFisica.matriculaInss}"
+							id="matriculaInss" />
+
+						<p:outputLabel value="#{pessoafisicaResource.salarioContribuicao}"
+							for="salarioContribuicao" />
+						<p:inputText id="salarioContribuicao"
+							value="#{clienteBean.cliente.pessoaFisica.salarioContribuicao}">
+							<f:convertNumber locale="pt_BR" maxFractionDigits="2"
+								minFractionDigits="2" />
+						</p:inputText>
+
+						<p:outputLabel value="#{pessoafisicaResource.dependentes}"
+							for="depententes" />
+						<p:spinner
+							value="#{clienteBean.cliente.pessoaFisica.dependentes}"
+							id="depententes" />
+
+						<h:outputText value="#{pessoafisicaResource.tetoMaximo}"
+							for="tetoMaximo" />
+						<p:selectBooleanCheckbox
+							value="#{clienteBean.cliente.pessoaFisica.tetoMaximo}"
+							id="tetoMaximo" />
+
+						<p:outputLabel value="#{pessoafisicaResource.cbo}" />
+						<h:panelGroup>
+							<basico:cbo value="#{clienteBean.cliente.pessoaFisica.cbo}"
+								eventEnitySelected="#{clienteBean.cboSelecionado}" />
+						</h:panelGroup>
+					</p:panelGrid>
+				</p:tab>
+			</p:tabView>
+		</p:fieldset>
+		
+		<p:fieldset legend="#{clienteResource.enderecos}"
+			toggleable="true" toggleSpeed="500" style="margin-top:20px">
+
+			<p:dataTable id="dtEnderecos" var="endereco" paginatorPosition="top"
+				paginatorTemplate="{Buttons}" paginator="true" rows="100"
+				value="#{clienteBean.cliente.enderecos}" rowIndexVar="indexRow"
+				resizableColumns="true">
+
+				<!-- Botão INCLUIR endereço-->
+				<f:facet name="{Buttons}">
+					<p:commandButton icon="fa fa-plus-circle White"
+						styleClass="BlueButton" title="Pesquisa" value="Incluir"
+						action="#{enderecoBean.openWindow(endereco)}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.enderecoRetornado}" process="@this"
+							update="dtEnderecos" />
+					</p:commandButton>
+				</f:facet>
+
+				<p:column headerText="" style="text-align: left;width: 75px;">
+					<!-- Botão REMOVER endereço-->
+					<p:commandButton icon="fa fa-remove White" styleClass="RedButton" 
+						actionListener="#{clienteBean.removerEndereco(endereco)}" 
+						process="@this"	update="dtEnderecos" >
+						<f:param name="id" value="#{indexRow}" />
+					</p:commandButton>
+					
+					<!-- Botão ALTERAR endereço-->
+					<p:commandButton icon="fa fa-pencil White" styleClass="BlueButton" 
+						action="#{enderecoBean.openWindow(endereco)}" process="@this" update="@none">
+						<f:param name="id" value="#{indexRow}" />
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.enderecoRetornado}" process="@this"
+							update="dtEnderecos" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Endereço" style="text-align: left">
+					<p:outputLabel value="(#{endereco.codigo}) - #{endereco.cep}, #{endereco.logradouro}, 
+						#{endereco.numero}, #{endereco.complemento}, #{endereco.bairro}, 
+						#{endereco.cidade.nome}, #{endereco.estado.sigla}, #{endereco.pais.nome}" />	
+				</p:column>
+			</p:dataTable>
+
+		</p:fieldset>
+		
+	    <p:fieldset legend="#{clienteResource.emails}"
+			toggleable="true" toggleSpeed="500" style="margin-top:20px">
+
+			<p:dataTable id="dtEmails" var="email" paginatorPosition="top"
+				paginatorTemplate="{Buttons}" paginator="true" rows="100"
+				value="#{clienteBean.cliente.emails}" rowIndexVar="indexRow"
+				resizableColumns="true" type="unordered">
+
+				<!-- Botão INCLUIR endereço-->
+				<f:facet name="{Buttons}">
+					<p:commandButton icon="fa fa-plus-circle White"
+						styleClass="BlueButton" title="Pesquisa" value="Incluir"
+						action="#{emailBean.openWindow(email)}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.emailRetornado}" process="@this"
+							update="dtEmails" />
+					</p:commandButton>
+				</f:facet>
+				<p:column style="text-align: left" width="75">
+					<!-- Botão REMOVER endereço-->
+					<p:commandButton icon="fa fa-remove White" styleClass="RedButton" 
+						actionListener="#{clienteBean.removerEmail(email)}" 
+						process="@this"	update="dtEmails" >
+						<f:param name="id" value="#{indexRow}" />
+					</p:commandButton>
+					
+					<!-- Botão ALTERAR endereço-->
+					<p:commandButton icon="fa fa-pencil White" styleClass="BlueButton" 
+						action="#{emailBean.openWindow(email)}" process="@this" update="@none">
+						<f:param name="id" value="#{indexRow}" />
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.emailRetornado}" process="@this"
+							update="dtEmails" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Email" style="text-align: left">
+					<h:outputText value="#{email.email}" />
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+		
+		<p:fieldset legend="#{clienteResource.telefones}"
+			toggleable="true" toggleSpeed="500" style="margin-top:20px">
+
+			<p:dataTable id="dtTelefones" var="telefone" paginatorPosition="top"
+				paginatorTemplate="{Buttons}" paginator="true" rows="100"
+				value="#{clienteBean.cliente.telefones}" rowIndexVar="indexRow"
+				resizableColumns="true" type="unordered">
+
+				<!-- Botão INCLUIR endereço-->
+				<f:facet name="{Buttons}">
+					<p:commandButton icon="fa fa-plus-circle White"
+						styleClass="BlueButton" title="Pesquisa" value="Incluir"
+						action="#{telefoneBean.openWindow(telefone)}" process="@this" update="@none">
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.telefoneRetornado}" process="@this"
+							update="dtTelefones" />
+					</p:commandButton>
+				</f:facet>
+				<p:column style="text-align: left" width="75">
+					<!-- Botão REMOVER endereço-->
+					<p:commandButton icon="fa fa-remove White" styleClass="RedButton" 
+						actionListener="#{clienteBean.removerTelefone}" 
+						process="@this"	update="dtTelefones" >
+						<f:param name="id" value="#{indexRow}" />
+					</p:commandButton>
+					
+					<!-- Botão ALTERAR endereço-->
+					<p:commandButton icon="fa fa-pencil White" styleClass="BlueButton" 
+						action="#{telefoneBean.openWindow(telefone)}" process="@this" update="@none">
+						<f:param name="id" value="#{indexRow}" />
+						<p:ajax event="dialogReturn"
+							listener="#{clienteBean.telefoneRetornado}" process="@this"
+							update="dtTelefones" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="#{telefoneResource.numero}" style="text-align: left">
+					
+					+<h:outputText value="#{telefone.codigoPais}" />
+					<h:outputText value="#{telefone.numero}" />
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+		
+		<p:fieldset legend="#{clienteResource.redeSocial}"
+			toggleable="true" toggleSpeed="500" style="margin-top:20px">
+			<p:panelGrid columns="2" style="margin-bottom:20px;width: 100%;">
+				<p:outputLabel value="#{redesocialResource.facebook}" for="facebook" />
+				<p:inputText value="#{clienteBean.cliente.redeSocial.facebook}" id="facebook" size="95">
+				</p:inputText>
+				
+				<p:outputLabel value="#{redesocialResource.twitter}" for="twitter" />
+				<p:inputText value="#{clienteBean.cliente.redeSocial.twitter}" id="twitter" size="95"/>
+				
+				<p:outputLabel value="#{redesocialResource.skype}" for="skype" />
+				<p:inputText value="#{clienteBean.cliente.redeSocial.skype}" id="skype" size="95"/>
+				
+				<p:outputLabel value="#{redesocialResource.linkedIn}" for="linkedIn" />
+				<p:inputText value="#{clienteBean.cliente.redeSocial.linkedIn}" id="linkedIn" size="95"/>
+			</p:panelGrid>
+		</p:fieldset>
+	</ui:define>
+
+</ui:composition>
+

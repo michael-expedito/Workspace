@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<ui:composition
+	template="/WEB-INF/templates/pattern/dialogCadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:basico="http://java.sun.com/jsf/composite/searchWindows/basico">
+
+	<ui:define name="title"> Telefone </ui:define>
+
+	<ui:define name="body">
+		<h:form id="frmPrincipal">
+			<p:panelGrid columns="3" id="gridPrincipal"
+				style="width: 100%; margin-top: 10px; margin-bottom: 5px;">
+
+				<p:outputLabel value="#{telefoneResource.numero}" for="codigoPais" />
+				<p:inputText id="codigoPais" value="#{telefoneBean.telefone.codigoPais}"
+					size="3" maxlength="3" />
+				<p:inputText id="numero" value="#{telefoneBean.telefone.numero}"
+					size="25" maxlength="20" />
+
+			</p:panelGrid>
+			<p:toolbar>
+				<f:facet name="right">
+					<p:commandButton value="Confirmar" icon="fa fa-check"
+						action="#{telefoneBean.confirmar}" process="frmPrincipal @this" >
+					</p:commandButton>
+				</f:facet>
+			</p:toolbar>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

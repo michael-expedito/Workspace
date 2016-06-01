@@ -51,7 +51,7 @@ public class Cliente extends GenericEntity implements Serializable {
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "CLIEND_CLEN", joinColumns={@JoinColumn(name = "CLEN_IDCLIENTE", foreignKey = @ForeignKey(name = "FK1_CLIEND_CLEN"))}, 
 	                          inverseJoinColumns={@JoinColumn(name = "CLEN_IDENDERECO", foreignKey = @ForeignKey(name = "FK2_CLIEND_CLEN"))})
-	private List<Endereco> endereco;
+	private List<Endereco> enderecos;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "CLIEMA_CLEM", joinColumns ={@JoinColumn(name = "CLEM_IDCLIENTE", foreignKey = @ForeignKey(name = "FK1_CLIEND_CLEM") )}, 
@@ -79,12 +79,6 @@ public class Cliente extends GenericEntity implements Serializable {
 	@JoinColumn(name = "CLI_IDIMAGEM", nullable = true, foreignKey = @ForeignKey(name = "FK6_CLIENTE_CLI"))
 	private Imagem imagem;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getCodigo() {
 		return codigo;
 	}
@@ -121,11 +115,11 @@ public class Cliente extends GenericEntity implements Serializable {
 	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		this.pessoaJuridica = pessoaJuridica;
 	}
-	public List<Endereco> getEndereco() {
-		return endereco;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
-	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 	public List<Email> getEmails() {
 		return emails;
