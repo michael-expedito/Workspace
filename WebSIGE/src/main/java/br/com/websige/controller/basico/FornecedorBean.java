@@ -70,11 +70,6 @@ public class FornecedorBean extends CadastroBean<Fornecedor, FornecedorFilter> i
 	}
 
 	@Override
-	protected String getParameterURL(Fornecedor entityConsulted) {
-		return "entity=" + entityConsulted.getId();
-	};
-
-	@Override
 	public void salvar() {
 		if (getEntity().getTipoPessoa() == TipoPessoa.FISICA) {
 			getEntity().setPessoaJuridica(null);

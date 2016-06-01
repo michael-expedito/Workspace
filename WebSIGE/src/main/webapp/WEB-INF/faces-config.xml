@@ -34,6 +34,13 @@
 		<resource-bundle><base-name>basico.cadastro.pais.pais</base-name><var>paisResource</var></resource-bundle>
 		<resource-bundle><base-name>basico.cadastro.pessoafisica.pessoafisica</base-name><var>pessoafisicaResource</var></resource-bundle>
 		<resource-bundle><base-name>basico.cadastro.pessoajuridica.pessoajuridica</base-name><var>pessoajuridicaResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.cliente.cliente</base-name><var>clienteResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.email.email</base-name><var>emailResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.segmento.segmento</base-name><var>segmentoResource</var></resource-bundle>
+		<resource-bundle><base-name>basico.cadastro.telefone.telefone</base-name><var>telefoneResource</var></resource-bundle>
+		
+		<resource-bundle><base-name>crm.cadastro.redesocial.redesocial</base-name><var>redesocialResource</var></resource-bundle>
+		<resource-bundle><base-name>crm.cadastro.categoriacliente.categoriacliente</base-name><var>categoriaclienteResource</var></resource-bundle>
 		
 	</application>
 </faces-config>
