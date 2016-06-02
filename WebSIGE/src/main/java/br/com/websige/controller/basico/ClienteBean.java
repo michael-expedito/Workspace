@@ -23,6 +23,7 @@ import br.com.websige.model.basico.enuns.EstadoCivil;
 import br.com.websige.model.basico.enuns.TipoPessoa;
 import br.com.websige.model.crm.CategoriaCliente;
 import br.com.websige.model.crm.RedeSocial;
+
 import br.com.websige.pattern.CadastroBean;
 import br.com.websige.repository.basico.ClienteRepository;
 import br.com.websige.service.basico.ClienteService;

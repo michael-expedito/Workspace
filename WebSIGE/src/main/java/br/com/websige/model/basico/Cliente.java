@@ -20,9 +20,11 @@ import br.com.websige.model.crm.CategoriaCliente;
 import br.com.websige.model.crm.RedeSocial;
 import br.com.websige.model.basico.endereco.Endereco;
 import br.com.websige.pattern.GenericEntity;
+import br.com.websige.pattern.annotations.ResourceEntity;
 
 @Entity
 @Table(name = "CLIENTE_CLI")
+@ResourceEntity(resourceDirectory="basico.cadastro.cliente.cliente")
 public class Cliente extends GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
