@@ -2,6 +2,7 @@ package br.com.websige.controller.basico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
@@ -23,9 +24,10 @@ import br.com.websige.model.basico.enuns.EstadoCivil;
 import br.com.websige.model.basico.enuns.TipoPessoa;
 import br.com.websige.model.crm.CategoriaCliente;
 import br.com.websige.model.crm.RedeSocial;
-
 import br.com.websige.pattern.CadastroBean;
 import br.com.websige.repository.basico.ClienteRepository;
+import br.com.websige.repository.basico.SegmentoRepository;
+import br.com.websige.repository.crm.CategoriaClienteRepository;
 import br.com.websige.service.basico.ClienteService;
 import br.com.websige.util.framework.FrameworkFunctions;
 
@@ -35,6 +37,15 @@ public class ClienteBean extends CadastroBean<Cliente, ClienteFilter> implements
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	SegmentoRepository segmentoRepository;
+	
+	@Inject
+	CategoriaClienteRepository categoriaClienteRepository;
+	
+	List<Segmento> segmentos;
+	List<CategoriaCliente> categoriasCliente;
+	
 	@Inject
 	public ClienteBean(ClienteRepository repository, ClienteService service) {
 		super(repository, service);
@@ -81,6 +92,23 @@ public class ClienteBean extends CadastroBean<Cliente, ClienteFilter> implements
 			getEntity().setCategoriaCliente(new CategoriaCliente());
 		}
 	}
+	
+	@Override
+	public void salvar() {
+		if (getEntity().getTipoPessoa() == TipoPessoa.FISICA) {
+			getEntity().setPessoaJuridica(null);
+		} else {
+			getEntity().setPessoaFisica(null);
+		}
+		super.salvar();
+	}
+
+	@Override
+	public void startCadastro() {
+		segmentos = segmentoRepository.getAll();
+		categoriasCliente = categoriaClienteRepository.getAll();
+		super.startCadastro();
+	}
 
 	public Cliente getCliente() {
 		return (Cliente) getEntity();
@@ -88,6 +116,14 @@ public class ClienteBean extends CadastroBean<Cliente, ClienteFilter> implements
 
 	public void setCliente(Cliente entity) {
 		setEntity(entity);
+	}
+
+	public List<Segmento> getSegmentos() {
+		return segmentos;
+	}
+
+	public List<CategoriaCliente> getCategoriasCliente() {
+		return categoriasCliente;
 	}
 
 	// Geters e Seters de Enuns

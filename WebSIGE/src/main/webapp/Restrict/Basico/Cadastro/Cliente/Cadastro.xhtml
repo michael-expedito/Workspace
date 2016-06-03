@@ -231,8 +231,7 @@
 						</p:commandButton>
 					</p:column>
 					<p:column headerText="Endereço" style="text-align: left">
-						<p:outputLabel
-							value="(#{endereco.codigo}) - #{endereco.cep}, #{endereco.logradouro}, 
+					<p:outputLabel value="(#{endereco.codigo}) - #{endereco.cep}, #{endereco.logradouro}, 
 						#{endereco.numero}, #{endereco.complemento}, #{endereco.bairro}, 
 						#{endereco.cidade.nome}, #{endereco.estado.sigla}, #{endereco.pais.nome}" />
 					</p:column>
@@ -256,7 +255,7 @@
 				<p:dataTable id="dtEmails" var="email" paginator="false" rows="100"
 					value="#{clienteBean.cliente.emails}" rowIndexVar="indexRow"
 					resizableColumns="false" style="margin-top:10px;" type="unordered">
-
+					
 					<p:column style="text-align: left" width="75">
 						<!-- Botão REMOVER endereço-->
 						<p:commandButton icon="fa fa-remove White" styleClass="RedButton"
